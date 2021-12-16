@@ -1,3 +1,11 @@
+/*
+TODO: Make sure to make a counter for each insturction 
+TODO: Matrix for functions and the instructions called in each function. 
+NOTE: There is no dependcey for each stack 
+NOTE: In addtion, remember it shouldn't matter about the matrix size. Do something as n by m. 
+*/
+
+
 /**************************************************************************/
 /*                                                                        */
 /*                                 OCaml                                  */
