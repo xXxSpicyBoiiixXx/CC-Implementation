@@ -5,22 +5,6 @@ NOTE: There is no dependcey for each stack
 NOTE: In addtion, remember it shouldn't matter about the matrix size. Do something as n by m. 
 */
 
-
-/**************************************************************************/
-/*                                                                        */
-/*                                 OCaml                                  */
-/*                                                                        */
-/*             Xavier Leroy, projet Cristal, INRIA Rocquencourt           */
-/*                                                                        */
-/*   Copyright 1996 Institut National de Recherche en Informatique et     */
-/*     en Automatique.                                                    */
-/*                                                                        */
-/*   All rights reserved.  This file is distributed under the terms of    */
-/*   the GNU Lesser General Public License version 2.1, with the          */
-/*   special exception on linking described in the file LICENSE.          */
-/*                                                                        */
-/**************************************************************************/
-
 #define CAML_INTERNALS
 
 /* The bytecode interpreter */
@@ -53,7 +37,9 @@ NOTE: In addtion, remember it shouldn't matter about the matrix size. Do somethi
 sp is a local copy of the global variable Caml_state->extern_sp. */
 
 /* Instruction decoding */
+/*
 
+*/
 #ifdef THREADED_CODE
 #  define Instruct(name) lbl_##name
 #  if defined(ARCH_SIXTYFOUR) && !defined(ARCH_CODE32)
