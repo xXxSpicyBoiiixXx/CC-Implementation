@@ -142,9 +142,61 @@ fun addPair(a, b) {
 fun identity(addPair)(1, 2); // prints 3
 
 You can also nest function together with outer and inner loops. 
+Such as below... 
+
+fun outerFunction() { 
+    fun localFunction() { 
+        print "I'm local!"l 
+        }
+    }
+
+localFunction();
+
+}
+
+So taking all the local fucntions, first-class functions, and block scope we get a interesting situation: 
+
+fun returnFunction() { 
+    var outside = "outside"; 
+    
+    fun inner() { 
+        print outside; 
+    }   
+
+    return inner; 
+
+var fn = returnFunction(); 
+
+fn();
+
+So this adds some complexity where we can't assume stacks...
+
+
+# Classes 
+
+Lox is about halfway being functional language and hald way on object oriented program. 
+
+For dynamically-typed lanugae, objects are pretty handy. 
+
+When it comes to objects, there are actually two approaches to them, classes and prototypes. 
+
+So there in Lox classes look like this 
+
+class Breakfast { 
+    cook() { 
+        print "Eggs a-ftying'!";
+    }
+
+serve(who) { 
+    print "Enjoy your breakfast, " + who + ".";
+}
+}
+
+The idea of OOP is encapsulating behavior and state together.
 
 
 
+    
 
 
 
