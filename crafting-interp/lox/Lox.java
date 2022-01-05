@@ -20,3 +20,10 @@ public class Lox {
         }
     }
 }
+
+private static void runFile(string path) throws IOException { 
+    byte[] bytes = Files.readAllBytes(Paths.get(path));
+    run(new String(bytes, Charset.defaultCharset()));
+}
+
+
