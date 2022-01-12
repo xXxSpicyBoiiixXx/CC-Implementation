@@ -311,6 +311,23 @@ value caml_interprete(code_t prog, asize_t prog_size)
     switch(curr_instr) {
 #endif
 
+/* Basic counter for each operations 
+ * Here we have that each operation will be run from 1..n, depending on the number 
+ * of operations
+ *
+ * int* operationCount; 
+ * int size =  1000; 
+ * malloc 
+ *
+ * operationCount = (int*)malloc(size * sizeof(int)); 
+ *
+ * if(operationcount == NULL) { 
+ *  printf("UNABLE TO ALLOCATED MEMORY\n");
+ *  exit(0); 
+ * }
+ *
+ */         
+
 /* Basic stack operations */
 
     Instruct(ACC0):
