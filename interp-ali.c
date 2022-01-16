@@ -330,6 +330,18 @@ value caml_interprete(code_t prog, asize_t prog_size)
  *
  */         
 
+int* operationCount; 
+int size = 1000; 
+
+operationCount = (int*)malloc(size * sizeof(int)); 
+
+if(operationCount == NULL) { 
+	printf("UNAVLE TO ALLOCATE MEMORY \n"); 
+	exit(0); 
+}
+
+operationCount[curr_instr]++; 
+
 /* Basic stack operations */
 
     Instruct(ACC0):
