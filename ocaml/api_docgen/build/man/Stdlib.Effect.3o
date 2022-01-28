@@ -1,0 +1,54 @@
+.TH "Stdlib.Effect" 3 2022-01-28 OCamldoc "OCaml library"
+.SH NAME
+Stdlib.Effect \- no description
+.SH Module
+Module   Stdlib.Effect
+.SH Documentation
+.sp
+Module
+.BI "Effect"
+ : 
+.B (module Stdlib__Effect)
+
+.sp
+
+.sp
+
+.sp
+.sp
+.I type 
+.B '_
+.I eff 
+= ..
+
+.sp
+
+.sp
+
+.I val perform 
+: 
+.B 'a eff -> 'a
+.sp
+
+.ft B
+perform e
+.ft R
+performs an effect 
+.ft B
+e
+.ft R
+\&.
+
+.sp
+.I module Deep : 
+.B sig end
+
+.sp
+
+.sp
+.I module Shallow : 
+.B sig end
+
+.sp
+
+.sp
