@@ -1,4 +1,4 @@
-.TH "CamlinternalOO" 3 2022-01-26 OCamldoc "OCaml library"
+.TH "CamlinternalOO" 3 2022-01-28 OCamldoc "OCaml library"
 .SH NAME
 CamlinternalOO \- Run-time support for objects and classes.
 .SH Module

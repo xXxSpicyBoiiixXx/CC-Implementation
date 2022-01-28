@@ -1,4 +1,4 @@
-.TH "Thread" 3 2022-01-26 OCamldoc "OCaml library"
+.TH "Thread" 3 2022-01-28 OCamldoc "OCaml library"
 .SH NAME
 Thread \- Lightweight threads for Posix 1003.1c and Win32.
 .SH Module
@@ -56,8 +56,13 @@ The new thread terminates when the application
 .ft B
 funct arg
 .ft R
-returns, either normally or by raising an uncaught exception\&.
-In the latter case, the exception is printed on standard error,
+returns, either normally or by raising the 
+.ft B
+Thread\&.Exit
+.ft R
+exception
+or by raising any other uncaught exception\&.
+In the last case, the uncaught exception is printed on standard error,
 but not propagated back to the parent thread\&. Similarly, the
 result of the application 
 .ft B
@@ -86,11 +91,83 @@ It can be used to build data structures indexed by threads\&.
 
 .sp
 
+.I exception Exit 
+
+.sp
+Exception raised by user code to initiate termination of the
+current thread\&.
+In a thread created by 
+.ft B
+Thread\&.create
+.ft R
+.ft B
+funct
+.ft R
+.ft B
+arg
+.ft R
+, if the
+.ft B
+Thread\&.Exit
+.ft R
+exception reaches the top of the application
+.ft B
+funct arg
+.ft R
+, it has the effect of terminating the current thread
+silently\&.  In other contexts, there is no implicit handling of the
+.ft B
+Thread\&.Exit
+.ft R
+exception\&.
+
+.sp
+
 .I val exit 
 : 
 .B unit -> unit
 .sp
-Terminate prematurely the currently executing thread\&.
+Raise the 
+.ft B
+Thread\&.Exit
+.ft R
+exception\&.
+In a thread created by 
+.ft B
+Thread\&.create
+.ft R
+, this will cause the thread
+to terminate prematurely, unless the thread function handles the
+exception itself\&.  
+.ft B
+Fun\&.protect
+.ft R
+finalizers and catch\-all
+exception handlers will be executed\&.
+.sp
+To make it clear that an exception is raised and will trigger
+finalizers and catch\-all exception handlers, it is recommended
+to write 
+.ft B
+raise Thread\&.Exit
+.ft R
+instead of 
+.ft B
+Thread\&.exit ()
+.ft R
+\&.
+
+.sp
+.B "Before5.00"
+A different implementation was used, not based on raising
+an exception, and not running finalizers and catch\-all handlers\&.
+The previous implementation had a different behavior when called
+outside of a thread created by 
+.ft B
+Thread\&.create
+.ft R
+\&.
+
 
 .sp
 

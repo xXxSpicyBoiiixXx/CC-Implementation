@@ -1,4 +1,4 @@
-.TH "Condition" 3 2022-01-26 OCamldoc "OCaml library"
+.TH "Condition" 3 2022-01-28 OCamldoc "OCaml library"
 .SH NAME
 Condition \- Condition variables to synchronize between threads.
 .SH Module

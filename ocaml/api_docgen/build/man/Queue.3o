@@ -1,4 +1,4 @@
-.TH "Queue" 3 2022-01-26 OCamldoc "OCaml library"
+.TH "Queue" 3 2022-01-28 OCamldoc "OCaml library"
 .SH NAME
 Queue \- First-in first-out queues.
 .SH Module

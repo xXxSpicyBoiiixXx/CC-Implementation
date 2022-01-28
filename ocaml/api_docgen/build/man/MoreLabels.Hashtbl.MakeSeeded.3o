@@ -1,4 +1,4 @@
-.TH "MoreLabels.Hashtbl.MakeSeeded" 3 2022-01-26 OCamldoc "OCaml library"
+.TH "MoreLabels.Hashtbl.MakeSeeded" 3 2022-01-28 OCamldoc "OCaml library"
 .SH NAME
 MoreLabels.Hashtbl.MakeSeeded \- Functor building an implementation of the hashtable structure.
 .SH Module

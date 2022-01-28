@@ -1,4 +1,4 @@
-.TH "MoreLabels.Set.OrderedType" 3 2022-01-26 OCamldoc "OCaml library"
+.TH "MoreLabels.Set.OrderedType" 3 2022-01-28 OCamldoc "OCaml library"
 .SH NAME
 MoreLabels.Set.OrderedType \- Input signature of the functor MoreLabels.Set.Make.
 .SH Module type

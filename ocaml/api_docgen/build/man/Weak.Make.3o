@@ -1,4 +1,4 @@
-.TH "Weak.Make" 3 2022-01-26 OCamldoc "OCaml library"
+.TH "Weak.Make" 3 2022-01-28 OCamldoc "OCaml library"
 .SH NAME
 Weak.Make \- Functor building an implementation of the weak hash set structure.
 .SH Module

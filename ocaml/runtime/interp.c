@@ -40,11 +40,6 @@
 #include "caml/startup.h"
 #include "caml/startup_aux.h"
 
-//#ifndef DEBUG
-//printf("This works for not debug lol");
-//#endif 
-
-
 /* Registers for the abstract machine:
         pc         the code pointer
         sp         the stack pointer (grows downward)
@@ -329,9 +324,11 @@ value caml_interprete(code_t prog, asize_t prog_size)
   extra_args = 0;
   env = Atom(0);
   accu = Val_int(0);
+
 #ifndef DEBUG
-  fprintf(stderr, "Not defined for ndef"); 
+  fprintf(stderr, "Not defined for DEBUG is running\n"); 
 #endif 
+
 
 #ifdef DEBUG  
   op_counts = NULL; 
@@ -350,6 +347,12 @@ value caml_interprete(code_t prog, asize_t prog_size)
 #ifdef THREADED_CODE
 #ifdef DEBUG
  next_instr:
+  if (*pc < FIRST_UNIMPLEMENTED_OP) {
+      op_counts[*pc]++;  
+      total_op_count++; 
+  } else {
+      fprintf(stderr, "Trying to inc opcode %u\n", *pc);
+  }
   if (caml_icount-- == 0) caml_stop_here ();
   CAMLassert(Stack_base(domain_state->current_stack) <= sp);
   CAMLassert(sp <= Stack_high(domain_state->current_stack));
@@ -373,9 +376,13 @@ value caml_interprete(code_t prog, asize_t prog_size)
     CAMLassert(Stack_base(domain_state->current_stack) <= sp);
     CAMLassert(sp <= Stack_high(domain_state->current_stack));
 
-    // count instructions 
-    op_counts[*pc]++; 
-    total_op_count++;
+    if (*pc < FIRST_UNIMPLEMENTED_OP) {
+        op_counts[*pc]++;  
+        total_op_count++; 
+    } else {
+        fprintf(stderr, "ERROR: Trying to inc opcode %u but it's invalid\n", *pc);
+    }
+
 
 #endif
     curr_instr = *pc++;
@@ -386,7 +393,7 @@ value caml_interprete(code_t prog, asize_t prog_size)
 
 /* Basic stack operations */
 
-    Instruct(ACC0):
+    Instruct(ACC0): 
       accu = sp[0]; Next;
     Instruct(ACC1):
       accu = sp[1]; Next;
@@ -420,8 +427,7 @@ value caml_interprete(code_t prog, asize_t prog_size)
     Instruct(PUSHACC7):
       *--sp = accu; accu = sp[7]; Next;
 
-    Instruct(PUSHACC):
-      *--sp = accu;
+    Instruct(PUSHACC): *--sp = accu;
       /* Fallthrough */
     Instruct(ACC):
       accu = sp[*pc++];
@@ -1264,6 +1270,14 @@ value caml_interprete(code_t prog, asize_t prog_size)
 /* Debugging and machine control */
 
     Instruct(STOP):
+#ifdef DEBUG
+      printf("Is the program stopping? who knows.\n");
+      printf("Total op_count = %lu\n", total_op_count);
+      for (int i = 0; i < FIRST_UNIMPLEMENTED_OP; i++) {
+          printf("Op_counts[%d] = %lu\n", i, op_counts[i]);
+      }
+#endif
+
       domain_state->external_raise = initial_external_raise;
       domain_state->trap_sp_off = initial_trap_sp_off;
       domain_state->current_stack->sp = sp;
