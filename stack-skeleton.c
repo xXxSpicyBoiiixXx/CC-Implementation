@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-int MAXSIZE = 8;       
-int stack[8];     
+int MAXSIZE = 256;       
+int stack[256];     
 int top = -1;            
 
 int isempty() {
@@ -47,14 +47,10 @@ int push(int data) {
 }
 
 int main() {
-   // push items on to the stack 
-   push(3);
-   push(5);
-   push(9);
-   push(1);
-   push(12);
-   push(15);
-
+   
+   // pushing functions
+   push(foo);
+   push(bar);
    printf("Element at top of the stack: %d\n" ,peek());
    printf("Elements: \n");
 
