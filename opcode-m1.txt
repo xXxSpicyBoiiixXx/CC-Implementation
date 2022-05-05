@@ -1,0 +1,3645 @@
+
+interp.bd.o:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+0000000000000000 <func_stack_push>:
+       0:	aa0003e2 	mov	x2, x0
+       4:	f9400800 	ldr	x0, [x0, #16]
+       8:	f9401043 	ldr	x3, [x2, #32]
+       c:	eb03001f 	cmp	x0, x3
+      10:	540001a0 	b.eq	44 <func_stack_push+0x44>  // b.none
+      14:	f9400044 	ldr	x4, [x2]
+      18:	91000460 	add	x0, x3, #0x1
+      1c:	f9001040 	str	x0, [x2, #32]
+      20:	52800000 	mov	w0, #0x0                   	// #0
+      24:	f8237881 	str	x1, [x4, x3, lsl #3]
+      28:	f9400443 	ldr	x3, [x2, #8]
+      2c:	f9400c41 	ldr	x1, [x2, #24]
+      30:	91000463 	add	x3, x3, #0x1
+      34:	f9000443 	str	x3, [x2, #8]
+      38:	91002021 	add	x1, x1, #0x8
+      3c:	f9000c41 	str	x1, [x2, #24]
+      40:	d65f03c0 	ret
+      44:	a9bf7bfd 	stp	x29, x30, [sp, #-16]!
+      48:	90000000 	adrp	x0, 0 <stderr>
+      4c:	52800021 	mov	w1, #0x1                   	// #1
+      50:	910003fd 	mov	x29, sp
+      54:	f9400000 	ldr	x0, [x0]
+      58:	90000003 	adrp	x3, 0 <func_stack_push>
+      5c:	90000002 	adrp	x2, 0 <func_stack_push>
+      60:	91000063 	add	x3, x3, #0x0
+      64:	91000042 	add	x2, x2, #0x0
+      68:	f9400000 	ldr	x0, [x0]
+      6c:	94000000 	bl	0 <__fprintf_chk>
+      70:	12800000 	mov	w0, #0xffffffff            	// #-1
+      74:	a8c17bfd 	ldp	x29, x30, [sp], #16
+      78:	d65f03c0 	ret
+      7c:	d503201f 	nop
+
+0000000000000080 <func_stack_pop>:
+      80:	f9400401 	ldr	x1, [x0, #8]
+      84:	b4000141 	cbz	x1, ac <func_stack_pop+0x2c>
+      88:	a9418803 	ldp	x3, x2, [x0, #24]
+      8c:	d1000421 	sub	x1, x1, #0x1
+      90:	f9400004 	ldr	x4, [x0]
+      94:	f9000401 	str	x1, [x0, #8]
+      98:	d1000442 	sub	x2, x2, #0x1
+      9c:	d1002063 	sub	x3, x3, #0x8
+      a0:	a9018803 	stp	x3, x2, [x0, #24]
+      a4:	f8627880 	ldr	x0, [x4, x2, lsl #3]
+      a8:	d65f03c0 	ret
+      ac:	a9bf7bfd 	stp	x29, x30, [sp, #-16]!
+      b0:	90000003 	adrp	x3, 0 <stderr>
+      b4:	d2800362 	mov	x2, #0x1b                  	// #27
+      b8:	910003fd 	mov	x29, sp
+      bc:	f9400063 	ldr	x3, [x3]
+      c0:	d2800021 	mov	x1, #0x1                   	// #1
+      c4:	90000000 	adrp	x0, 0 <func_stack_push>
+      c8:	91000000 	add	x0, x0, #0x0
+      cc:	f9400063 	ldr	x3, [x3]
+      d0:	94000000 	bl	0 <fwrite>
+      d4:	d2800000 	mov	x0, #0x0                   	// #0
+      d8:	a8c17bfd 	ldp	x29, x30, [sp], #16
+      dc:	d65f03c0 	ret
+
+00000000000000e0 <ht_set_entry>:
+      e0:	b4000402 	cbz	x2, 160 <ht_set_entry+0x80>
+      e4:	d3430846 	lsl	x6, x2, #61
+      e8:	aa0003e8 	mov	x8, x0
+      ec:	aa0203e0 	mov	x0, x2
+      f0:	8b02fc45 	add	x5, x2, x2, lsl #63
+      f4:	8b02d8c6 	add	x6, x6, x2, lsl #54
+      f8:	d34d3042 	lsl	x2, x2, #51
+      fc:	8b0500c5 	add	x5, x6, x5
+     100:	8b004842 	add	x2, x2, x0, lsl #18
+     104:	cb0200a2 	sub	x2, x5, x2
+     108:	d1000425 	sub	x5, x1, #0x1
+     10c:	cb00e442 	sub	x2, x2, x0, lsl #57
+     110:	8a0200a5 	and	x5, x5, x2
+     114:	8b051106 	add	x6, x8, x5, lsl #4
+     118:	14000007 	b	134 <ht_set_entry+0x54>
+     11c:	eb0000ff 	cmp	x7, x0
+     120:	54000180 	b.eq	150 <ht_set_entry+0x70>  // b.none
+     124:	910004a5 	add	x5, x5, #0x1
+     128:	910040c6 	add	x6, x6, #0x10
+     12c:	eb05003f 	cmp	x1, x5
+     130:	54000149 	b.ls	158 <ht_set_entry+0x78>  // b.plast
+     134:	f94000c7 	ldr	x7, [x6]
+     138:	b5ffff27 	cbnz	x7, 11c <ht_set_entry+0x3c>
+     13c:	b4000084 	cbz	x4, 14c <ht_set_entry+0x6c>
+     140:	f9400081 	ldr	x1, [x4]
+     144:	91000421 	add	x1, x1, #0x1
+     148:	f9000081 	str	x1, [x4]
+     14c:	f90000c0 	str	x0, [x6]
+     150:	f90004c3 	str	x3, [x6, #8]
+     154:	d65f03c0 	ret
+     158:	d2800005 	mov	x5, #0x0                   	// #0
+     15c:	17ffffee 	b	114 <ht_set_entry+0x34>
+     160:	a9bf7bfd 	stp	x29, x30, [sp, #-16]!
+     164:	90000000 	adrp	x0, 0 <stderr>
+     168:	90000003 	adrp	x3, 0 <func_stack_push>
+     16c:	910003fd 	mov	x29, sp
+     170:	f9400000 	ldr	x0, [x0]
+     174:	91000063 	add	x3, x3, #0x0
+     178:	91004063 	add	x3, x3, #0x10
+     17c:	90000002 	adrp	x2, 0 <func_stack_push>
+     180:	91000042 	add	x2, x2, #0x0
+     184:	52800021 	mov	w1, #0x1                   	// #1
+     188:	f9400000 	ldr	x0, [x0]
+     18c:	94000000 	bl	0 <__fprintf_chk>
+     190:	52800020 	mov	w0, #0x1                   	// #1
+     194:	94000000 	bl	0 <exit>
+
+0000000000000198 <ht_create>:
+     198:	a9be7bfd 	stp	x29, x30, [sp, #-32]!
+     19c:	d2800300 	mov	x0, #0x18                  	// #24
+     1a0:	910003fd 	mov	x29, sp
+     1a4:	f9000bf3 	str	x19, [sp, #16]
+     1a8:	94000000 	bl	0 <malloc>
+     1ac:	aa0003f3 	mov	x19, x0
+     1b0:	b40000e0 	cbz	x0, 1cc <ht_create+0x34>
+     1b4:	d2800201 	mov	x1, #0x10                  	// #16
+     1b8:	a900fe61 	stp	x1, xzr, [x19, #8]
+     1bc:	aa0103e0 	mov	x0, x1
+     1c0:	94000000 	bl	0 <calloc>
+     1c4:	f9000260 	str	x0, [x19]
+     1c8:	b40000a0 	cbz	x0, 1dc <ht_create+0x44>
+     1cc:	aa1303e0 	mov	x0, x19
+     1d0:	f9400bf3 	ldr	x19, [sp, #16]
+     1d4:	a8c27bfd 	ldp	x29, x30, [sp], #32
+     1d8:	d65f03c0 	ret
+     1dc:	aa1303e0 	mov	x0, x19
+     1e0:	d2800013 	mov	x19, #0x0                   	// #0
+     1e4:	94000000 	bl	0 <free>
+     1e8:	17fffff9 	b	1cc <ht_create+0x34>
+     1ec:	d503201f 	nop
+
+00000000000001f0 <ht_destroy>:
+     1f0:	a9be7bfd 	stp	x29, x30, [sp, #-32]!
+     1f4:	910003fd 	mov	x29, sp
+     1f8:	f9000bf3 	str	x19, [sp, #16]
+     1fc:	aa0003f3 	mov	x19, x0
+     200:	f9400000 	ldr	x0, [x0]
+     204:	94000000 	bl	0 <free>
+     208:	aa1303e0 	mov	x0, x19
+     20c:	f9400bf3 	ldr	x19, [sp, #16]
+     210:	a8c27bfd 	ldp	x29, x30, [sp], #32
+     214:	14000000 	b	0 <free>
+
+0000000000000218 <ht_get>:
+     218:	d3430823 	lsl	x3, x1, #61
+     21c:	8b01fc25 	add	x5, x1, x1, lsl #63
+     220:	8b01d863 	add	x3, x3, x1, lsl #54
+     224:	d34d3022 	lsl	x2, x1, #51
+     228:	8b050063 	add	x3, x3, x5
+     22c:	8b014842 	add	x2, x2, x1, lsl #18
+     230:	a9401005 	ldp	x5, x4, [x0]
+     234:	cb020063 	sub	x3, x3, x2
+     238:	cb01e463 	sub	x3, x3, x1, lsl #57
+     23c:	d1000482 	sub	x2, x4, #0x1
+     240:	8a030042 	and	x2, x2, x3
+     244:	8b0210a3 	add	x3, x5, x2, lsl #4
+     248:	14000005 	b	25c <ht_get+0x44>
+     24c:	54000120 	b.eq	270 <ht_get+0x58>  // b.none
+     250:	91004063 	add	x3, x3, #0x10
+     254:	eb02009f 	cmp	x4, x2
+     258:	54000109 	b.ls	278 <ht_get+0x60>  // b.plast
+     25c:	f9400060 	ldr	x0, [x3]
+     260:	91000442 	add	x2, x2, #0x1
+     264:	eb01001f 	cmp	x0, x1
+     268:	b5ffff20 	cbnz	x0, 24c <ht_get+0x34>
+     26c:	d65f03c0 	ret
+     270:	f9400460 	ldr	x0, [x3, #8]
+     274:	d65f03c0 	ret
+     278:	d2800002 	mov	x2, #0x0                   	// #0
+     27c:	17fffff2 	b	244 <ht_get+0x2c>
+
+0000000000000280 <ht_set>:
+     280:	a9bb7bfd 	stp	x29, x30, [sp, #-80]!
+     284:	910003fd 	mov	x29, sp
+     288:	b40009e2 	cbz	x2, 3c4 <ht_set+0x144>
+     28c:	a90153f3 	stp	x19, x20, [sp, #16]
+     290:	a9025bf5 	stp	x21, x22, [sp, #32]
+     294:	aa0103f6 	mov	x22, x1
+     298:	a90363f7 	stp	x23, x24, [sp, #48]
+     29c:	b4000ae1 	cbz	x1, 3f8 <ht_set+0x178>
+     2a0:	aa0003f3 	mov	x19, x0
+     2a4:	aa0203f5 	mov	x21, x2
+     2a8:	a9408014 	ldp	x20, x0, [x0, #8]
+     2ac:	eb54041f 	cmp	x0, x20, lsr #1
+     2b0:	54000423 	b.cc	334 <ht_set+0xb4>  // b.lo, b.ul, b.last
+     2b4:	f90023f9 	str	x25, [sp, #64]
+     2b8:	eb14069f 	cmp	x20, x20, lsl #1
+     2bc:	d37ffa99 	lsl	x25, x20, #1
+     2c0:	54000508 	b.hi	360 <ht_set+0xe0>  // b.pmore
+     2c4:	aa1903e0 	mov	x0, x25
+     2c8:	d2800201 	mov	x1, #0x10                  	// #16
+     2cc:	94000000 	bl	0 <calloc>
+     2d0:	aa0003f8 	mov	x24, x0
+     2d4:	b4000ac0 	cbz	x0, 42c <ht_set+0x1ac>
+     2d8:	d2800017 	mov	x23, #0x0                   	// #0
+     2dc:	f9400260 	ldr	x0, [x19]
+     2e0:	b4000214 	cbz	x20, 320 <ht_set+0xa0>
+     2e4:	d503201f 	nop
+     2e8:	d37ceee1 	lsl	x1, x23, #4
+     2ec:	8b010003 	add	x3, x0, x1
+     2f0:	f8616802 	ldr	x2, [x0, x1]
+     2f4:	b40000e2 	cbz	x2, 310 <ht_set+0x90>
+     2f8:	f9400463 	ldr	x3, [x3, #8]
+     2fc:	aa1903e1 	mov	x1, x25
+     300:	aa1803e0 	mov	x0, x24
+     304:	d2800004 	mov	x4, #0x0                   	// #0
+     308:	97ffff76 	bl	e0 <ht_set_entry>
+     30c:	f9400260 	ldr	x0, [x19]
+     310:	910006f7 	add	x23, x23, #0x1
+     314:	f9400661 	ldr	x1, [x19, #8]
+     318:	eb0102ff 	cmp	x23, x1
+     31c:	54fffe63 	b.cc	2e8 <ht_set+0x68>  // b.lo, b.ul, b.last
+     320:	94000000 	bl	0 <free>
+     324:	a9006678 	stp	x24, x25, [x19]
+     328:	aa1903f4 	mov	x20, x25
+     32c:	f94023f9 	ldr	x25, [sp, #64]
+     330:	14000002 	b	338 <ht_set+0xb8>
+     334:	f9400278 	ldr	x24, [x19]
+     338:	91004264 	add	x4, x19, #0x10
+     33c:	aa1503e3 	mov	x3, x21
+     340:	aa1603e2 	mov	x2, x22
+     344:	aa1403e1 	mov	x1, x20
+     348:	aa1803e0 	mov	x0, x24
+     34c:	a94153f3 	ldp	x19, x20, [sp, #16]
+     350:	a9425bf5 	ldp	x21, x22, [sp, #32]
+     354:	a94363f7 	ldp	x23, x24, [sp, #48]
+     358:	a8c57bfd 	ldp	x29, x30, [sp], #80
+     35c:	17ffff61 	b	e0 <ht_set_entry>
+     360:	90000013 	adrp	x19, 0 <stderr>
+     364:	90000014 	adrp	x20, 0 <func_stack_push>
+     368:	91000283 	add	x3, x20, #0x0
+     36c:	90000002 	adrp	x2, 0 <func_stack_push>
+     370:	f9400260 	ldr	x0, [x19]
+     374:	9100c063 	add	x3, x3, #0x30
+     378:	91000042 	add	x2, x2, #0x0
+     37c:	52800021 	mov	w1, #0x1                   	// #1
+     380:	f9400000 	ldr	x0, [x0]
+     384:	94000000 	bl	0 <__fprintf_chk>
+     388:	f9400273 	ldr	x19, [x19]
+     38c:	91000283 	add	x3, x20, #0x0
+     390:	9100a063 	add	x3, x3, #0x28
+     394:	52800021 	mov	w1, #0x1                   	// #1
+     398:	90000002 	adrp	x2, 0 <func_stack_push>
+     39c:	91000042 	add	x2, x2, #0x0
+     3a0:	f9400260 	ldr	x0, [x19]
+     3a4:	94000000 	bl	0 <__fprintf_chk>
+     3a8:	d2800000 	mov	x0, #0x0                   	// #0
+     3ac:	a94153f3 	ldp	x19, x20, [sp, #16]
+     3b0:	a9425bf5 	ldp	x21, x22, [sp, #32]
+     3b4:	a94363f7 	ldp	x23, x24, [sp, #48]
+     3b8:	f94023f9 	ldr	x25, [sp, #64]
+     3bc:	a8c57bfd 	ldp	x29, x30, [sp], #80
+     3c0:	d65f03c0 	ret
+     3c4:	90000003 	adrp	x3, 0 <func_stack_push>
+     3c8:	91000063 	add	x3, x3, #0x0
+     3cc:	90000001 	adrp	x1, 0 <func_stack_push>
+     3d0:	90000000 	adrp	x0, 0 <func_stack_push>
+     3d4:	91008063 	add	x3, x3, #0x20
+     3d8:	91000021 	add	x1, x1, #0x0
+     3dc:	91000000 	add	x0, x0, #0x0
+     3e0:	528047a2 	mov	w2, #0x23d                 	// #573
+     3e4:	a90153f3 	stp	x19, x20, [sp, #16]
+     3e8:	a9025bf5 	stp	x21, x22, [sp, #32]
+     3ec:	a90363f7 	stp	x23, x24, [sp, #48]
+     3f0:	f90023f9 	str	x25, [sp, #64]
+     3f4:	94000000 	bl	0 <__assert_fail>
+     3f8:	90000000 	adrp	x0, 0 <stderr>
+     3fc:	f90023f9 	str	x25, [sp, #64]
+     400:	90000003 	adrp	x3, 0 <func_stack_push>
+     404:	91000063 	add	x3, x3, #0x0
+     408:	f9400000 	ldr	x0, [x0]
+     40c:	9100a063 	add	x3, x3, #0x28
+     410:	90000002 	adrp	x2, 0 <func_stack_push>
+     414:	91000042 	add	x2, x2, #0x0
+     418:	52800021 	mov	w1, #0x1                   	// #1
+     41c:	f9400000 	ldr	x0, [x0]
+     420:	94000000 	bl	0 <__fprintf_chk>
+     424:	52800020 	mov	w0, #0x1                   	// #1
+     428:	94000000 	bl	0 <exit>
+     42c:	90000013 	adrp	x19, 0 <stderr>
+     430:	90000014 	adrp	x20, 0 <func_stack_push>
+     434:	91000283 	add	x3, x20, #0x0
+     438:	90000002 	adrp	x2, 0 <func_stack_push>
+     43c:	f9400260 	ldr	x0, [x19]
+     440:	9100c063 	add	x3, x3, #0x30
+     444:	91000042 	add	x2, x2, #0x0
+     448:	52800021 	mov	w1, #0x1                   	// #1
+     44c:	f9400000 	ldr	x0, [x0]
+     450:	94000000 	bl	0 <__fprintf_chk>
+     454:	17ffffcd 	b	388 <ht_set+0x108>
+
+0000000000000458 <array_alloc_op_counts>:
+     458:	a9bd7bfd 	stp	x29, x30, [sp, #-48]!
+     45c:	910003fd 	mov	x29, sp
+     460:	a90153f3 	stp	x19, x20, [sp, #16]
+     464:	aa0103f3 	mov	x19, x1
+     468:	a9025bf5 	stp	x21, x22, [sp, #32]
+     46c:	aa0003f5 	mov	x21, x0
+     470:	f9400421 	ldr	x1, [x1, #8]
+     474:	b4000381 	cbz	x1, 4e4 <array_alloc_op_counts+0x8c>
+     478:	f9400262 	ldr	x2, [x19]
+     47c:	f9401261 	ldr	x1, [x19, #32]
+     480:	8b010c41 	add	x1, x2, x1, lsl #3
+     484:	f85f8034 	ldur	x20, [x1, #-8]
+     488:	b40005b4 	cbz	x20, 53c <array_alloc_op_counts+0xe4>
+     48c:	aa1403e1 	mov	x1, x20
+     490:	94000000 	bl	218 <ht_get>
+     494:	b40000a0 	cbz	x0, 4a8 <array_alloc_op_counts+0x50>
+     498:	a94153f3 	ldp	x19, x20, [sp, #16]
+     49c:	a9425bf5 	ldp	x21, x22, [sp, #32]
+     4a0:	a8c37bfd 	ldp	x29, x30, [sp], #48
+     4a4:	d65f03c0 	ret
+     4a8:	d2809900 	mov	x0, #0x4c8                 	// #1224
+     4ac:	94000000 	bl	0 <malloc>
+     4b0:	aa0003e3 	mov	x3, x0
+     4b4:	b40006c3 	cbz	x3, 58c <array_alloc_op_counts+0x134>
+     4b8:	aa0303e0 	mov	x0, x3
+     4bc:	d2809902 	mov	x2, #0x4c8                 	// #1224
+     4c0:	52800001 	mov	w1, #0x0                   	// #0
+     4c4:	94000000 	bl	0 <memset>
+     4c8:	aa1403e1 	mov	x1, x20
+     4cc:	aa0003e2 	mov	x2, x0
+     4d0:	aa1503e0 	mov	x0, x21
+     4d4:	a94153f3 	ldp	x19, x20, [sp, #16]
+     4d8:	a9425bf5 	ldp	x21, x22, [sp, #32]
+     4dc:	a8c37bfd 	ldp	x29, x30, [sp], #48
+     4e0:	14000000 	b	280 <ht_set>
+     4e4:	90000000 	adrp	x0, 0 <stderr>
+     4e8:	90000016 	adrp	x22, 0 <func_stack_push>
+     4ec:	910002c3 	add	x3, x22, #0x0
+     4f0:	90000002 	adrp	x2, 0 <func_stack_push>
+     4f4:	f9400000 	ldr	x0, [x0]
+     4f8:	91010063 	add	x3, x3, #0x40
+     4fc:	91000042 	add	x2, x2, #0x0
+     500:	52800021 	mov	w1, #0x1                   	// #1
+     504:	f9400000 	ldr	x0, [x0]
+     508:	94000000 	bl	0 <__fprintf_chk>
+     50c:	aa1503e0 	mov	x0, x21
+     510:	d2800001 	mov	x1, #0x0                   	// #0
+     514:	94000000 	bl	218 <ht_get>
+     518:	b5fffc00 	cbnz	x0, 498 <array_alloc_op_counts+0x40>
+     51c:	910002c3 	add	x3, x22, #0x0
+     520:	90000001 	adrp	x1, 0 <func_stack_push>
+     524:	90000000 	adrp	x0, 0 <func_stack_push>
+     528:	91012063 	add	x3, x3, #0x48
+     52c:	91000021 	add	x1, x1, #0x0
+     530:	91000000 	add	x0, x0, #0x0
+     534:	52804f62 	mov	w2, #0x27b                 	// #635
+     538:	94000000 	bl	0 <__assert_fail>
+     53c:	90000016 	adrp	x22, 0 <func_stack_push>
+     540:	910002c2 	add	x2, x22, #0x0
+     544:	91010042 	add	x2, x2, #0x40
+     548:	90000001 	adrp	x1, 0 <func_stack_push>
+     54c:	52800020 	mov	w0, #0x1                   	// #1
+     550:	91000021 	add	x1, x1, #0x0
+     554:	94000000 	bl	0 <__printf_chk>
+     558:	f9400262 	ldr	x2, [x19]
+     55c:	aa1503e0 	mov	x0, x21
+     560:	f9401261 	ldr	x1, [x19, #32]
+     564:	8b010c41 	add	x1, x2, x1, lsl #3
+     568:	f85f8034 	ldur	x20, [x1, #-8]
+     56c:	aa1403e1 	mov	x1, x20
+     570:	94000000 	bl	218 <ht_get>
+     574:	b5fff920 	cbnz	x0, 498 <array_alloc_op_counts+0x40>
+     578:	d2809900 	mov	x0, #0x4c8                 	// #1224
+     57c:	94000000 	bl	0 <malloc>
+     580:	aa0003e3 	mov	x3, x0
+     584:	b5fff994 	cbnz	x20, 4b4 <array_alloc_op_counts+0x5c>
+     588:	17ffffe5 	b	51c <array_alloc_op_counts+0xc4>
+     58c:	90000000 	adrp	x0, 0 <stderr>
+     590:	90000003 	adrp	x3, 0 <func_stack_push>
+     594:	a94153f3 	ldp	x19, x20, [sp, #16]
+     598:	91000063 	add	x3, x3, #0x0
+     59c:	f9400000 	ldr	x0, [x0]
+     5a0:	91018063 	add	x3, x3, #0x60
+     5a4:	a9425bf5 	ldp	x21, x22, [sp, #32]
+     5a8:	90000002 	adrp	x2, 0 <func_stack_push>
+     5ac:	a8c37bfd 	ldp	x29, x30, [sp], #48
+     5b0:	91000042 	add	x2, x2, #0x0
+     5b4:	f9400000 	ldr	x0, [x0]
+     5b8:	52800021 	mov	w1, #0x1                   	// #1
+     5bc:	14000000 	b	0 <__fprintf_chk>
+
+00000000000005c0 <ht_length>:
+     5c0:	f9400800 	ldr	x0, [x0, #16]
+     5c4:	d65f03c0 	ret
+
+00000000000005c8 <ht_iterator>:
+     5c8:	a9017d00 	stp	x0, xzr, [x8, #16]
+     5cc:	d65f03c0 	ret
+
+00000000000005d0 <ht_next>:
+     5d0:	aa0003e6 	mov	x6, x0
+     5d4:	a9410404 	ldp	x4, x1, [x0, #16]
+     5d8:	14000006 	b	5f0 <ht_next+0x20>
+     5dc:	f9000cc2 	str	x2, [x6, #24]
+     5e0:	f9400082 	ldr	x2, [x4]
+     5e4:	8b030040 	add	x0, x2, x3
+     5e8:	f8636842 	ldr	x2, [x2, x3]
+     5ec:	b5000122 	cbnz	x2, 610 <ht_next+0x40>
+     5f0:	f9400485 	ldr	x5, [x4, #8]
+     5f4:	91000422 	add	x2, x1, #0x1
+     5f8:	d37cec23 	lsl	x3, x1, #4
+     5fc:	eb0100bf 	cmp	x5, x1
+     600:	aa0203e1 	mov	x1, x2
+     604:	54fffec8 	b.hi	5dc <ht_next+0xc>  // b.pmore
+     608:	52800000 	mov	w0, #0x0                   	// #0
+     60c:	d65f03c0 	ret
+     610:	f9400401 	ldr	x1, [x0, #8]
+     614:	52800020 	mov	w0, #0x1                   	// #1
+     618:	a90004c2 	stp	x2, x1, [x6]
+     61c:	d65f03c0 	ret
+
+0000000000000620 <caml_interprete>:
+     620:	d11083ff 	sub	sp, sp, #0x420
+     624:	90000004 	adrp	x4, 0 <Caml_state>
+     628:	f9400084 	ldr	x4, [x4]
+     62c:	d53bd045 	mrs	x5, tpidr_el0
+     630:	90000003 	adrp	x3, 0 <__stack_chk_guard>
+     634:	910b03e2 	add	x2, sp, #0x2c0
+     638:	910b83e6 	add	x6, sp, #0x2e0
+     63c:	a9007bfd 	stp	x29, x30, [sp]
+     640:	910003fd 	mov	x29, sp
+     644:	f9400063 	ldr	x3, [x3]
+     648:	a90153f3 	stp	x19, x20, [sp, #16]
+     64c:	d2800033 	mov	x19, #0x1                   	// #1
+     650:	a9025bf5 	stp	x21, x22, [sp, #32]
+     654:	a90363f7 	stp	x23, x24, [sp, #48]
+     658:	a9046bf9 	stp	x25, x26, [sp, #64]
+     65c:	a90573fb 	stp	x27, x28, [sp, #80]
+     660:	fd0033e8 	str	d8, [sp, #96]
+     664:	f86468a4 	ldr	x4, [x5, x4]
+     668:	f9400065 	ldr	x5, [x3]
+     66c:	f9020fe5 	str	x5, [sp, #1048]
+     670:	d2800005 	mov	x5, #0x0                   	// #0
+     674:	f9016fe2 	str	x2, [sp, #728]
+     678:	f9003be4 	str	x4, [sp, #112]
+     67c:	f9405082 	ldr	x2, [x4, #160]
+     680:	a90907e0 	stp	x0, x1, [sp, #144]
+     684:	f90163f3 	str	x19, [sp, #704]
+     688:	f90167e6 	str	x6, [sp, #712]
+     68c:	f9016be2 	str	x2, [sp, #720]
+     690:	b40032c0 	cbz	x0, ce8 <__stubGETBYTESCHAR+0x20>
+     694:	f9403be4 	ldr	x4, [sp, #112]
+     698:	aa0603e0 	mov	x0, x6
+     69c:	52800001 	mov	w1, #0x0                   	// #0
+     6a0:	f9401082 	ldr	x2, [x4, #32]
+     6a4:	f940ec83 	ldr	x3, [x4, #472]
+     6a8:	f940f485 	ldr	x5, [x4, #488]
+     6ac:	a90a8fe5 	stp	x5, x3, [sp, #168]
+     6b0:	f9400043 	ldr	x3, [x2]
+     6b4:	f9400842 	ldr	x2, [x2, #16]
+     6b8:	cb030042 	sub	x2, x2, x3
+     6bc:	9343fc42 	asr	x2, x2, #3
+     6c0:	f90063e2 	str	x2, [sp, #192]
+     6c4:	94000000 	bl	0 <__sigsetjmp>
+     6c8:	f9403be4 	ldr	x4, [sp, #112]
+     6cc:	f9401081 	ldr	x1, [x4, #32]
+     6d0:	34001c40 	cbz	w0, a58 <__stubCHECK_SIGNALS+0x2f0>
+     6d4:	a95d8082 	ldp	x2, x0, [x4, #472]
+     6d8:	f94163f6 	ldr	x22, [sp, #704]
+     6dc:	f9400033 	ldr	x19, [x1]
+     6e0:	eb00005f 	cmp	x2, x0
+     6e4:	54001fea 	b.ge	ae0 <__stubCHECK_SIGNALS+0x378>  // b.tcont
+     6e8:	f9403be0 	ldr	x0, [sp, #112]
+     6ec:	f9406000 	ldr	x0, [x0, #192]
+     6f0:	b5000da0 	cbnz	x0, 8a4 <__stubCHECK_SIGNALS+0x13c>
+     6f4:	f9403be0 	ldr	x0, [sp, #112]
+     6f8:	f940ec02 	ldr	x2, [x0, #472]
+     6fc:	f100005f 	cmp	x2, #0x0
+     700:	f9403be0 	ldr	x0, [sp, #112]
+     704:	f9401000 	ldr	x0, [x0, #32]
+     708:	f9400801 	ldr	x1, [x0, #16]
+     70c:	54000e2d 	b.le	8d0 <__stubCHECK_SIGNALS+0x168>
+     710:	f9400c22 	ldr	x2, [x1, #24]
+     714:	b4003502 	cbz	x2, db4 <__stubGETBYTESCHAR+0xec>
+     718:	f9403bf4 	ldr	x20, [sp, #112]
+     71c:	f9400435 	ldr	x21, [x1, #8]
+     720:	f9000013 	str	x19, [x0]
+     724:	f9001282 	str	x2, [x20, #32]
+     728:	f9400057 	ldr	x23, [x2]
+     72c:	94000000 	bl	0 <caml_free_stack>
+     730:	aa1703f3 	mov	x19, x23
+     734:	f94002e0 	ldr	x0, [x23]
+     738:	9341fc00 	asr	x0, x0, #1
+     73c:	f900ee80 	str	x0, [x20, #472]
+     740:	f8408e74 	ldr	x20, [x19, #8]!
+     744:	f90006f6 	str	x22, [x23, #8]
+     748:	f94002b8 	ldr	x24, [x21]
+     74c:	9341fe94 	asr	x20, x20, #1
+     750:	f9403be0 	ldr	x0, [sp, #112]
+     754:	aa1503f7 	mov	x23, x21
+     758:	f9401000 	ldr	x0, [x0, #32]
+     75c:	9102a001 	add	x1, x0, #0xa8
+     760:	eb01027f 	cmp	x19, x1
+     764:	54001cc3 	b.cc	afc <__stubCHECK_SIGNALS+0x394>  // b.lo, b.ul, b.last
+
+0000000000000768 <__stubCHECK_SIGNALS>:
+     768:	94000000 	bl	0 <caml_alloc_point_here>
+     76c:	f9403be0 	ldr	x0, [sp, #112]
+     770:	f9400401 	ldr	x1, [x0, #8]
+     774:	f9400000 	ldr	x0, [x0]
+     778:	eb00003f 	cmp	x1, x0
+     77c:	54001d03 	b.cc	b1c <__stubCHECK_SIGNALS+0x3b4>  // b.lo, b.ul, b.last
+     780:	94000000 	bl	0 <caml_check_for_pending_signals>
+     784:	f94043f6 	ldr	x22, [sp, #128]
+     788:	f94053f9 	ldr	x25, [sp, #160]
+     78c:	35001c80 	cbnz	w0, b1c <__stubCHECK_SIGNALS+0x3b4>
+     790:	90000001 	adrp	x1, 0 <caml_params>
+     794:	90000000 	adrp	x0, 0 <func_stack_push>
+     798:	91000000 	add	x0, x0, #0x0
+     79c:	f90053f9 	str	x25, [sp, #160]
+     7a0:	91010000 	add	x0, x0, #0x40
+     7a4:	f90067e0 	str	x0, [sp, #200]
+     7a8:	f9400020 	ldr	x0, [x1]
+     7ac:	f90047e0 	str	x0, [sp, #136]
+     7b0:	aa1903e0 	mov	x0, x25
+     7b4:	aa1303f9 	mov	x25, x19
+     7b8:	f9403bfb 	ldr	x27, [sp, #112]
+     7bc:	aa1803f3 	mov	x19, x24
+     7c0:	f9405ffc 	ldr	x28, [sp, #184]
+     7c4:	aa0003f8 	mov	x24, x0
+     7c8:	f90043f6 	str	x22, [sp, #128]
+     7cc:	d503201f 	nop
+     7d0:	d53bd041 	mrs	x1, tpidr_el0
+     7d4:	90000004 	adrp	x4, 0 <caml_icount>
+     7d8:	f9400084 	ldr	x4, [x4]
+     7dc:	91400023 	add	x3, x1, #0x0, lsl #12
+     7e0:	91000063 	add	x3, x3, #0x0
+     7e4:	f8646822 	ldr	x2, [x1, x4]
+     7e8:	f9400060 	ldr	x0, [x3]
+     7ec:	d1000447 	sub	x7, x2, #0x1
+     7f0:	f8246827 	str	x7, [x1, x4]
+     7f4:	91000400 	add	x0, x0, #0x1
+     7f8:	f9000060 	str	x0, [x3]
+     7fc:	b4000e62 	cbz	x2, 9c8 <__stubCHECK_SIGNALS+0x260>
+     800:	f94047e0 	ldr	x0, [sp, #136]
+     804:	f940001a 	ldr	x26, [x0]
+     808:	f9401b40 	ldr	x0, [x26, #48]
+     80c:	f100041f 	cmp	x0, #0x1
+     810:	540007a8 	b.hi	904 <__stubCHECK_SIGNALS+0x19c>  // b.pmore
+     814:	b50008c0 	cbnz	x0, 92c <__stubCHECK_SIGNALS+0x1c4>
+     818:	f9401360 	ldr	x0, [x27, #32]
+     81c:	9100a001 	add	x1, x0, #0x28
+     820:	eb01033f 	cmp	x25, x1
+     824:	54015443 	b.cc	32ac <__stubRAISE+0xa88>  // b.lo, b.ul, b.last
+     828:	f9400800 	ldr	x0, [x0, #16]
+     82c:	eb19001f 	cmp	x0, x25
+     830:	54015323 	b.cc	3294 <__stubRAISE+0xa70>  // b.lo, b.ul, b.last
+     834:	b9400263 	ldr	w3, [x19]
+     838:	7102607f 	cmp	w3, #0x98
+     83c:	54000b4c 	b.gt	9a4 <__stubCHECK_SIGNALS+0x23c>
+     840:	f9403fe0 	ldr	x0, [sp, #120]
+     844:	93407c7a 	sxtw	x26, w3
+     848:	91000400 	add	x0, x0, #0x1
+     84c:	f9003fe0 	str	x0, [sp, #120]
+     850:	f94053e0 	ldr	x0, [sp, #160]
+     854:	f9400401 	ldr	x1, [x0, #8]
+     858:	f87a7b80 	ldr	x0, [x28, x26, lsl #3]
+     85c:	91000400 	add	x0, x0, #0x1
+     860:	f83a7b80 	str	x0, [x28, x26, lsl #3]
+     864:	b5000b61 	cbnz	x1, 9d0 <__stubCHECK_SIGNALS+0x268>
+     868:	90000001 	adrp	x1, 0 <caml_event_count>
+     86c:	d37ffa80 	lsl	x0, x20, #1
+     870:	91000407 	add	x7, x0, #0x1
+     874:	91001262 	add	x2, x19, #0x4
+     878:	f9400024 	ldr	x4, [x1]
+     87c:	90000000 	adrp	x0, 0 <func_stack_push>
+     880:	aa1403e9 	mov	x9, x20
+     884:	9100001a 	add	x26, x0, #0x0
+     888:	d1008328 	sub	x8, x25, #0x20
+     88c:	7102607f 	cmp	w3, #0x98
+     890:	54000829 	b.ls	994 <__stubCHECK_SIGNALS+0x22c>  // b.plast
+     894:	b9800261 	ldrsw	x1, [x19]
+     898:	90000000 	adrp	x0, 0 <func_stack_push>
+     89c:	91000000 	add	x0, x0, #0x0
+     8a0:	94000000 	bl	0 <caml_fatal_error>
+     8a4:	aa1303e1 	mov	x1, x19
+     8a8:	aa1603e0 	mov	x0, x22
+     8ac:	52800002 	mov	w2, #0x0                   	// #0
+     8b0:	94000000 	bl	0 <caml_stash_backtrace>
+     8b4:	f9403be0 	ldr	x0, [sp, #112]
+     8b8:	f940ec02 	ldr	x2, [x0, #472]
+     8bc:	f9403be0 	ldr	x0, [sp, #112]
+     8c0:	f100005f 	cmp	x2, #0x0
+     8c4:	f9401000 	ldr	x0, [x0, #32]
+     8c8:	f9400801 	ldr	x1, [x0, #16]
+     8cc:	54fff22c 	b.gt	710 <caml_interprete+0xf0>
+     8d0:	8b020c20 	add	x0, x1, x2, lsl #3
+     8d4:	aa1603f5 	mov	x21, x22
+     8d8:	f8627838 	ldr	x24, [x1, x2, lsl #3]
+     8dc:	91008013 	add	x19, x0, #0x20
+     8e0:	f9400401 	ldr	x1, [x0, #8]
+     8e4:	f9403be2 	ldr	x2, [sp, #112]
+     8e8:	9341fc21 	asr	x1, x1, #1
+     8ec:	f94043f6 	ldr	x22, [sp, #128]
+     8f0:	f900ec41 	str	x1, [x2, #472]
+     8f4:	f94053f9 	ldr	x25, [sp, #160]
+     8f8:	a9415017 	ldp	x23, x20, [x0, #16]
+     8fc:	9341fe94 	asr	x20, x20, #1
+     900:	17ffffa4 	b	790 <__stubCHECK_SIGNALS+0x28>
+     904:	d53bd042 	mrs	x2, tpidr_el0
+     908:	90000001 	adrp	x1, 0 <func_stack_push>
+     90c:	91400042 	add	x2, x2, #0x0, lsl #12
+     910:	91000042 	add	x2, x2, #0x0
+     914:	91000021 	add	x1, x1, #0x0
+     918:	52800020 	mov	w0, #0x1                   	// #1
+     91c:	f9400042 	ldr	x2, [x2]
+     920:	94000000 	bl	0 <__printf_chk>
+     924:	f9401b40 	ldr	x0, [x26, #48]
+     928:	b4fff780 	cbz	x0, 818 <__stubCHECK_SIGNALS+0xb0>
+     92c:	aa1303e0 	mov	x0, x19
+     930:	94000000 	bl	0 <caml_disasm_instr>
+     934:	f9401b40 	ldr	x0, [x26, #48]
+     938:	f100041f 	cmp	x0, #0x1
+     93c:	54fff6e9 	b.ls	818 <__stubCHECK_SIGNALS+0xb0>  // b.plast
+     940:	9000001a 	adrp	x26, 0 <stdout>
+     944:	90000001 	adrp	x1, 0 <func_stack_push>
+     948:	52800020 	mov	w0, #0x1                   	// #1
+     94c:	91000021 	add	x1, x1, #0x0
+     950:	94000000 	bl	0 <__printf_chk>
+     954:	f940035a 	ldr	x26, [x26]
+     958:	aa1703e0 	mov	x0, x23
+     95c:	a9490be1 	ldp	x1, x2, [sp, #144]
+     960:	f9400343 	ldr	x3, [x26]
+     964:	94000000 	bl	0 <caml_trace_value_file>
+     968:	f9400341 	ldr	x1, [x26]
+     96c:	52800140 	mov	w0, #0xa                   	// #10
+     970:	94000000 	bl	0 <putc>
+     974:	a9490fe2 	ldp	x2, x3, [sp, #144]
+     978:	aa1503e0 	mov	x0, x21
+     97c:	f9400344 	ldr	x4, [x26]
+     980:	aa1903e1 	mov	x1, x25
+     984:	94000000 	bl	0 <caml_trace_accu_sp_file>
+     988:	f9400340 	ldr	x0, [x26]
+     98c:	94000000 	bl	0 <fflush>
+     990:	17ffffa2 	b	818 <__stubCHECK_SIGNALS+0xb0>
+     994:	78635b40 	ldrh	w0, [x26, w3, uxtw #1]
+     998:	10000061 	adr	x1, 9a4 <__stubCHECK_SIGNALS+0x23c>
+     99c:	8b20a820 	add	x0, x1, w0, sxth #2
+     9a0:	d61f0000 	br	x0
+     9a4:	90000000 	adrp	x0, 0 <stderr>
+     9a8:	90000002 	adrp	x2, 0 <func_stack_push>
+     9ac:	52800021 	mov	w1, #0x1                   	// #1
+     9b0:	91000042 	add	x2, x2, #0x0
+     9b4:	f9400000 	ldr	x0, [x0]
+     9b8:	f9400000 	ldr	x0, [x0]
+     9bc:	94000000 	bl	0 <__fprintf_chk>
+     9c0:	b9400263 	ldr	w3, [x19]
+     9c4:	17ffffa9 	b	868 <__stubCHECK_SIGNALS+0x100>
+     9c8:	94000000 	bl	0 <caml_stop_here>
+     9cc:	17ffff8d 	b	800 <__stubCHECK_SIGNALS+0x98>
+     9d0:	f9400700 	ldr	x0, [x24, #8]
+     9d4:	b40001c0 	cbz	x0, a0c <__stubCHECK_SIGNALS+0x2a4>
+     9d8:	f9400301 	ldr	x1, [x24]
+     9dc:	f9401300 	ldr	x0, [x24, #32]
+     9e0:	8b000c20 	add	x0, x1, x0, lsl #3
+     9e4:	f85f8001 	ldur	x1, [x0, #-8]
+     9e8:	b4001d01 	cbz	x1, d88 <__stubGETBYTESCHAR+0xc0>
+     9ec:	aa1603e0 	mov	x0, x22
+     9f0:	94000000 	bl	218 <ht_get>
+     9f4:	b4014680 	cbz	x0, 32c4 <__stubRAISE+0xaa0>
+     9f8:	f87a7801 	ldr	x1, [x0, x26, lsl #3]
+     9fc:	91000421 	add	x1, x1, #0x1
+     a00:	f83a7801 	str	x1, [x0, x26, lsl #3]
+     a04:	b9400263 	ldr	w3, [x19]
+     a08:	17ffff98 	b	868 <__stubCHECK_SIGNALS+0x100>
+     a0c:	90000000 	adrp	x0, 0 <stderr>
+     a10:	90000003 	adrp	x3, 0 <func_stack_push>
+     a14:	91000063 	add	x3, x3, #0x0
+     a18:	90000002 	adrp	x2, 0 <func_stack_push>
+     a1c:	f9400000 	ldr	x0, [x0]
+     a20:	91010063 	add	x3, x3, #0x40
+     a24:	91000042 	add	x2, x2, #0x0
+     a28:	52800021 	mov	w1, #0x1                   	// #1
+     a2c:	f9400000 	ldr	x0, [x0]
+     a30:	94000000 	bl	0 <__fprintf_chk>
+     a34:	90000003 	adrp	x3, 0 <func_stack_push>
+     a38:	91000063 	add	x3, x3, #0x0
+     a3c:	90000001 	adrp	x1, 0 <func_stack_push>
+     a40:	90000000 	adrp	x0, 0 <func_stack_push>
+     a44:	9101e063 	add	x3, x3, #0x78
+     a48:	91000021 	add	x1, x1, #0x0
+     a4c:	91000000 	add	x0, x0, #0x0
+     a50:	52804c02 	mov	w2, #0x260                 	// #608
+     a54:	94000000 	bl	0 <__assert_fail>
+     a58:	f9403be3 	ldr	x3, [sp, #112]
+     a5c:	910b23e2 	add	x2, sp, #0x2c8
+     a60:	d2800035 	mov	x21, #0x1                   	// #1
+     a64:	f9003fff 	str	xzr, [sp, #120]
+     a68:	f900ec75 	str	x21, [x3, #472]
+     a6c:	f900f462 	str	x2, [x3, #488]
+     a70:	f9400033 	ldr	x19, [x1]
+     a74:	94000000 	bl	0 <caml_atom>
+     a78:	aa0003f7 	mov	x23, x0
+     a7c:	d2809900 	mov	x0, #0x4c8                 	// #1224
+     a80:	94000000 	bl	0 <malloc>
+     a84:	f9005fe0 	str	x0, [sp, #184]
+     a88:	b4014300 	cbz	x0, 32e8 <__stubRAISE+0xac4>
+     a8c:	d2809902 	mov	x2, #0x4c8                 	// #1224
+     a90:	52800001 	mov	w1, #0x0                   	// #0
+     a94:	94000000 	bl	0 <memset>
+     a98:	aa1503e1 	mov	x1, x21
+     a9c:	d2840000 	mov	x0, #0x2000                	// #8192
+     aa0:	94000000 	bl	0 <calloc>
+     aa4:	aa0003f4 	mov	x20, x0
+     aa8:	b4014320 	cbz	x0, 330c <__stubRAISE+0xae8>
+     aac:	d2800500 	mov	x0, #0x28                  	// #40
+     ab0:	94000000 	bl	0 <malloc>
+     ab4:	b4013dc0 	cbz	x0, 326c <__stubRAISE+0xa48>
+     ab8:	d2808001 	mov	x1, #0x400                 	// #1024
+     abc:	a9007c14 	stp	x20, xzr, [x0]
+     ac0:	aa0003f9 	mov	x25, x0
+     ac4:	a9017c01 	stp	x1, xzr, [x0, #16]
+     ac8:	d2800014 	mov	x20, #0x0                   	// #0
+     acc:	f900101f 	str	xzr, [x0, #32]
+     ad0:	f9404bf8 	ldr	x24, [sp, #144]
+     ad4:	94000000 	bl	198 <ht_create>
+     ad8:	aa0003f6 	mov	x22, x0
+     adc:	17ffff2d 	b	790 <__stubCHECK_SIGNALS+0x28>
+     ae0:	52800080 	mov	w0, #0x4                   	// #4
+     ae4:	d2800021 	mov	x1, #0x1                   	// #1
+     ae8:	94000000 	bl	0 <caml_debugger>
+     aec:	f9403be0 	ldr	x0, [sp, #112]
+     af0:	f9406000 	ldr	x0, [x0, #192]
+     af4:	b4ffe000 	cbz	x0, 6f4 <caml_interprete+0xd4>
+     af8:	17ffff6b 	b	8a4 <__stubCHECK_SIGNALS+0x13c>
+     afc:	f9000013 	str	x19, [x0]
+     b00:	d2800200 	mov	x0, #0x10                  	// #16
+     b04:	94000000 	bl	0 <caml_try_realloc_stack>
+     b08:	34013a40 	cbz	w0, 3250 <__stubRAISE+0xa2c>
+     b0c:	f9403be0 	ldr	x0, [sp, #112]
+     b10:	f9401000 	ldr	x0, [x0, #32]
+     b14:	f9400013 	ldr	x19, [x0]
+     b18:	17ffff14 	b	768 <__stubCHECK_SIGNALS>
+     b1c:	d37ffa80 	lsl	x0, x20, #1
+     b20:	9100041c 	add	x28, x0, #0x1
+     b24:	d100c261 	sub	x1, x19, #0x30
+     b28:	d2800020 	mov	x0, #0x1                   	// #1
+     b2c:	a93d0275 	stp	x21, x0, [x19, #-48]
+     b30:	a93e6260 	stp	x0, x24, [x19, #-32]
+     b34:	a93f7277 	stp	x23, x28, [x19, #-16]
+     b38:	f9403bf3 	ldr	x19, [sp, #112]
+     b3c:	f94043f6 	ldr	x22, [sp, #128]
+     b40:	f9401260 	ldr	x0, [x19, #32]
+     b44:	f94053f9 	ldr	x25, [sp, #160]
+     b48:	f9000001 	str	x1, [x0]
+     b4c:	94000000 	bl	0 <caml_process_pending_actions>
+     b50:	f9401260 	ldr	x0, [x19, #32]
+     b54:	f9400000 	ldr	x0, [x0]
+     b58:	9100c013 	add	x19, x0, #0x30
+     b5c:	f9401414 	ldr	x20, [x0, #40]
+     b60:	f9400015 	ldr	x21, [x0]
+     b64:	9341fe94 	asr	x20, x20, #1
+     b68:	a941dc18 	ldp	x24, x23, [x0, #24]
+     b6c:	17ffff09 	b	790 <__stubCHECK_SIGNALS+0x28>
+
+0000000000000b70 <__stubPUSH>:
+     b70:	aa0203f3 	mov	x19, x2
+     b74:	d1002339 	sub	x25, x25, #0x8
+     b78:	f9000335 	str	x21, [x25]
+     b7c:	f90043f6 	str	x22, [sp, #128]
+     b80:	17ffff14 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000b84 <__stubPUSHACC>:
+     b84:	d1002339 	sub	x25, x25, #0x8
+     b88:	f9000335 	str	x21, [x25]
+     b8c:	b9800660 	ldrsw	x0, [x19, #4]
+     b90:	91002273 	add	x19, x19, #0x8
+     b94:	f90043f6 	str	x22, [sp, #128]
+     b98:	f8607b35 	ldr	x21, [x25, x0, lsl #3]
+     b9c:	17ffff0d 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000ba0 <__stubPUSHENVACC>:
+     ba0:	d1002339 	sub	x25, x25, #0x8
+     ba4:	f9000335 	str	x21, [x25]
+     ba8:	b9400660 	ldr	w0, [x19, #4]
+     bac:	91002273 	add	x19, x19, #0x8
+     bb0:	f90043f6 	str	x22, [sp, #128]
+     bb4:	f860daf5 	ldr	x21, [x23, w0, sxtw #3]
+     bb8:	17ffff06 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000bbc <__stubPUSHATOM>:
+     bbc:	d1002339 	sub	x25, x25, #0x8
+     bc0:	f9000335 	str	x21, [x25]
+
+0000000000000bc4 <__stubATOM>:
+     bc4:	b9400660 	ldr	w0, [x19, #4]
+     bc8:	9100227a 	add	x26, x19, #0x8
+     bcc:	aa1a03f3 	mov	x19, x26
+     bd0:	94000000 	bl	0 <caml_atom>
+     bd4:	aa0003f5 	mov	x21, x0
+     bd8:	f90043f6 	str	x22, [sp, #128]
+     bdc:	17fffefd 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000be0 <__stubPUSHATOM0>:
+     be0:	d1002339 	sub	x25, x25, #0x8
+     be4:	f9000335 	str	x21, [x25]
+     be8:	f900fbe2 	str	x2, [sp, #496]
+
+0000000000000bec <__stubATOM0>:
+     bec:	52800000 	mov	w0, #0x0                   	// #0
+     bf0:	94000000 	bl	0 <caml_atom>
+     bf4:	f940fbe2 	ldr	x2, [sp, #496]
+     bf8:	aa0003f5 	mov	x21, x0
+     bfc:	f90043f6 	str	x22, [sp, #128]
+     c00:	aa0203f3 	mov	x19, x2
+     c04:	17fffef3 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000c08 <__stubPUSHGETGLOBALFIELD>:
+     c08:	d1002339 	sub	x25, x25, #0x8
+     c0c:	f9000335 	str	x21, [x25]
+
+0000000000000c10 <__stubGETGLOBALFIELD>:
+     c10:	90000000 	adrp	x0, 0 <caml_global_data>
+     c14:	f90043f6 	str	x22, [sp, #128]
+     c18:	29408662 	ldp	w2, w1, [x19, #4]
+     c1c:	91003273 	add	x19, x19, #0xc
+     c20:	f9400000 	ldr	x0, [x0]
+     c24:	f9400000 	ldr	x0, [x0]
+     c28:	f862d800 	ldr	x0, [x0, w2, sxtw #3]
+     c2c:	f861d815 	ldr	x21, [x0, w1, sxtw #3]
+     c30:	17fffee8 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000c34 <__stubPUSHGETGLOBAL>:
+     c34:	d1002339 	sub	x25, x25, #0x8
+     c38:	f9000335 	str	x21, [x25]
+
+0000000000000c3c <__stubGETGLOBAL>:
+     c3c:	90000000 	adrp	x0, 0 <caml_global_data>
+     c40:	b9400661 	ldr	w1, [x19, #4]
+     c44:	91002273 	add	x19, x19, #0x8
+     c48:	f90043f6 	str	x22, [sp, #128]
+     c4c:	f9400000 	ldr	x0, [x0]
+     c50:	f9400000 	ldr	x0, [x0]
+     c54:	f861d815 	ldr	x21, [x0, w1, sxtw #3]
+     c58:	17fffede 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000c5c <__stubPUSHOFFSETCLOSURE>:
+     c5c:	d1002339 	sub	x25, x25, #0x8
+     c60:	f9000335 	str	x21, [x25]
+     c64:	b9400675 	ldr	w21, [x19, #4]
+     c68:	91002273 	add	x19, x19, #0x8
+     c6c:	f90043f6 	str	x22, [sp, #128]
+     c70:	8b35cef5 	add	x21, x23, w21, sxtw #3
+     c74:	17fffed7 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+     c78:	d1002339 	sub	x25, x25, #0x8
+     c7c:	f9000335 	str	x21, [x25]
+     c80:	aa0203f3 	mov	x19, x2
+     c84:	910062f5 	add	x21, x23, #0x18
+     c88:	f90043f6 	str	x22, [sp, #128]
+     c8c:	17fffed1 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+     c90:	d1002339 	sub	x25, x25, #0x8
+     c94:	f9000335 	str	x21, [x25]
+     c98:	aa0203f3 	mov	x19, x2
+     c9c:	d10062f5 	sub	x21, x23, #0x18
+     ca0:	f90043f6 	str	x22, [sp, #128]
+     ca4:	17fffecb 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000ca8 <__stubPUSHCONSTINT>:
+     ca8:	d1002339 	sub	x25, x25, #0x8
+     cac:	f9000335 	str	x21, [x25]
+
+0000000000000cb0 <__stubCONSTINT>:
+     cb0:	b9800675 	ldrsw	x21, [x19, #4]
+     cb4:	91002273 	add	x19, x19, #0x8
+     cb8:	f90043f6 	str	x22, [sp, #128]
+     cbc:	d37ffab5 	lsl	x21, x21, #1
+     cc0:	910006b5 	add	x21, x21, #0x1
+     cc4:	17fffec3 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000cc8 <__stubGETBYTESCHAR>:
+     cc8:	f8408720 	ldr	x0, [x25], #8
+     ccc:	aa0203f3 	mov	x19, x2
+     cd0:	f90043f6 	str	x22, [sp, #128]
+     cd4:	9341fc00 	asr	x0, x0, #1
+     cd8:	38756815 	ldrb	w21, [x0, x21]
+     cdc:	d37ffab5 	lsl	x21, x21, #1
+     ce0:	910006b5 	add	x21, x21, #0x1
+     ce4:	17fffebb 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+     ce8:	90000014 	adrp	x20, 0 <func_stack_push>
+     cec:	91000294 	add	x20, x20, #0x0
+     cf0:	d2800003 	mov	x3, #0x0                   	// #0
+     cf4:	52800062 	mov	w2, #0x3                   	// #3
+     cf8:	91003281 	add	x1, x20, #0xc
+     cfc:	aa1403e0 	mov	x0, x20
+     d00:	94000000 	bl	0 <caml_register_code_fragment>
+     d04:	aa1303f5 	mov	x21, x19
+     d08:	52801ee1 	mov	w1, #0xf7                  	// #247
+     d0c:	d2800040 	mov	x0, #0x2                   	// #2
+     d10:	94000000 	bl	0 <caml_alloc_small>
+     d14:	aa0003e1 	mov	x1, x0
+     d18:	90000002 	adrp	x2, 0 <func_stack_push>
+     d1c:	d28000a3 	mov	x3, #0x5                   	// #5
+     d20:	91000040 	add	x0, x2, #0x0
+     d24:	a9000c34 	stp	x20, x3, [x1]
+     d28:	f9000041 	str	x1, [x2]
+     d2c:	94000000 	bl	0 <caml_register_generational_global_root>
+     d30:	90000000 	adrp	x0, 0 <caml_global_data>
+     d34:	f9400000 	ldr	x0, [x0]
+     d38:	f9000013 	str	x19, [x0]
+     d3c:	94000000 	bl	0 <caml_register_generational_global_root>
+     d40:	94000000 	bl	0 <caml_init_callbacks>
+     d44:	90000000 	adrp	x0, 0 <__stack_chk_guard>
+     d48:	f9400000 	ldr	x0, [x0]
+     d4c:	f9420fe1 	ldr	x1, [sp, #1048]
+     d50:	f9400002 	ldr	x2, [x0]
+     d54:	eb020021 	subs	x1, x1, x2
+     d58:	d2800002 	mov	x2, #0x0                   	// #0
+     d5c:	54012f61 	b.ne	3348 <__stubRAISE+0xb24>  // b.any
+     d60:	aa1503e0 	mov	x0, x21
+     d64:	fd4033e8 	ldr	d8, [sp, #96]
+     d68:	a9407bfd 	ldp	x29, x30, [sp]
+     d6c:	a94153f3 	ldp	x19, x20, [sp, #16]
+     d70:	a9425bf5 	ldp	x21, x22, [sp, #32]
+     d74:	a94363f7 	ldp	x23, x24, [sp, #48]
+     d78:	a9446bf9 	ldp	x25, x26, [sp, #64]
+     d7c:	a94573fb 	ldp	x27, x28, [sp, #80]
+     d80:	911083ff 	add	sp, sp, #0x420
+     d84:	d65f03c0 	ret
+     d88:	f94067e2 	ldr	x2, [sp, #200]
+     d8c:	90000001 	adrp	x1, 0 <func_stack_push>
+     d90:	52800020 	mov	w0, #0x1                   	// #1
+     d94:	91000021 	add	x1, x1, #0x0
+     d98:	94000000 	bl	0 <__printf_chk>
+     d9c:	f9400301 	ldr	x1, [x24]
+     da0:	f9401300 	ldr	x0, [x24, #32]
+     da4:	8b000c20 	add	x0, x1, x0, lsl #3
+     da8:	f85f8001 	ldur	x1, [x0, #-8]
+     dac:	b5ffe201 	cbnz	x1, 9ec <__stubCHECK_SIGNALS+0x284>
+     db0:	17ffff21 	b	a34 <__stubCHECK_SIGNALS+0x2cc>
+     db4:	f9403be1 	ldr	x1, [sp, #112]
+     db8:	b27f02d5 	orr	x21, x22, #0x2
+     dbc:	f9405be2 	ldr	x2, [sp, #176]
+     dc0:	f900ec22 	str	x2, [x1, #472]
+     dc4:	f94057e2 	ldr	x2, [sp, #168]
+     dc8:	f900f422 	str	x2, [x1, #488]
+     dcc:	b940c3e2 	ldr	w2, [sp, #192]
+     dd0:	f9400801 	ldr	x1, [x0, #16]
+     dd4:	cb22cc21 	sub	x1, x1, w2, sxtw #3
+     dd8:	f9000001 	str	x1, [x0]
+     ddc:	17ffffda 	b	d44 <__stubGETBYTESCHAR+0x7c>
+
+0000000000000de0 <__stubCONST2>:
+     de0:	d28000b5 	mov	x21, #0x5                   	// #5
+     de4:	aa0203f3 	mov	x19, x2
+     de8:	f90043f6 	str	x22, [sp, #128]
+     dec:	17fffe79 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+     df0:	f8408720 	ldr	x0, [x25], #8
+     df4:	aa0203f3 	mov	x19, x2
+     df8:	eb15001f 	cmp	x0, x21
+     dfc:	5400e84a 	b.ge	2b04 <__stubRAISE+0x2e0>  // b.tcont
+     e00:	d2800035 	mov	x21, #0x1                   	// #1
+     e04:	f90043f6 	str	x22, [sp, #128]
+     e08:	17fffe72 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+     e0c:	f8408720 	ldr	x0, [x25], #8
+     e10:	aa0203f3 	mov	x19, x2
+     e14:	eb15001f 	cmp	x0, x21
+     e18:	5400e7cb 	b.lt	2b10 <__stubRAISE+0x2ec>  // b.tstop
+     e1c:	d2800035 	mov	x21, #0x1                   	// #1
+     e20:	f90043f6 	str	x22, [sp, #128]
+     e24:	17fffe6b 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+     e28:	f8408720 	ldr	x0, [x25], #8
+     e2c:	aa0203f3 	mov	x19, x2
+     e30:	eb15001f 	cmp	x0, x21
+     e34:	5400e74d 	b.le	2b1c <__stubRAISE+0x2f8>
+     e38:	d2800035 	mov	x21, #0x1                   	// #1
+     e3c:	f90043f6 	str	x22, [sp, #128]
+     e40:	17fffe64 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000e44 <__stubOFFSETINT>:
+     e44:	b9400660 	ldr	w0, [x19, #4]
+     e48:	91002273 	add	x19, x19, #0x8
+     e4c:	f90043f6 	str	x22, [sp, #128]
+     e50:	531f7800 	lsl	w0, w0, #1
+     e54:	8b20c2b5 	add	x21, x21, w0, sxtw
+     e58:	17fffe5e 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000e5c <__stubOFFSETREF>:
+     e5c:	b9400660 	ldr	w0, [x19, #4]
+     e60:	91002273 	add	x19, x19, #0x8
+     e64:	f94002a1 	ldr	x1, [x21]
+     e68:	f90043f6 	str	x22, [sp, #128]
+     e6c:	531f7800 	lsl	w0, w0, #1
+     e70:	8b20c020 	add	x0, x1, w0, sxtw
+     e74:	f90002a0 	str	x0, [x21]
+     e78:	d2800035 	mov	x21, #0x1                   	// #1
+     e7c:	17fffe55 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000e80 <__stubISINT>:
+     e80:	d37f02b5 	ubfiz	x21, x21, #1, #1
+     e84:	aa0203f3 	mov	x19, x2
+     e88:	910006b5 	add	x21, x21, #0x1
+     e8c:	f90043f6 	str	x22, [sp, #128]
+     e90:	17fffe50 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000e94 <__stubGETMETHOD>:
+     e94:	f9400320 	ldr	x0, [x25]
+     e98:	9341feb5 	asr	x21, x21, #1
+     e9c:	aa0203f3 	mov	x19, x2
+     ea0:	f90043f6 	str	x22, [sp, #128]
+     ea4:	f9400000 	ldr	x0, [x0]
+     ea8:	f875d815 	ldr	x21, [x0, w21, sxtw #3]
+     eac:	17fffe49 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+     eb0:	b9800660 	ldrsw	x0, [x19, #4]
+     eb4:	eb95041f 	cmp	x0, x21, asr #1
+     eb8:	5400e980 	b.eq	2be8 <__stubRAISE+0x3c4>  // b.none
+     ebc:	91003273 	add	x19, x19, #0xc
+     ec0:	f90043f6 	str	x22, [sp, #128]
+     ec4:	17fffe43 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+     ec8:	b9800660 	ldrsw	x0, [x19, #4]
+     ecc:	eb95041f 	cmp	x0, x21, asr #1
+     ed0:	5400edc0 	b.eq	2c88 <__stubRAISE+0x464>  // b.none
+     ed4:	b9400a7a 	ldr	w26, [x19, #8]
+     ed8:	f90043f6 	str	x22, [sp, #128]
+     edc:	8b3aca7a 	add	x26, x19, w26, sxtw #2
+     ee0:	91002353 	add	x19, x26, #0x8
+     ee4:	17fffe3b 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+     ee8:	b9800660 	ldrsw	x0, [x19, #4]
+     eec:	eb95041f 	cmp	x0, x21, asr #1
+     ef0:	5400e1cc 	b.gt	2b28 <__stubRAISE+0x304>
+     ef4:	b9400a7a 	ldr	w26, [x19, #8]
+     ef8:	f90043f6 	str	x22, [sp, #128]
+     efc:	8b3aca7a 	add	x26, x19, w26, sxtw #2
+     f00:	91002353 	add	x19, x26, #0x8
+     f04:	17fffe33 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+     f08:	b9800660 	ldrsw	x0, [x19, #4]
+     f0c:	eb95041f 	cmp	x0, x21, asr #1
+     f10:	5400e12a 	b.ge	2b34 <__stubRAISE+0x310>  // b.tcont
+     f14:	b9400a7a 	ldr	w26, [x19, #8]
+     f18:	f90043f6 	str	x22, [sp, #128]
+     f1c:	8b3aca7a 	add	x26, x19, w26, sxtw #2
+     f20:	91002353 	add	x19, x26, #0x8
+     f24:	17fffe2b 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+     f28:	b9800660 	ldrsw	x0, [x19, #4]
+     f2c:	eb95041f 	cmp	x0, x21, asr #1
+     f30:	5400e14d 	b.le	2b58 <__stubRAISE+0x334>
+     f34:	b9400a7a 	ldr	w26, [x19, #8]
+     f38:	f90043f6 	str	x22, [sp, #128]
+     f3c:	8b3aca7a 	add	x26, x19, w26, sxtw #2
+     f40:	91002353 	add	x19, x26, #0x8
+     f44:	17fffe23 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+     f48:	b9800660 	ldrsw	x0, [x19, #4]
+     f4c:	eb95041f 	cmp	x0, x21, asr #1
+     f50:	5400db4b 	b.lt	2ab8 <__stubRAISE+0x294>  // b.tstop
+     f54:	b9400a7a 	ldr	w26, [x19, #8]
+     f58:	f90043f6 	str	x22, [sp, #128]
+     f5c:	8b3aca7a 	add	x26, x19, w26, sxtw #2
+     f60:	91002353 	add	x19, x26, #0x8
+     f64:	17fffe1b 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+     f68:	aa1903f3 	mov	x19, x25
+     f6c:	aa0203f8 	mov	x24, x2
+     f70:	17fffdfe 	b	768 <__stubCHECK_SIGNALS>
+
+0000000000000f74 <__stubSETGLOBAL>:
+     f74:	90000002 	adrp	x2, 0 <caml_global_data>
+     f78:	b9400663 	ldr	w3, [x19, #4]
+     f7c:	aa1503e1 	mov	x1, x21
+     f80:	91002273 	add	x19, x19, #0x8
+     f84:	f9400042 	ldr	x2, [x2]
+     f88:	d2800035 	mov	x21, #0x1                   	// #1
+     f8c:	f9400040 	ldr	x0, [x2]
+     f90:	8b23cc00 	add	x0, x0, w3, sxtw #3
+     f94:	94000000 	bl	0 <caml_modify>
+     f98:	f90043f6 	str	x22, [sp, #128]
+     f9c:	17fffe0d 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000fa0 <__stubPUSHENVACC1>:
+     fa0:	f81f8335 	stur	x21, [x25, #-8]
+     fa4:	aa0203f3 	mov	x19, x2
+     fa8:	d1002339 	sub	x25, x25, #0x8
+     fac:	f90043f6 	str	x22, [sp, #128]
+     fb0:	f94006f5 	ldr	x21, [x23, #8]
+     fb4:	17fffe07 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000fb8 <__stubPUSHENVACC2>:
+     fb8:	f81f8335 	stur	x21, [x25, #-8]
+     fbc:	aa0203f3 	mov	x19, x2
+     fc0:	d1002339 	sub	x25, x25, #0x8
+     fc4:	f90043f6 	str	x22, [sp, #128]
+     fc8:	f9400af5 	ldr	x21, [x23, #16]
+     fcc:	17fffe01 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000fd0 <__stubASSIGN>:
+     fd0:	b9800660 	ldrsw	x0, [x19, #4]
+     fd4:	91002273 	add	x19, x19, #0x8
+     fd8:	f90043f6 	str	x22, [sp, #128]
+     fdc:	f8207b35 	str	x21, [x25, x0, lsl #3]
+     fe0:	d2800035 	mov	x21, #0x1                   	// #1
+     fe4:	17fffdfb 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000fe8 <__stubENVACC1>:
+     fe8:	aa0203f3 	mov	x19, x2
+     fec:	f90043f6 	str	x22, [sp, #128]
+     ff0:	f94006f5 	ldr	x21, [x23, #8]
+     ff4:	17fffdf7 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000000ff8 <__stubENVACC2>:
+     ff8:	aa0203f3 	mov	x19, x2
+     ffc:	f90043f6 	str	x22, [sp, #128]
+    1000:	f9400af5 	ldr	x21, [x23, #16]
+    1004:	17fffdf3 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001008 <__stubENVACC3>:
+    1008:	aa0203f3 	mov	x19, x2
+    100c:	f90043f6 	str	x22, [sp, #128]
+    1010:	f9400ef5 	ldr	x21, [x23, #24]
+    1014:	17fffdef 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    1018:	aa0203f3 	mov	x19, x2
+    101c:	d1002339 	sub	x25, x25, #0x8
+    1020:	f9000335 	str	x21, [x25]
+    1024:	aa1703f5 	mov	x21, x23
+    1028:	f90043f6 	str	x22, [sp, #128]
+    102c:	17fffde9 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001030 <__stubENVACC4>:
+    1030:	aa0203f3 	mov	x19, x2
+    1034:	f90043f6 	str	x22, [sp, #128]
+    1038:	f94012f5 	ldr	x21, [x23, #32]
+    103c:	17fffde5 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    1040:	b9400660 	ldr	w0, [x19, #4]
+    1044:	91003261 	add	x1, x19, #0xc
+    1048:	b900fbe0 	str	w0, [sp, #248]
+    104c:	f90073e1 	str	x1, [sp, #224]
+    1050:	0b000400 	add	w0, w0, w0, lsl #1
+    1054:	b9400a61 	ldr	w1, [x19, #8]
+    1058:	51000400 	sub	w0, w0, #0x1
+    105c:	b900dfe1 	str	w1, [sp, #220]
+    1060:	b900ffe0 	str	w0, [sp, #252]
+    1064:	7100003f 	cmp	w1, #0x0
+    1068:	93407c00 	sxtw	x0, w0
+    106c:	f900b3e0 	str	x0, [sp, #352]
+    1070:	8b21c000 	add	x0, x0, w1, sxtw
+    1074:	5400006d 	b.le	1080 <__stubENVACC4+0x50>
+    1078:	d1002339 	sub	x25, x25, #0x8
+    107c:	f9000335 	str	x21, [x25]
+    1080:	f104001f 	cmp	x0, #0x100
+    1084:	5400e108 	b.hi	2ca4 <__stubRAISE+0x480>  // b.pmore
+    1088:	b4010a00 	cbz	x0, 31c8 <__stubRAISE+0x9a4>
+    108c:	90000001 	adrp	x1, 0 <Caml_state>
+    1090:	f9400021 	ldr	x1, [x1]
+    1094:	d53bd043 	mrs	x3, tpidr_el0
+    1098:	d37df002 	lsl	x2, x0, #3
+    109c:	928000fa 	mov	x26, #0xfffffffffffffff8    	// #-8
+    10a0:	cb020344 	sub	x4, x26, x2
+    10a4:	91002045 	add	x5, x2, #0x8
+    10a8:	a91297e4 	stp	x4, x5, [sp, #296]
+    10ac:	f861687a 	ldr	x26, [x3, x1]
+    10b0:	f900dfe2 	str	x2, [sp, #440]
+    10b4:	f9400743 	ldr	x3, [x26, #8]
+    10b8:	8b040063 	add	x3, x3, x4
+    10bc:	aa1503e4 	mov	x4, x21
+    10c0:	aa1403f5 	mov	x21, x20
+    10c4:	aa1303f4 	mov	x20, x19
+    10c8:	aa1b03f3 	mov	x19, x27
+    10cc:	aa1703fb 	mov	x27, x23
+    10d0:	aa0003f7 	mov	x23, x0
+    10d4:	f9000743 	str	x3, [x26, #8]
+    10d8:	f900f7e4 	str	x4, [sp, #488]
+    10dc:	94000000 	bl	0 <caml_alloc_point_here>
+    10e0:	f9400743 	ldr	x3, [x26, #8]
+    10e4:	f9400340 	ldr	x0, [x26]
+    10e8:	eb00007f 	cmp	x3, x0
+    10ec:	f940f7e4 	ldr	x4, [sp, #488]
+    10f0:	54011463 	b.cc	337c <__stubRAISE+0xb58>  // b.lo, b.ul, b.last
+    10f4:	aa1703e0 	mov	x0, x23
+    10f8:	aa1b03f7 	mov	x23, x27
+    10fc:	f940dfe2 	ldr	x2, [sp, #440]
+    1100:	d376d400 	lsl	x0, x0, #10
+    1104:	9103dc00 	add	x0, x0, #0xf7
+    1108:	f9000060 	str	x0, [x3]
+    110c:	aa1303fb 	mov	x27, x19
+    1110:	aa1403f3 	mov	x19, x20
+    1114:	f9400741 	ldr	x1, [x26, #8]
+    1118:	aa1503f4 	mov	x20, x21
+    111c:	91002035 	add	x21, x1, #0x8
+    1120:	8b020022 	add	x2, x1, x2
+    1124:	aa1503e0 	mov	x0, x21
+    1128:	d29adae3 	mov	x3, #0xd6d7                	// #54999
+    112c:	f2bae203 	movk	x3, #0xd710, lsl #16
+    1130:	f2dafae3 	movk	x3, #0xd7d7, lsl #32
+    1134:	f2fae203 	movk	x3, #0xd710, lsl #48
+    1138:	f8008c23 	str	x3, [x1, #8]!
+    113c:	eb01005f 	cmp	x2, x1
+    1140:	54ffff41 	b.ne	1128 <__stubENVACC4+0xf8>  // b.any
+    1144:	b940ffe1 	ldr	w1, [sp, #252]
+    1148:	8b21cc02 	add	x2, x0, w1, sxtw #3
+    114c:	b940dfe1 	ldr	w1, [sp, #220]
+    1150:	7100003f 	cmp	w1, #0x0
+    1154:	5400012d 	b.le	1178 <__stubENVACC4+0x148>
+    1158:	51000421 	sub	w1, w1, #0x1
+    115c:	cb020323 	sub	x3, x25, x2
+    1160:	91000421 	add	x1, x1, #0x1
+    1164:	8b010c41 	add	x1, x2, x1, lsl #3
+    1168:	f8636844 	ldr	x4, [x2, x3]
+    116c:	f8008444 	str	x4, [x2], #8
+    1170:	eb01005f 	cmp	x2, x1
+    1174:	54ffffa1 	b.ne	1168 <__stubENVACC4+0x138>  // b.any
+    1178:	b940dfe1 	ldr	w1, [sp, #220]
+    117c:	f940b3e4 	ldr	x4, [sp, #352]
+    1180:	8b21cf21 	add	x1, x25, w1, sxtw #3
+    1184:	b940fbe3 	ldr	w3, [sp, #248]
+    1188:	f94073e5 	ldr	x5, [sp, #224]
+    118c:	d1002039 	sub	x25, x1, #0x8
+    1190:	f81f8035 	stur	x21, [x1, #-8]
+    1194:	d37ff882 	lsl	x2, x4, #1
+    1198:	91000442 	add	x2, x2, #0x1
+    119c:	7100047f 	cmp	w3, #0x1
+    11a0:	b9800e61 	ldrsw	x1, [x19, #12]
+    11a4:	8b0108a1 	add	x1, x5, x1, lsl #2
+    11a8:	a9000801 	stp	x1, x2, [x0]
+    11ac:	5400030d 	b.le	120c <__stubENVACC4+0x1dc>
+    11b0:	d37ff881 	lsl	x1, x4, #1
+    11b4:	91006000 	add	x0, x0, #0x18
+    11b8:	d1001421 	sub	x1, x1, #0x5
+    11bc:	9100427a 	add	x26, x19, #0x10
+    11c0:	0b030466 	add	w6, w3, w3, lsl #1
+    11c4:	aa1903e4 	mov	x4, x25
+    11c8:	52800062 	mov	w2, #0x3                   	// #3
+    11cc:	93767c43 	sbfiz	x3, x2, #10, #32
+    11d0:	11000c42 	add	w2, w2, #0x3
+    11d4:	9103e463 	add	x3, x3, #0xf9
+    11d8:	f81f8003 	stur	x3, [x0, #-8]
+    11dc:	f81f8c80 	str	x0, [x4, #-8]!
+    11e0:	6b0200df 	cmp	w6, w2
+    11e4:	b8804743 	ldrsw	x3, [x26], #4
+    11e8:	8b0308a3 	add	x3, x5, x3, lsl #2
+    11ec:	a9000403 	stp	x3, x1, [x0]
+    11f0:	d1001821 	sub	x1, x1, #0x6
+    11f4:	91006000 	add	x0, x0, #0x18
+    11f8:	54fffea1 	b.ne	11cc <__stubENVACC4+0x19c>  // b.any
+    11fc:	b940fbe0 	ldr	w0, [sp, #248]
+    1200:	51000800 	sub	w0, w0, #0x2
+    1204:	aa2003e0 	mvn	x0, x0
+    1208:	8b000f39 	add	x25, x25, x0, lsl #3
+    120c:	f94073e1 	ldr	x1, [sp, #224]
+    1210:	f90043f6 	str	x22, [sp, #128]
+    1214:	b940fbe0 	ldr	w0, [sp, #248]
+    1218:	8b20c833 	add	x19, x1, w0, sxtw #2
+    121c:	17fffd6d 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    1220:	aa0203f3 	mov	x19, x2
+    1224:	aa1703f5 	mov	x21, x23
+    1228:	f90043f6 	str	x22, [sp, #128]
+    122c:	17fffd69 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001230 <__stubNEGINT>:
+    1230:	d2800040 	mov	x0, #0x2                   	// #2
+    1234:	aa0203f3 	mov	x19, x2
+    1238:	cb150015 	sub	x21, x0, x21
+    123c:	f90043f6 	str	x22, [sp, #128]
+    1240:	17fffd64 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001244 <__stubADDINT>:
+    1244:	f8408720 	ldr	x0, [x25], #8
+    1248:	d10006b5 	sub	x21, x21, #0x1
+    124c:	aa0203f3 	mov	x19, x2
+    1250:	f90043f6 	str	x22, [sp, #128]
+    1254:	8b0002b5 	add	x21, x21, x0
+    1258:	17fffd5e 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+000000000000125c <__stubSUBINT>:
+    125c:	f8408720 	ldr	x0, [x25], #8
+    1260:	910006b5 	add	x21, x21, #0x1
+    1264:	aa0203f3 	mov	x19, x2
+    1268:	f90043f6 	str	x22, [sp, #128]
+    126c:	cb0002b5 	sub	x21, x21, x0
+    1270:	17fffd58 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001274 <__stubMULINT>:
+    1274:	9341fea0 	asr	x0, x21, #1
+    1278:	aa0203f3 	mov	x19, x2
+    127c:	f8408735 	ldr	x21, [x25], #8
+    1280:	f90043f6 	str	x22, [sp, #128]
+    1284:	9341feb5 	asr	x21, x21, #1
+    1288:	9b007eb5 	mul	x21, x21, x0
+    128c:	d37ffab5 	lsl	x21, x21, #1
+    1290:	910006b5 	add	x21, x21, #0x1
+    1294:	17fffd4f 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    1298:	aa1903e1 	mov	x1, x25
+    129c:	f8408420 	ldr	x0, [x1], #8
+    12a0:	eb8007ff 	cmp	xzr, x0, asr #1
+    12a4:	9341fc00 	asr	x0, x0, #1
+    12a8:	54011540 	b.eq	3550 <__stubRAISE+0xd2c>  // b.none
+    12ac:	9341feb5 	asr	x21, x21, #1
+    12b0:	aa0103f9 	mov	x25, x1
+    12b4:	aa0203f3 	mov	x19, x2
+    12b8:	f90043f6 	str	x22, [sp, #128]
+    12bc:	9ac00eb5 	sdiv	x21, x21, x0
+    12c0:	d37ffab5 	lsl	x21, x21, #1
+    12c4:	910006b5 	add	x21, x21, #0x1
+    12c8:	17fffd42 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    12cc:	aa1903e1 	mov	x1, x25
+    12d0:	f8408420 	ldr	x0, [x1], #8
+    12d4:	eb8007ff 	cmp	xzr, x0, asr #1
+    12d8:	9341fc00 	asr	x0, x0, #1
+    12dc:	540113a0 	b.eq	3550 <__stubRAISE+0xd2c>  // b.none
+    12e0:	9341fea3 	asr	x3, x21, #1
+    12e4:	aa0103f9 	mov	x25, x1
+    12e8:	aa0203f3 	mov	x19, x2
+    12ec:	f90043f6 	str	x22, [sp, #128]
+    12f0:	9ac00c75 	sdiv	x21, x3, x0
+    12f4:	9b008eb5 	msub	x21, x21, x0, x3
+    12f8:	d37ffab5 	lsl	x21, x21, #1
+    12fc:	910006b5 	add	x21, x21, #0x1
+    1300:	17fffd34 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001304 <__stubANDINT>:
+    1304:	f8408720 	ldr	x0, [x25], #8
+    1308:	aa0203f3 	mov	x19, x2
+    130c:	f90043f6 	str	x22, [sp, #128]
+    1310:	8a0002b5 	and	x21, x21, x0
+    1314:	17fffd2f 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001318 <__stubORINT>:
+    1318:	f8408720 	ldr	x0, [x25], #8
+    131c:	aa0203f3 	mov	x19, x2
+    1320:	f90043f6 	str	x22, [sp, #128]
+    1324:	aa0002b5 	orr	x21, x21, x0
+    1328:	17fffd2a 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+000000000000132c <__stubXORINT>:
+    132c:	f8408720 	ldr	x0, [x25], #8
+    1330:	aa0203f3 	mov	x19, x2
+    1334:	f90043f6 	str	x22, [sp, #128]
+    1338:	ca0002b5 	eor	x21, x21, x0
+    133c:	b24002b5 	orr	x21, x21, #0x1
+    1340:	17fffd24 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001344 <__stubLSLINT>:
+    1344:	f8408720 	ldr	x0, [x25], #8
+    1348:	d10006b5 	sub	x21, x21, #0x1
+    134c:	aa0203f3 	mov	x19, x2
+    1350:	f90043f6 	str	x22, [sp, #128]
+    1354:	9341fc00 	asr	x0, x0, #1
+    1358:	9ac022b5 	lsl	x21, x21, x0
+    135c:	910006b5 	add	x21, x21, #0x1
+    1360:	17fffd1c 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001364 <__stubLSRINT>:
+    1364:	f8408720 	ldr	x0, [x25], #8
+    1368:	aa0203f3 	mov	x19, x2
+    136c:	f90043f6 	str	x22, [sp, #128]
+    1370:	9341fc00 	asr	x0, x0, #1
+    1374:	9ac026b5 	lsr	x21, x21, x0
+    1378:	b24002b5 	orr	x21, x21, #0x1
+    137c:	17fffd15 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001380 <__stubASRINT>:
+    1380:	f8408720 	ldr	x0, [x25], #8
+    1384:	aa0203f3 	mov	x19, x2
+    1388:	f90043f6 	str	x22, [sp, #128]
+    138c:	9341fc00 	asr	x0, x0, #1
+    1390:	9ac02ab5 	asr	x21, x21, x0
+    1394:	b24002b5 	orr	x21, x21, #0x1
+    1398:	17fffd0e 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    139c:	f8408720 	ldr	x0, [x25], #8
+    13a0:	aa0203f3 	mov	x19, x2
+    13a4:	eb15001f 	cmp	x0, x21
+    13a8:	5400cc20 	b.eq	2d2c <__stubRAISE+0x508>  // b.none
+    13ac:	d2800035 	mov	x21, #0x1                   	// #1
+    13b0:	f90043f6 	str	x22, [sp, #128]
+    13b4:	17fffd07 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    13b8:	f8408720 	ldr	x0, [x25], #8
+    13bc:	aa0203f3 	mov	x19, x2
+    13c0:	eb15001f 	cmp	x0, x21
+    13c4:	5400cba0 	b.eq	2d38 <__stubRAISE+0x514>  // b.none
+    13c8:	d2800075 	mov	x21, #0x3                   	// #3
+    13cc:	f90043f6 	str	x22, [sp, #128]
+    13d0:	17fffd00 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    13d4:	f8408720 	ldr	x0, [x25], #8
+    13d8:	aa0203f3 	mov	x19, x2
+    13dc:	eb15001f 	cmp	x0, x21
+    13e0:	5400b8cc 	b.gt	2af8 <__stubRAISE+0x2d4>
+    13e4:	d2800035 	mov	x21, #0x1                   	// #1
+    13e8:	f90043f6 	str	x22, [sp, #128]
+    13ec:	17fffcf9 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+00000000000013f0 <__stubPUSHENVACC3>:
+    13f0:	f81f8335 	stur	x21, [x25, #-8]
+    13f4:	aa0203f3 	mov	x19, x2
+    13f8:	d1002339 	sub	x25, x25, #0x8
+    13fc:	f90043f6 	str	x22, [sp, #128]
+    1400:	f9400ef5 	ldr	x21, [x23, #24]
+    1404:	17fffcf3 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    1408:	f9400080 	ldr	x0, [x4]
+    140c:	d1000400 	sub	x0, x0, #0x1
+    1410:	f9000080 	str	x0, [x4]
+    1414:	b5000320 	cbnz	x0, 1478 <__stubPUSHENVACC3+0x88>
+    1418:	a93e4f35 	stp	x21, x19, [x25, #-32]
+    141c:	910883ec 	add	x12, sp, #0x220
+    1420:	d2800021 	mov	x1, #0x1                   	// #1
+    1424:	a93f1f37 	stp	x23, x7, [x25, #-16]
+    1428:	f9401363 	ldr	x3, [x27, #32]
+    142c:	a9001d88 	stp	x8, x7, [x12]
+    1430:	a9010989 	stp	x9, x2, [x12, #16]
+    1434:	f9000068 	str	x8, [x3]
+    1438:	f90123e4 	str	x4, [sp, #576]
+    143c:	94000000 	bl	0 <caml_debugger>
+    1440:	910883ed 	add	x13, sp, #0x220
+    1444:	f9401360 	ldr	x0, [x27, #32]
+    1448:	a9401da8 	ldp	x8, x7, [x13]
+    144c:	f9400000 	ldr	x0, [x0]
+    1450:	a94109a9 	ldp	x9, x2, [x13, #16]
+    1454:	eb08001f 	cmp	x0, x8
+    1458:	f94123e4 	ldr	x4, [sp, #576]
+    145c:	54010621 	b.ne	3520 <__stubRAISE+0xcfc>  // b.any
+    1460:	f85e0320 	ldur	x0, [x25, #-32]
+    1464:	eb15001f 	cmp	x0, x21
+    1468:	54010501 	b.ne	3508 <__stubRAISE+0xce4>  // b.any
+    146c:	f85f0320 	ldur	x0, [x25, #-16]
+    1470:	eb17001f 	cmp	x0, x23
+    1474:	54010621 	b.ne	3538 <__stubRAISE+0xd14>  // b.any
+    1478:	910923ea 	add	x10, sp, #0x248
+    147c:	aa1303e0 	mov	x0, x19
+    1480:	f90137e4 	str	x4, [sp, #616]
+    1484:	a9000949 	stp	x9, x2, [x10]
+    1488:	a9012147 	stp	x7, x8, [x10, #16]
+    148c:	94000000 	bl	0 <caml_debugger_saved_instruction>
+    1490:	910923eb 	add	x11, sp, #0x248
+    1494:	2a0003e3 	mov	w3, w0
+    1498:	f94137e4 	ldr	x4, [sp, #616]
+    149c:	a9400969 	ldp	x9, x2, [x11]
+    14a0:	a9412167 	ldp	x7, x8, [x11, #16]
+    14a4:	17fffcfa 	b	88c <__stubCHECK_SIGNALS+0x124>
+    14a8:	a93e4f35 	stp	x21, x19, [x25, #-32]
+    14ac:	9109c3e5 	add	x5, sp, #0x270
+    14b0:	d2800021 	mov	x1, #0x1                   	// #1
+    14b4:	a93f1f37 	stp	x23, x7, [x25, #-16]
+    14b8:	2a0103e0 	mov	w0, w1
+    14bc:	f9401363 	ldr	x3, [x27, #32]
+    14c0:	a9001ca8 	stp	x8, x7, [x5]
+    14c4:	a90108a9 	stp	x9, x2, [x5, #16]
+    14c8:	f9000068 	str	x8, [x3]
+    14cc:	f9014be4 	str	x4, [sp, #656]
+    14d0:	94000000 	bl	0 <caml_debugger>
+    14d4:	9109c3e6 	add	x6, sp, #0x270
+    14d8:	f9401360 	ldr	x0, [x27, #32]
+    14dc:	a9401cc8 	ldp	x8, x7, [x6]
+    14e0:	f9400000 	ldr	x0, [x0]
+    14e4:	a94108c9 	ldp	x9, x2, [x6, #16]
+    14e8:	eb08001f 	cmp	x0, x8
+    14ec:	f9414be4 	ldr	x4, [sp, #656]
+    14f0:	5400e601 	b.ne	31b0 <__stubRAISE+0x98c>  // b.any
+    14f4:	f85e0320 	ldur	x0, [x25, #-32]
+    14f8:	eb15001f 	cmp	x0, x21
+    14fc:	5400e4e1 	b.ne	3198 <__stubRAISE+0x974>  // b.any
+    1500:	f85f0320 	ldur	x0, [x25, #-16]
+    1504:	eb17001f 	cmp	x0, x23
+    1508:	5400e6c1 	b.ne	31e0 <__stubRAISE+0x9bc>  // b.any
+    150c:	910a63e1 	add	x1, sp, #0x298
+    1510:	aa1303e0 	mov	x0, x19
+    1514:	f9015fe4 	str	x4, [sp, #696]
+    1518:	a9000829 	stp	x9, x2, [x1]
+    151c:	a9012027 	stp	x7, x8, [x1, #16]
+    1520:	94000000 	bl	0 <caml_debugger_saved_instruction>
+    1524:	910a63e4 	add	x4, sp, #0x298
+    1528:	2a0003e3 	mov	w3, w0
+    152c:	a9400889 	ldp	x9, x2, [x4]
+    1530:	a9412087 	ldp	x7, x8, [x4, #16]
+    1534:	f9415fe4 	ldr	x4, [sp, #696]
+    1538:	17fffcd5 	b	88c <__stubCHECK_SIGNALS+0x124>
+    153c:	aa1303f8 	mov	x24, x19
+    1540:	aa1903f3 	mov	x19, x25
+
+0000000000001544 <__stubRERAISE>:
+    1544:	f9403be0 	ldr	x0, [sp, #112]
+    1548:	a95d8001 	ldp	x1, x0, [x0, #472]
+    154c:	eb00003f 	cmp	x1, x0
+    1550:	5400ba2a 	b.ge	2c94 <__stubRAISE+0x470>  // b.tcont
+    1554:	f9403be0 	ldr	x0, [sp, #112]
+    1558:	f9406000 	ldr	x0, [x0, #192]
+    155c:	b400aa60 	cbz	x0, 2aa8 <__stubRAISE+0x284>
+    1560:	f81f8278 	stur	x24, [x19, #-8]
+    1564:	d1002261 	sub	x1, x19, #0x8
+    1568:	aa1503e0 	mov	x0, x21
+    156c:	52800022 	mov	w2, #0x1                   	// #1
+    1570:	aa0103f3 	mov	x19, x1
+    1574:	94000000 	bl	0 <caml_stash_backtrace>
+    1578:	f9403be0 	ldr	x0, [sp, #112]
+    157c:	aa1503f6 	mov	x22, x21
+    1580:	f940ec02 	ldr	x2, [x0, #472]
+    1584:	17fffc5e 	b	6fc <caml_interprete+0xdc>
+    1588:	aa1303f8 	mov	x24, x19
+    158c:	aa1903f3 	mov	x19, x25
+    1590:	b9400700 	ldr	w0, [x24, #4]
+    1594:	b9800b03 	ldrsw	x3, [x24, #8]
+    1598:	71000404 	subs	w4, w0, #0x1
+    159c:	cb20c063 	sub	x3, x3, w0, sxtw
+    15a0:	8b030f23 	add	x3, x25, x3, lsl #3
+    15a4:	54000144 	b.mi	15cc <__stubRERAISE+0x88>  // b.first
+    15a8:	93407c82 	sxtw	x2, w4
+    15ac:	937d7c80 	sbfiz	x0, x4, #3, #32
+    15b0:	cb244042 	sub	x2, x2, w4, uxtw
+    15b4:	d37df042 	lsl	x2, x2, #3
+    15b8:	f8606a61 	ldr	x1, [x19, x0]
+    15bc:	f8206861 	str	x1, [x3, x0]
+    15c0:	eb02001f 	cmp	x0, x2
+    15c4:	d1002000 	sub	x0, x0, #0x8
+    15c8:	54ffff81 	b.ne	15b8 <__stubRERAISE+0x74>  // b.any
+    15cc:	f90043f6 	str	x22, [sp, #128]
+    15d0:	8b24c294 	add	x20, x20, w4, sxtw
+    15d4:	aa0303f3 	mov	x19, x3
+    15d8:	f94002b8 	ldr	x24, [x21]
+    15dc:	17fffc5d 	b	750 <caml_interprete+0x130>
+    15e0:	b9400660 	ldr	w0, [x19, #4]
+    15e4:	f9400321 	ldr	x1, [x25]
+    15e8:	f90043f6 	str	x22, [sp, #128]
+    15ec:	8b20cf33 	add	x19, x25, w0, sxtw #3
+    15f0:	d1002273 	sub	x19, x19, #0x8
+    15f4:	f9000261 	str	x1, [x19]
+    15f8:	f94002b8 	ldr	x24, [x21]
+    15fc:	17fffc55 	b	750 <caml_interprete+0x130>
+    1600:	b9800660 	ldrsw	x0, [x19, #4]
+    1604:	eb95041f 	cmp	x0, x21, asr #1
+    1608:	5400aea3 	b.cc	2bdc <__stubRAISE+0x3b8>  // b.lo, b.ul, b.last
+    160c:	b9400a7a 	ldr	w26, [x19, #8]
+    1610:	f90043f6 	str	x22, [sp, #128]
+    1614:	8b3aca7a 	add	x26, x19, w26, sxtw #2
+    1618:	91002353 	add	x19, x26, #0x8
+    161c:	17fffc6d 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    1620:	f94002a7 	ldr	x7, [x21]
+    1624:	f81f8335 	stur	x21, [x25, #-8]
+    1628:	d1002339 	sub	x25, x25, #0x8
+    162c:	69408263 	ldpsw	x3, x0, [x19, #4]
+    1630:	f94004e1 	ldr	x1, [x7, #8]
+    1634:	d37ff863 	lsl	x3, x3, #1
+    1638:	8a010000 	and	x0, x0, x1
+    163c:	91000463 	add	x3, x3, #0x1
+    1640:	8b070000 	add	x0, x0, x7
+    1644:	f9400c01 	ldr	x1, [x0, #24]
+    1648:	eb03003f 	cmp	x1, x3
+    164c:	5400aa21 	b.ne	2b90 <__stubRAISE+0x36c>  // b.any
+    1650:	f9400815 	ldr	x21, [x0, #16]
+    1654:	91003273 	add	x19, x19, #0xc
+    1658:	f90043f6 	str	x22, [sp, #128]
+    165c:	17fffc5d 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    1660:	f9400320 	ldr	x0, [x25]
+    1664:	52800061 	mov	w1, #0x3                   	// #3
+    1668:	f9400007 	ldr	x7, [x0]
+    166c:	b94000e3 	ldr	w3, [x7]
+    1670:	14000008 	b	1690 <__stubRERAISE+0x14c>
+    1674:	0b010060 	add	w0, w3, w1
+    1678:	13017c00 	asr	w0, w0, #1
+    167c:	32000000 	orr	w0, w0, #0x1
+    1680:	f860d8e4 	ldr	x4, [x7, w0, sxtw #3]
+    1684:	eb15009f 	cmp	x4, x21
+    1688:	540097cc 	b.gt	2980 <__stubRAISE+0x15c>
+    168c:	2a0003e1 	mov	w1, w0
+    1690:	6b01007f 	cmp	w3, w1
+    1694:	54ffff0c 	b.gt	1674 <__stubRERAISE+0x130>
+    1698:	51000421 	sub	w1, w1, #0x1
+    169c:	aa0203f3 	mov	x19, x2
+    16a0:	f90043f6 	str	x22, [sp, #128]
+    16a4:	f861d8f5 	ldr	x21, [x7, w1, sxtw #3]
+    16a8:	17fffc4a 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    16ac:	f8408720 	ldr	x0, [x25], #8
+    16b0:	aa0203f3 	mov	x19, x2
+    16b4:	eb15001f 	cmp	x0, x21
+    16b8:	5400a4a9 	b.ls	2b4c <__stubRAISE+0x328>  // b.plast
+    16bc:	d2800035 	mov	x21, #0x1                   	// #1
+    16c0:	f90043f6 	str	x22, [sp, #128]
+    16c4:	17fffc43 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    16c8:	b9800660 	ldrsw	x0, [x19, #4]
+    16cc:	eb95041f 	cmp	x0, x21, asr #1
+    16d0:	5400a4a2 	b.cs	2b64 <__stubRAISE+0x340>  // b.hs, b.nlast
+    16d4:	b9400a7a 	ldr	w26, [x19, #8]
+    16d8:	f90043f6 	str	x22, [sp, #128]
+    16dc:	8b3aca7a 	add	x26, x19, w26, sxtw #2
+    16e0:	91002353 	add	x19, x26, #0x8
+    16e4:	17fffc3b 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    16e8:	f8408720 	ldr	x0, [x25], #8
+    16ec:	aa0203f3 	mov	x19, x2
+    16f0:	eb15001f 	cmp	x0, x21
+    16f4:	5400a268 	b.hi	2b40 <__stubRAISE+0x31c>  // b.pmore
+    16f8:	d2800035 	mov	x21, #0x1                   	// #1
+    16fc:	f90043f6 	str	x22, [sp, #128]
+    1700:	17fffc34 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    1704:	aa1903f3 	mov	x19, x25
+    1708:	aa1803f9 	mov	x25, x24
+
+000000000000170c <__stubSTOP>:
+    170c:	f9403fe2 	ldr	x2, [sp, #120]
+    1710:	90000001 	adrp	x1, 0 <func_stack_push>
+    1714:	52800020 	mov	w0, #0x1                   	// #1
+    1718:	91000021 	add	x1, x1, #0x0
+    171c:	5280001b 	mov	w27, #0x0                   	// #0
+    1720:	d2800018 	mov	x24, #0x0                   	// #0
+    1724:	94000000 	bl	0 <__printf_chk>
+    1728:	f94043fa 	ldr	x26, [sp, #128]
+    172c:	f9400740 	ldr	x0, [x26, #8]
+    1730:	b40089c0 	cbz	x0, 2868 <__stubRAISE+0x44>
+    1734:	90000017 	adrp	x23, 0 <func_stack_push>
+    1738:	910002f7 	add	x23, x23, #0x0
+    173c:	9000001c 	adrp	x28, 0 <func_stack_push>
+    1740:	910242f7 	add	x23, x23, #0x90
+    1744:	9100039c 	add	x28, x28, #0x0
+    1748:	aa1803f4 	mov	x20, x24
+    174c:	a91857f3 	stp	x19, x21, [sp, #384]
+    1750:	1400000a 	b	1778 <__stubSTOP+0x6c>
+    1754:	2a1b03e2 	mov	w2, w27
+    1758:	aa1c03e1 	mov	x1, x28
+    175c:	52800020 	mov	w0, #0x1                   	// #1
+    1760:	94000000 	bl	0 <__printf_chk>
+    1764:	f9400740 	ldr	x0, [x26, #8]
+    1768:	1100077b 	add	w27, w27, #0x1
+    176c:	93407f74 	sxtw	x20, w27
+    1770:	eb3bc01f 	cmp	x0, w27, sxtw
+    1774:	54008789 	b.ls	2864 <__stubRAISE+0x40>  // b.plast
+    1778:	f9400340 	ldr	x0, [x26]
+    177c:	d37cee94 	lsl	x20, x20, #4
+    1780:	f8746802 	ldr	x2, [x0, x20]
+    1784:	b4fffe82 	cbz	x2, 1754 <__stubSTOP+0x48>
+    1788:	aa1703e3 	mov	x3, x23
+    178c:	90000001 	adrp	x1, 0 <func_stack_push>
+    1790:	52800020 	mov	w0, #0x1                   	// #1
+    1794:	91000021 	add	x1, x1, #0x0
+    1798:	94000000 	bl	0 <__printf_chk>
+    179c:	d2800013 	mov	x19, #0x0                   	// #0
+    17a0:	f9400340 	ldr	x0, [x26]
+    17a4:	90000001 	adrp	x1, 0 <func_stack_push>
+    17a8:	91000035 	add	x21, x1, #0x0
+    17ac:	52800038 	mov	w24, #0x1                   	// #1
+    17b0:	8b140014 	add	x20, x0, x20
+    17b4:	f9400694 	ldr	x20, [x20, #8]
+    17b8:	2a1303e2 	mov	w2, w19
+    17bc:	f8737a83 	ldr	x3, [x20, x19, lsl #3]
+    17c0:	aa1703e4 	mov	x4, x23
+    17c4:	aa1503e1 	mov	x1, x21
+    17c8:	91000673 	add	x19, x19, #0x1
+    17cc:	2a1803e0 	mov	w0, w24
+    17d0:	94000000 	bl	0 <__printf_chk>
+    17d4:	f102667f 	cmp	x19, #0x99
+    17d8:	54ffff01 	b.ne	17b8 <__stubSTOP+0xac>  // b.any
+    17dc:	17ffffe2 	b	1764 <__stubSTOP+0x58>
+    17e0:	f9403be0 	ldr	x0, [sp, #112]
+    17e4:	aa1303f8 	mov	x24, x19
+    17e8:	aa1903f3 	mov	x19, x25
+    17ec:	aa0703fc 	mov	x28, x7
+    17f0:	f9401016 	ldr	x22, [x0, #32]
+    17f4:	f9400ac0 	ldr	x0, [x22, #16]
+    17f8:	f9400c19 	ldr	x25, [x0, #24]
+    17fc:	b400bb39 	cbz	x25, 2f60 <__stubRAISE+0x73c>
+    1800:	90000000 	adrp	x0, 0 <Caml_state>
+    1804:	f9400000 	ldr	x0, [x0]
+    1808:	d53bd041 	mrs	x1, tpidr_el0
+    180c:	f9403bf8 	ldr	x24, [sp, #112]
+    1810:	aa0203fa 	mov	x26, x2
+    1814:	f8606834 	ldr	x20, [x1, x0]
+    1818:	f9400680 	ldr	x0, [x20, #8]
+    181c:	d1004000 	sub	x0, x0, #0x10
+    1820:	f9000680 	str	x0, [x20, #8]
+    1824:	94000000 	bl	0 <caml_alloc_point_here>
+    1828:	f9400680 	ldr	x0, [x20, #8]
+    182c:	f9400281 	ldr	x1, [x20]
+    1830:	eb01001f 	cmp	x0, x1
+    1834:	5400b763 	b.cc	2f20 <__stubRAISE+0x6fc>  // b.lo, b.ul, b.last
+    1838:	d2809ea1 	mov	x1, #0x4f5                 	// #1269
+    183c:	f9000001 	str	x1, [x0]
+    1840:	d29adae0 	mov	x0, #0xd6d7                	// #54999
+    1844:	d1008264 	sub	x4, x19, #0x20
+    1848:	f9400681 	ldr	x1, [x20, #8]
+    184c:	f2bae200 	movk	x0, #0xd710, lsl #16
+    1850:	f9403be5 	ldr	x5, [sp, #112]
+    1854:	f2dafae0 	movk	x0, #0xd7d7, lsl #32
+    1858:	f2fae200 	movk	x0, #0xd710, lsl #48
+    185c:	f9000420 	str	x0, [x1, #8]
+    1860:	91002023 	add	x3, x1, #0x8
+    1864:	f940eca0 	ldr	x0, [x5, #472]
+    1868:	a93f7277 	stp	x23, x28, [x19, #-16]
+    186c:	d37ff800 	lsl	x0, x0, #1
+    1870:	91000400 	add	x0, x0, #0x1
+    1874:	a93e6a60 	stp	x0, x26, [x19, #-32]
+    1878:	f90002c4 	str	x4, [x22]
+    187c:	f90010b9 	str	x25, [x5, #32]
+    1880:	f9400ac2 	ldr	x2, [x22, #16]
+    1884:	f9400320 	ldr	x0, [x25]
+    1888:	f9000c5f 	str	xzr, [x2, #24]
+    188c:	3700de96 	tbnz	w22, #0, 345c <__stubRAISE+0xc38>
+    1890:	910006c2 	add	x2, x22, #0x1
+    1894:	f9000422 	str	x2, [x1, #8]
+    1898:	f9403be4 	ldr	x4, [sp, #112]
+    189c:	d1002013 	sub	x19, x0, #0x8
+    18a0:	f9400001 	ldr	x1, [x0]
+    18a4:	9341fc21 	asr	x1, x1, #1
+    18a8:	f900ec81 	str	x1, [x4, #472]
+    18ac:	a93f8c15 	stp	x21, x3, [x0, #-8]
+    18b0:	f9400414 	ldr	x20, [x0, #8]
+    18b4:	f9000402 	str	x2, [x0, #8]
+    18b8:	f9400ac0 	ldr	x0, [x22, #16]
+    18bc:	9341fe94 	asr	x20, x20, #1
+    18c0:	91000a94 	add	x20, x20, #0x2
+    18c4:	f9400815 	ldr	x21, [x0, #16]
+    18c8:	f94002b8 	ldr	x24, [x21]
+    18cc:	17fffba1 	b	750 <caml_interprete+0x130>
+    18d0:	f9403be0 	ldr	x0, [sp, #112]
+    18d4:	aa1303f8 	mov	x24, x19
+    18d8:	f90043f6 	str	x22, [sp, #128]
+    18dc:	d1006336 	sub	x22, x25, #0x18
+    18e0:	d2800021 	mov	x1, #0x1                   	// #1
+    18e4:	f940ec00 	ldr	x0, [x0, #472]
+    18e8:	f81f8322 	stur	x2, [x25, #-8]
+    18ec:	f9400322 	ldr	x2, [x25]
+    18f0:	f9000337 	str	x23, [x25]
+    18f4:	d37ff800 	lsl	x0, x0, #1
+    18f8:	8b010000 	add	x0, x0, x1
+    18fc:	a93e8720 	stp	x0, x1, [x25, #-24]
+    1900:	f9400723 	ldr	x3, [x25, #8]
+    1904:	f9000727 	str	x7, [x25, #8]
+    1908:	3600c315 	tbz	w21, #0, 3168 <__stubRAISE+0x944>
+    190c:	f10006bf 	cmp	x21, #0x1
+    1910:	540083c0 	b.eq	2988 <__stubRAISE+0x164>  // b.none
+    1914:	d10006a4 	sub	x4, x21, #0x1
+    1918:	aa0403e0 	mov	x0, x4
+    191c:	f9400801 	ldr	x1, [x0, #16]
+    1920:	f9400c20 	ldr	x0, [x1, #24]
+    1924:	b5ffffc0 	cbnz	x0, 191c <__stubSTOP+0x210>
+    1928:	90000000 	adrp	x0, 0 <Caml_state>
+    192c:	f9400000 	ldr	x0, [x0]
+    1930:	d53bd045 	mrs	x5, tpidr_el0
+    1934:	aa0203f5 	mov	x21, x2
+    1938:	d2800014 	mov	x20, #0x0                   	// #0
+    193c:	f86068a0 	ldr	x0, [x5, x0]
+    1940:	f9401000 	ldr	x0, [x0, #32]
+    1944:	f9000c20 	str	x0, [x1, #24]
+    1948:	f9403be1 	ldr	x1, [sp, #112]
+    194c:	f9401020 	ldr	x0, [x1, #32]
+    1950:	f9000016 	str	x22, [x0]
+    1954:	f9001024 	str	x4, [x1, #32]
+    1958:	f9400093 	ldr	x19, [x4]
+    195c:	f9400260 	ldr	x0, [x19]
+    1960:	9341fc00 	asr	x0, x0, #1
+    1964:	f900ec20 	str	x0, [x1, #472]
+    1968:	f9000263 	str	x3, [x19]
+    196c:	f9400058 	ldr	x24, [x2]
+    1970:	17fffb78 	b	750 <caml_interprete+0x130>
+    1974:	f9403be0 	ldr	x0, [sp, #112]
+    1978:	928001e2 	mov	x2, #0xfffffffffffffff0    	// #-16
+    197c:	b9400661 	ldr	w1, [x19, #4]
+    1980:	aa1303f8 	mov	x24, x19
+    1984:	f90043f6 	str	x22, [sp, #128]
+    1988:	f940ec00 	ldr	x0, [x0, #472]
+    198c:	8b21cc41 	add	x1, x2, w1, sxtw #3
+    1990:	8b010336 	add	x22, x25, x1
+    1994:	a9400f22 	ldp	x2, x3, [x25]
+    1998:	d37ff800 	lsl	x0, x0, #1
+    199c:	91000400 	add	x0, x0, #0x1
+    19a0:	f8216b20 	str	x0, [x25, x1]
+    19a4:	f90006c7 	str	x7, [x22, #8]
+    19a8:	17ffffd8 	b	1908 <__stubSTOP+0x1fc>
+    19ac:	aa1903f3 	mov	x19, x25
+
+00000000000019b0 <__stubRAISE_NOTRACE>:
+    19b0:	f9403bf4 	ldr	x20, [sp, #112]
+    19b4:	aa1503f6 	mov	x22, x21
+    19b8:	a95d8282 	ldp	x2, x0, [x20, #472]
+    19bc:	eb00005f 	cmp	x2, x0
+    19c0:	54ff69eb 	b.lt	6fc <caml_interprete+0xdc>  // b.tstop
+    19c4:	d2800021 	mov	x1, #0x1                   	// #1
+    19c8:	52800080 	mov	w0, #0x4                   	// #4
+    19cc:	94000000 	bl	0 <caml_debugger>
+    19d0:	f940ee82 	ldr	x2, [x20, #472]
+    19d4:	17fffb4a 	b	6fc <caml_interprete+0xdc>
+    19d8:	aa1803e0 	mov	x0, x24
+    19dc:	aa1303f8 	mov	x24, x19
+    19e0:	aa1903f3 	mov	x19, x25
+    19e4:	aa0003f9 	mov	x25, x0
+
+00000000000019e8 <__stubAPPLY>:
+    19e8:	b9400714 	ldr	w20, [x24, #4]
+    19ec:	f94002b8 	ldr	x24, [x21]
+    19f0:	51000694 	sub	w20, w20, #0x1
+    19f4:	93407e94 	sxtw	x20, w20
+    19f8:	b400a3f8 	cbz	x24, 2e74 <__stubRAISE+0x650>
+    19fc:	aa1803e1 	mov	x1, x24
+    1a00:	aa1903e0 	mov	x0, x25
+    1a04:	97fff97f 	bl	0 <func_stack_push>
+    1a08:	aa1903e1 	mov	x1, x25
+    1a0c:	aa1603e0 	mov	x0, x22
+    1a10:	97fffa92 	bl	458 <array_alloc_op_counts>
+    1a14:	17fffb4f 	b	750 <caml_interprete+0x130>
+    1a18:	aa1903f3 	mov	x19, x25
+    1a1c:	aa1803f9 	mov	x25, x24
+
+0000000000001a20 <__stubAPPLY1>:
+    1a20:	aa1303f4 	mov	x20, x19
+    1a24:	f85e8680 	ldr	x0, [x20], #-24
+    1a28:	a93e8a60 	stp	x0, x2, [x19, #-24]
+    1a2c:	a93f9e77 	stp	x23, x7, [x19, #-8]
+    1a30:	f94002b8 	ldr	x24, [x21]
+    1a34:	b400a0f8 	cbz	x24, 2e50 <__stubRAISE+0x62c>
+    1a38:	aa1803e1 	mov	x1, x24
+    1a3c:	aa1903e0 	mov	x0, x25
+    1a40:	97fff970 	bl	0 <func_stack_push>
+    1a44:	aa1403f3 	mov	x19, x20
+    1a48:	aa1903e1 	mov	x1, x25
+    1a4c:	aa1603e0 	mov	x0, x22
+    1a50:	d2800014 	mov	x20, #0x0                   	// #0
+    1a54:	97fffa81 	bl	458 <array_alloc_op_counts>
+    1a58:	17fffb3e 	b	750 <caml_interprete+0x130>
+
+0000000000001a5c <__stubRETURN>:
+    1a5c:	b9800660 	ldrsw	x0, [x19, #4]
+    1a60:	f100029f 	cmp	x20, #0x0
+    1a64:	8b000f39 	add	x25, x25, x0, lsl #3
+    1a68:	540082ed 	b.le	2ac4 <__stubRAISE+0x2a0>
+    1a6c:	aa1803e0 	mov	x0, x24
+    1a70:	d1000694 	sub	x20, x20, #0x1
+    1a74:	aa1503f7 	mov	x23, x21
+    1a78:	f94002b3 	ldr	x19, [x21]
+    1a7c:	97fff981 	bl	80 <func_stack_pop>
+    1a80:	f90043f6 	str	x22, [sp, #128]
+    1a84:	17fffb53 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    1a88:	b9400660 	ldr	w0, [x19, #4]
+    1a8c:	91000694 	add	x20, x20, #0x1
+    1a90:	a9400722 	ldp	x2, x1, [x25]
+    1a94:	f90043f6 	str	x22, [sp, #128]
+    1a98:	8b20cf20 	add	x0, x25, w0, sxtw #3
+    1a9c:	d1004013 	sub	x19, x0, #0x10
+    1aa0:	a9000662 	stp	x2, x1, [x19]
+    1aa4:	f94002b8 	ldr	x24, [x21]
+    1aa8:	17fffb2a 	b	750 <caml_interprete+0x130>
+    1aac:	b9400660 	ldr	w0, [x19, #4]
+    1ab0:	91000a94 	add	x20, x20, #0x2
+    1ab4:	a9400b23 	ldp	x3, x2, [x25]
+    1ab8:	f90043f6 	str	x22, [sp, #128]
+    1abc:	8b20cf20 	add	x0, x25, w0, sxtw #3
+    1ac0:	d1006013 	sub	x19, x0, #0x18
+    1ac4:	f9400b21 	ldr	x1, [x25, #16]
+    1ac8:	a9000a63 	stp	x3, x2, [x19]
+    1acc:	f9000a61 	str	x1, [x19, #16]
+    1ad0:	f94002b8 	ldr	x24, [x21]
+    1ad4:	17fffb1f 	b	750 <caml_interprete+0x130>
+    1ad8:	b9800660 	ldrsw	x0, [x19, #4]
+    1adc:	91002261 	add	x1, x19, #0x8
+    1ae0:	f900b7e1 	str	x1, [sp, #360]
+    1ae4:	eb14001f 	cmp	x0, x20
+    1ae8:	540092ec 	b.gt	2d44 <__stubRAISE+0x520>
+    1aec:	cb000294 	sub	x20, x20, x0
+    1af0:	aa0103f3 	mov	x19, x1
+    1af4:	f90043f6 	str	x22, [sp, #128]
+    1af8:	17fffb36 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    1afc:	b940067a 	ldr	w26, [x19, #4]
+    1b00:	91002260 	add	x0, x19, #0x8
+    1b04:	f90083e0 	str	x0, [sp, #256]
+    1b08:	7100035f 	cmp	w26, #0x0
+    1b0c:	11000b40 	add	w0, w26, #0x2
+    1b10:	5400748d 	b.le	29a0 <__stubRAISE+0x17c>
+    1b14:	f81f8335 	stur	x21, [x25, #-8]
+    1b18:	7103fb5f 	cmp	w26, #0xfe
+    1b1c:	d1002339 	sub	x25, x25, #0x8
+    1b20:	5400740d 	b.le	29a0 <__stubRAISE+0x17c>
+    1b24:	93407c00 	sxtw	x0, w0
+    1b28:	52801ee1 	mov	w1, #0xf7                  	// #247
+    1b2c:	94000000 	bl	0 <caml_alloc_shr>
+    1b30:	aa0003f5 	mov	x21, x0
+    1b34:	d2800002 	mov	x2, #0x0                   	// #0
+    1b38:	f900e3f3 	str	x19, [sp, #448]
+    1b3c:	aa0203f3 	mov	x19, x2
+    1b40:	f90087e0 	str	x0, [sp, #264]
+    1b44:	f8737b21 	ldr	x1, [x25, x19, lsl #3]
+    1b48:	11000a60 	add	w0, w19, #0x2
+    1b4c:	91000673 	add	x19, x19, #0x1
+    1b50:	8b20cea0 	add	x0, x21, w0, sxtw #3
+    1b54:	94000000 	bl	0 <caml_initialize>
+    1b58:	6b13035f 	cmp	w26, w19
+    1b5c:	54ffff4c 	b.gt	1b44 <__stubRETURN+0xe8>
+    1b60:	f940e3f3 	ldr	x19, [sp, #448]
+    1b64:	aa1503e2 	mov	x2, x21
+    1b68:	f94083e3 	ldr	x3, [sp, #256]
+    1b6c:	8b3acf39 	add	x25, x25, w26, sxtw #3
+    1b70:	b9800a60 	ldrsw	x0, [x19, #8]
+    1b74:	d28000a1 	mov	x1, #0x5                   	// #5
+    1b78:	91003273 	add	x19, x19, #0xc
+    1b7c:	f90043f6 	str	x22, [sp, #128]
+    1b80:	8b00087a 	add	x26, x3, x0, lsl #2
+    1b84:	f900005a 	str	x26, [x2]
+    1b88:	f94087e0 	ldr	x0, [sp, #264]
+    1b8c:	f9000401 	str	x1, [x0, #8]
+    1b90:	17fffb10 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    1b94:	f85f82e1 	ldur	x1, [x23, #-8]
+    1b98:	aa1703e4 	mov	x4, x23
+    1b9c:	d2800000 	mov	x0, #0x0                   	// #0
+    1ba0:	d34afc21 	lsr	x1, x1, #10
+    1ba4:	51000c21 	sub	w1, w1, #0x3
+    1ba8:	7100003f 	cmp	w1, #0x0
+    1bac:	cb21cf39 	sub	x25, x25, w1, sxtw #3
+    1bb0:	540000ed 	b.le	1bcc <__stubRETURN+0x170>
+    1bb4:	11000c03 	add	w3, w0, #0x3
+    1bb8:	f863dae3 	ldr	x3, [x23, w3, sxtw #3]
+    1bbc:	f8207b23 	str	x3, [x25, x0, lsl #3]
+    1bc0:	91000400 	add	x0, x0, #0x1
+    1bc4:	6b00003f 	cmp	w1, w0
+    1bc8:	54ffff6c 	b.gt	1bb4 <__stubRETURN+0x158>
+    1bcc:	8b21c294 	add	x20, x20, w1, sxtw
+    1bd0:	aa0203f3 	mov	x19, x2
+    1bd4:	f90043f6 	str	x22, [sp, #128]
+    1bd8:	f9400897 	ldr	x23, [x4, #16]
+    1bdc:	17fffafd 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    1be0:	aa1903f3 	mov	x19, x25
+    1be4:	aa1803f9 	mov	x25, x24
+    1be8:	aa1303f4 	mov	x20, x19
+    1bec:	f9400660 	ldr	x0, [x19, #8]
+    1bf0:	f85e8681 	ldr	x1, [x20], #-24
+    1bf4:	a93e8261 	stp	x1, x0, [x19, #-24]
+    1bf8:	a93fde62 	stp	x2, x23, [x19, #-8]
+    1bfc:	f9000667 	str	x7, [x19, #8]
+    1c00:	f94002b8 	ldr	x24, [x21]
+    1c04:	b40094b8 	cbz	x24, 2e98 <__stubRAISE+0x674>
+    1c08:	aa1803e1 	mov	x1, x24
+    1c0c:	aa1903e0 	mov	x0, x25
+    1c10:	97fff8fc 	bl	0 <func_stack_push>
+    1c14:	aa1403f3 	mov	x19, x20
+    1c18:	aa1903e1 	mov	x1, x25
+    1c1c:	aa1603e0 	mov	x0, x22
+    1c20:	d2800034 	mov	x20, #0x1                   	// #1
+    1c24:	97fffa0d 	bl	458 <array_alloc_op_counts>
+    1c28:	17fffaca 	b	750 <caml_interprete+0x130>
+    1c2c:	aa1903f3 	mov	x19, x25
+    1c30:	aa1803f9 	mov	x25, x24
+    1c34:	aa1303f4 	mov	x20, x19
+    1c38:	f9400661 	ldr	x1, [x19, #8]
+    1c3c:	f85e8680 	ldr	x0, [x20], #-24
+    1c40:	a93e8660 	stp	x0, x1, [x19, #-24]
+    1c44:	f9400a60 	ldr	x0, [x19, #16]
+    1c48:	f81f8260 	stur	x0, [x19, #-8]
+    1c4c:	a9005e62 	stp	x2, x23, [x19]
+    1c50:	f9000a67 	str	x7, [x19, #16]
+    1c54:	f94002b8 	ldr	x24, [x21]
+    1c58:	b4009338 	cbz	x24, 2ebc <__stubRAISE+0x698>
+    1c5c:	aa1803e1 	mov	x1, x24
+    1c60:	aa1903e0 	mov	x0, x25
+    1c64:	97fff8e7 	bl	0 <func_stack_push>
+    1c68:	aa1403f3 	mov	x19, x20
+    1c6c:	aa1903e1 	mov	x1, x25
+    1c70:	aa1603e0 	mov	x0, x22
+    1c74:	d2800054 	mov	x20, #0x2                   	// #2
+    1c78:	97fff9f8 	bl	458 <array_alloc_op_counts>
+    1c7c:	17fffab5 	b	750 <caml_interprete+0x130>
+
+0000000000001c80 <__stubPUSHENVACC4>:
+    1c80:	f81f8335 	stur	x21, [x25, #-8]
+    1c84:	aa0203f3 	mov	x19, x2
+    1c88:	d1002339 	sub	x25, x25, #0x8
+    1c8c:	f90043f6 	str	x22, [sp, #128]
+    1c90:	f94012f5 	ldr	x21, [x23, #32]
+    1c94:	17fffacf 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001c98 <__stubPUSH_RETADDR>:
+    1c98:	b9800660 	ldrsw	x0, [x19, #4]
+    1c9c:	91002273 	add	x19, x19, #0x8
+    1ca0:	f81f8327 	stur	x7, [x25, #-8]
+    1ca4:	f90043f6 	str	x22, [sp, #128]
+    1ca8:	8b000842 	add	x2, x2, x0, lsl #2
+    1cac:	a93edf22 	stp	x2, x23, [x25, #-24]
+    1cb0:	d1006339 	sub	x25, x25, #0x18
+    1cb4:	17fffac7 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001cb8 <__stubBRANCH>:
+    1cb8:	b980067a 	ldrsw	x26, [x19, #4]
+    1cbc:	f90043f6 	str	x22, [sp, #128]
+    1cc0:	8b1a0853 	add	x19, x2, x26, lsl #2
+    1cc4:	17fffac3 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001cc8 <__stubBRANCHIF>:
+    1cc8:	f10006bf 	cmp	x21, #0x1
+    1ccc:	54007a60 	b.eq	2c18 <__stubRAISE+0x3f4>  // b.none
+    1cd0:	b980067a 	ldrsw	x26, [x19, #4]
+    1cd4:	f90043f6 	str	x22, [sp, #128]
+    1cd8:	8b1a0853 	add	x19, x2, x26, lsl #2
+    1cdc:	17fffabd 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001ce0 <__stubBRANCHIFNOT>:
+    1ce0:	f10006bf 	cmp	x21, #0x1
+    1ce4:	54007a00 	b.eq	2c24 <__stubRAISE+0x400>  // b.none
+    1ce8:	91002273 	add	x19, x19, #0x8
+    1cec:	f90043f6 	str	x22, [sp, #128]
+    1cf0:	17fffab8 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    1cf4:	b9400660 	ldr	w0, [x19, #4]
+    1cf8:	91002261 	add	x1, x19, #0x8
+    1cfc:	370073b5 	tbnz	w21, #0, 2b70 <__stubRAISE+0x34c>
+    1d00:	385f82a2 	ldurb	w2, [x21, #-8]
+    1d04:	92401c43 	and	x3, x2, #0xff
+    1d08:	6b40405f 	cmp	w2, w0, lsr #16
+    1d0c:	5400b9c2 	b.cs	3444 <__stubRAISE+0xc20>  // b.hs, b.nlast
+    1d10:	8b202060 	add	x0, x3, w0, uxth
+    1d14:	f90043f6 	str	x22, [sp, #128]
+    1d18:	b8a0783a 	ldrsw	x26, [x1, x0, lsl #2]
+    1d1c:	8b1a0833 	add	x19, x1, x26, lsl #2
+    1d20:	17fffaac 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001d24 <__stubBOOLNOT>:
+    1d24:	d2800080 	mov	x0, #0x4                   	// #4
+    1d28:	aa0203f3 	mov	x19, x2
+    1d2c:	cb150015 	sub	x21, x0, x21
+    1d30:	f90043f6 	str	x22, [sp, #128]
+    1d34:	17fffaa7 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001d38 <__stubPUSHTRAP>:
+    1d38:	b9800661 	ldrsw	x1, [x19, #4]
+    1d3c:	d1008320 	sub	x0, x25, #0x20
+    1d40:	91002273 	add	x19, x19, #0x8
+    1d44:	f90043f6 	str	x22, [sp, #128]
+    1d48:	8b010842 	add	x2, x2, x1, lsl #2
+    1d4c:	f81e0322 	stur	x2, [x25, #-32]
+    1d50:	f940ef61 	ldr	x1, [x27, #472]
+    1d54:	f81f8327 	stur	x7, [x25, #-8]
+    1d58:	d37ff821 	lsl	x1, x1, #1
+    1d5c:	91000421 	add	x1, x1, #0x1
+    1d60:	a93edf21 	stp	x1, x23, [x25, #-24]
+    1d64:	aa0003f9 	mov	x25, x0
+    1d68:	f9401361 	ldr	x1, [x27, #32]
+    1d6c:	f9400821 	ldr	x1, [x1, #16]
+    1d70:	cb010000 	sub	x0, x0, x1
+    1d74:	9343fc00 	asr	x0, x0, #3
+    1d78:	f900ef60 	str	x0, [x27, #472]
+    1d7c:	17fffa95 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000001d80 <__stubMAKEBLOCK>:
+    1d80:	b980067a 	ldrsw	x26, [x19, #4]
+    1d84:	91003260 	add	x0, x19, #0xc
+    1d88:	f9006be0 	str	x0, [sp, #208]
+    1d8c:	b9400a73 	ldr	w19, [x19, #8]
+    1d90:	f104035f 	cmp	x26, #0x100
+    1d94:	54007508 	b.hi	2c34 <__stubRAISE+0x410>  // b.pmore
+    1d98:	b4009bda 	cbz	x26, 3110 <__stubRAISE+0x8ec>
+    1d9c:	7103fe7f 	cmp	w19, #0xff
+    1da0:	54009ac8 	b.hi	30f8 <__stubRAISE+0x8d4>  // b.pmore
+    1da4:	90000000 	adrp	x0, 0 <Caml_state>
+    1da8:	f9400000 	ldr	x0, [x0]
+    1dac:	d53bd044 	mrs	x4, tpidr_el0
+    1db0:	aa1503e6 	mov	x6, x21
+    1db4:	d37df341 	lsl	x1, x26, #3
+    1db8:	91002023 	add	x3, x1, #0x8
+    1dbc:	928000e2 	mov	x2, #0xfffffffffffffff8    	// #-8
+    1dc0:	cb010042 	sub	x2, x2, x1
+    1dc4:	f900dbe1 	str	x1, [sp, #432]
+    1dc8:	f8606895 	ldr	x21, [x4, x0]
+    1dcc:	aa1703e1 	mov	x1, x23
+    1dd0:	2a1303f7 	mov	w23, w19
+    1dd4:	aa1b03f3 	mov	x19, x27
+    1dd8:	aa0603fb 	mov	x27, x6
+    1ddc:	a9138fe2 	stp	x2, x3, [sp, #312]
+    1de0:	f94006a0 	ldr	x0, [x21, #8]
+    1de4:	8b020000 	add	x0, x0, x2
+    1de8:	f90006a0 	str	x0, [x21, #8]
+    1dec:	f900ffe1 	str	x1, [sp, #504]
+    1df0:	94000000 	bl	0 <caml_alloc_point_here>
+    1df4:	f94006a0 	ldr	x0, [x21, #8]
+    1df8:	f94002a3 	ldr	x3, [x21]
+    1dfc:	eb03001f 	cmp	x0, x3
+    1e00:	f940ffe1 	ldr	x1, [sp, #504]
+    1e04:	54009523 	b.cc	30a8 <__stubRAISE+0x884>  // b.lo, b.ul, b.last
+    1e08:	2a1703e2 	mov	w2, w23
+    1e0c:	aa0103f7 	mov	x23, x1
+    1e10:	8b1a2842 	add	x2, x2, x26, lsl #10
+    1e14:	f9000002 	str	x2, [x0]
+    1e18:	f940dbe1 	ldr	x1, [sp, #432]
+    1e1c:	aa1b03e6 	mov	x6, x27
+    1e20:	f94006a4 	ldr	x4, [x21, #8]
+    1e24:	aa1303fb 	mov	x27, x19
+    1e28:	91002082 	add	x2, x4, #0x8
+    1e2c:	8b010041 	add	x1, x2, x1
+    1e30:	aa0203f5 	mov	x21, x2
+    1e34:	aa0203e0 	mov	x0, x2
+    1e38:	d29adae3 	mov	x3, #0xd6d7                	// #54999
+    1e3c:	f2bae203 	movk	x3, #0xd710, lsl #16
+    1e40:	f2dafae3 	movk	x3, #0xd7d7, lsl #32
+    1e44:	f2fae203 	movk	x3, #0xd710, lsl #48
+    1e48:	f8008403 	str	x3, [x0], #8
+    1e4c:	eb00003f 	cmp	x1, x0
+    1e50:	54ffff41 	b.ne	1e38 <__stubMAKEBLOCK+0xb8>  // b.any
+    1e54:	f9000486 	str	x6, [x4, #8]
+    1e58:	f100075f 	cmp	x26, #0x1
+    1e5c:	54009200 	b.eq	309c <__stubRAISE+0x878>  // b.none
+    1e60:	d1002324 	sub	x4, x25, #0x8
+    1e64:	d2800020 	mov	x0, #0x1                   	// #1
+    1e68:	f8607881 	ldr	x1, [x4, x0, lsl #3]
+    1e6c:	f8207841 	str	x1, [x2, x0, lsl #3]
+    1e70:	aa0003e1 	mov	x1, x0
+    1e74:	91000400 	add	x0, x0, #0x1
+    1e78:	eb00035f 	cmp	x26, x0
+    1e7c:	54ffff61 	b.ne	1e68 <__stubMAKEBLOCK+0xe8>  // b.any
+    1e80:	8b010f39 	add	x25, x25, x1, lsl #3
+    1e84:	f90043f6 	str	x22, [sp, #128]
+    1e88:	f9406bf3 	ldr	x19, [sp, #208]
+    1e8c:	17fffa51 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    1e90:	b940067a 	ldr	w26, [x19, #4]
+    1e94:	91002273 	add	x19, x19, #0x8
+    1e98:	7103ff5f 	cmp	w26, #0xff
+    1e9c:	54008f48 	b.hi	3084 <__stubRAISE+0x860>  // b.pmore
+    1ea0:	90000000 	adrp	x0, 0 <Caml_state>
+    1ea4:	f9400000 	ldr	x0, [x0]
+    1ea8:	d53bd041 	mrs	x1, tpidr_el0
+    1eac:	aa1503e2 	mov	x2, x21
+    1eb0:	f900d7f4 	str	x20, [sp, #424]
+    1eb4:	aa1b03f4 	mov	x20, x27
+    1eb8:	aa1703fb 	mov	x27, x23
+    1ebc:	aa0203f7 	mov	x23, x2
+    1ec0:	f8606835 	ldr	x21, [x1, x0]
+    1ec4:	f94006a0 	ldr	x0, [x21, #8]
+    1ec8:	d1004000 	sub	x0, x0, #0x10
+    1ecc:	f90006a0 	str	x0, [x21, #8]
+    1ed0:	94000000 	bl	0 <caml_alloc_point_here>
+    1ed4:	f94006a1 	ldr	x1, [x21, #8]
+    1ed8:	f94002a0 	ldr	x0, [x21]
+    1edc:	eb00003f 	cmp	x1, x0
+    1ee0:	54008a63 	b.cc	302c <__stubRAISE+0x808>  // b.lo, b.ul, b.last
+    1ee4:	2a1a03e0 	mov	w0, w26
+    1ee8:	aa1703e2 	mov	x2, x23
+    1eec:	91100000 	add	x0, x0, #0x400
+    1ef0:	f9000020 	str	x0, [x1]
+    1ef4:	aa1b03f7 	mov	x23, x27
+    1ef8:	aa1403fb 	mov	x27, x20
+    1efc:	f94006a0 	ldr	x0, [x21, #8]
+    1f00:	f90043f6 	str	x22, [sp, #128]
+    1f04:	f940d7f4 	ldr	x20, [sp, #424]
+    1f08:	91002015 	add	x21, x0, #0x8
+    1f0c:	f9000402 	str	x2, [x0, #8]
+    1f10:	17fffa30 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    1f14:	b940067a 	ldr	w26, [x19, #4]
+    1f18:	91002273 	add	x19, x19, #0x8
+    1f1c:	7103ff5f 	cmp	w26, #0xff
+    1f20:	54008a68 	b.hi	306c <__stubRAISE+0x848>  // b.pmore
+    1f24:	90000000 	adrp	x0, 0 <Caml_state>
+    1f28:	f9400000 	ldr	x0, [x0]
+    1f2c:	d53bd041 	mrs	x1, tpidr_el0
+    1f30:	aa1503e2 	mov	x2, x21
+    1f34:	f900d3f4 	str	x20, [sp, #416]
+    1f38:	aa1b03f4 	mov	x20, x27
+    1f3c:	aa1703fb 	mov	x27, x23
+    1f40:	aa0203f7 	mov	x23, x2
+    1f44:	f8606835 	ldr	x21, [x1, x0]
+    1f48:	f94006a0 	ldr	x0, [x21, #8]
+    1f4c:	d1006000 	sub	x0, x0, #0x18
+    1f50:	f90006a0 	str	x0, [x21, #8]
+    1f54:	94000000 	bl	0 <caml_alloc_point_here>
+    1f58:	f94006a1 	ldr	x1, [x21, #8]
+    1f5c:	f94002a0 	ldr	x0, [x21]
+    1f60:	eb00003f 	cmp	x1, x0
+    1f64:	54008443 	b.cc	2fec <__stubRAISE+0x7c8>  // b.lo, b.ul, b.last
+    1f68:	2a1a03e0 	mov	w0, w26
+    1f6c:	aa1703e2 	mov	x2, x23
+    1f70:	91200000 	add	x0, x0, #0x800
+    1f74:	f9000020 	str	x0, [x1]
+    1f78:	d29adae1 	mov	x1, #0xd6d7                	// #54999
+    1f7c:	aa1b03f7 	mov	x23, x27
+    1f80:	f94006a0 	ldr	x0, [x21, #8]
+    1f84:	f2bae201 	movk	x1, #0xd710, lsl #16
+    1f88:	f2dafae1 	movk	x1, #0xd7d7, lsl #32
+    1f8c:	aa1403fb 	mov	x27, x20
+    1f90:	91002015 	add	x21, x0, #0x8
+    1f94:	f2fae201 	movk	x1, #0xd710, lsl #48
+    1f98:	f90043f6 	str	x22, [sp, #128]
+    1f9c:	f940d3f4 	ldr	x20, [sp, #416]
+    1fa0:	f90006a1 	str	x1, [x21, #8]
+    1fa4:	f9000402 	str	x2, [x0, #8]
+    1fa8:	f8408720 	ldr	x0, [x25], #8
+    1fac:	f90006a0 	str	x0, [x21, #8]
+    1fb0:	17fffa08 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    1fb4:	b940067a 	ldr	w26, [x19, #4]
+    1fb8:	91002273 	add	x19, x19, #0x8
+    1fbc:	7103ff5f 	cmp	w26, #0xff
+    1fc0:	54009d28 	b.hi	3364 <__stubRAISE+0xb40>  // b.pmore
+    1fc4:	90000000 	adrp	x0, 0 <Caml_state>
+    1fc8:	f9400000 	ldr	x0, [x0]
+    1fcc:	d53bd041 	mrs	x1, tpidr_el0
+    1fd0:	aa1503e2 	mov	x2, x21
+    1fd4:	f900cff4 	str	x20, [sp, #408]
+    1fd8:	aa1b03f4 	mov	x20, x27
+    1fdc:	aa1703fb 	mov	x27, x23
+    1fe0:	aa0203f7 	mov	x23, x2
+    1fe4:	f8606835 	ldr	x21, [x1, x0]
+    1fe8:	f94006a0 	ldr	x0, [x21, #8]
+    1fec:	d1008000 	sub	x0, x0, #0x20
+    1ff0:	f90006a0 	str	x0, [x21, #8]
+    1ff4:	94000000 	bl	0 <caml_alloc_point_here>
+    1ff8:	f94006a1 	ldr	x1, [x21, #8]
+    1ffc:	f94002a0 	ldr	x0, [x21]
+    2000:	eb00003f 	cmp	x1, x0
+    2004:	54007d43 	b.cc	2fac <__stubRAISE+0x788>  // b.lo, b.ul, b.last
+    2008:	2a1a03e0 	mov	w0, w26
+    200c:	aa1703e2 	mov	x2, x23
+    2010:	91300000 	add	x0, x0, #0xc00
+    2014:	f9000020 	str	x0, [x1]
+    2018:	d29adae1 	mov	x1, #0xd6d7                	// #54999
+    201c:	aa1b03f7 	mov	x23, x27
+    2020:	f94006a0 	ldr	x0, [x21, #8]
+    2024:	f2bae201 	movk	x1, #0xd710, lsl #16
+    2028:	f2dafae1 	movk	x1, #0xd7d7, lsl #32
+    202c:	aa1403fb 	mov	x27, x20
+    2030:	91002015 	add	x21, x0, #0x8
+    2034:	f2fae201 	movk	x1, #0xd710, lsl #48
+    2038:	91004339 	add	x25, x25, #0x10
+    203c:	f90043f6 	str	x22, [sp, #128]
+    2040:	f940cff4 	ldr	x20, [sp, #408]
+    2044:	f90006a1 	str	x1, [x21, #8]
+    2048:	f9000402 	str	x2, [x0, #8]
+    204c:	f9000c01 	str	x1, [x0, #24]
+    2050:	f85f0321 	ldur	x1, [x25, #-16]
+    2054:	f90006a1 	str	x1, [x21, #8]
+    2058:	f85f8321 	ldur	x1, [x25, #-8]
+    205c:	f9000c01 	str	x1, [x0, #24]
+    2060:	17fff9dc 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002064 <__stubGETFIELD1>:
+    2064:	aa0203f3 	mov	x19, x2
+    2068:	f90043f6 	str	x22, [sp, #128]
+    206c:	f94006b5 	ldr	x21, [x21, #8]
+    2070:	17fff9d8 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002074 <__stubGETFIELD2>:
+    2074:	aa0203f3 	mov	x19, x2
+    2078:	f90043f6 	str	x22, [sp, #128]
+    207c:	f9400ab5 	ldr	x21, [x21, #16]
+    2080:	17fff9d4 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2084:	b980067a 	ldrsw	x26, [x19, #4]
+    2088:	91002273 	add	x19, x19, #0x8
+    208c:	f104035f 	cmp	x26, #0x100
+    2090:	54005b68 	b.hi	2bfc <__stubRAISE+0x3d8>  // b.pmore
+    2094:	b40099ba 	cbz	x26, 33c8 <__stubRAISE+0xba4>
+    2098:	90000000 	adrp	x0, 0 <Caml_state>
+    209c:	f9400000 	ldr	x0, [x0]
+    20a0:	d53bd041 	mrs	x1, tpidr_el0
+    20a4:	aa1503e6 	mov	x6, x21
+    20a8:	d37df343 	lsl	x3, x26, #3
+    20ac:	928000e2 	mov	x2, #0xfffffffffffffff8    	// #-8
+    20b0:	cb030042 	sub	x2, x2, x3
+    20b4:	91002064 	add	x4, x3, #0x8
+    20b8:	a91493e2 	stp	x2, x4, [sp, #328]
+    20bc:	f8606835 	ldr	x21, [x1, x0]
+    20c0:	aa1703e1 	mov	x1, x23
+    20c4:	aa1603f7 	mov	x23, x22
+    20c8:	aa1403f6 	mov	x22, x20
+    20cc:	aa1b03f4 	mov	x20, x27
+    20d0:	aa0603fb 	mov	x27, x6
+    20d4:	f94006a0 	ldr	x0, [x21, #8]
+    20d8:	f900cbe3 	str	x3, [sp, #400]
+    20dc:	8b020000 	add	x0, x0, x2
+    20e0:	f90006a0 	str	x0, [x21, #8]
+    20e4:	f90103e1 	str	x1, [sp, #512]
+    20e8:	94000000 	bl	0 <caml_alloc_point_here>
+    20ec:	f94006a0 	ldr	x0, [x21, #8]
+    20f0:	f94002a3 	ldr	x3, [x21]
+    20f4:	eb03001f 	cmp	x0, x3
+    20f8:	f94103e1 	ldr	x1, [sp, #512]
+    20fc:	54009d43 	b.cc	34a4 <__stubRAISE+0xc80>  // b.lo, b.ul, b.last
+    2100:	aa1b03e6 	mov	x6, x27
+    2104:	aa1403fb 	mov	x27, x20
+    2108:	aa1603f4 	mov	x20, x22
+    210c:	aa1703f6 	mov	x22, x23
+    2110:	aa0103f7 	mov	x23, x1
+    2114:	d376d741 	lsl	x1, x26, #10
+    2118:	9103f821 	add	x1, x1, #0xfe
+    211c:	f9000001 	str	x1, [x0]
+    2120:	f940cbe3 	ldr	x3, [sp, #400]
+    2124:	f94006a4 	ldr	x4, [x21, #8]
+    2128:	91002095 	add	x21, x4, #0x8
+    212c:	8b0302a3 	add	x3, x21, x3
+    2130:	aa1503e0 	mov	x0, x21
+    2134:	aa1503e1 	mov	x1, x21
+    2138:	d29adae2 	mov	x2, #0xd6d7                	// #54999
+    213c:	f2bae202 	movk	x2, #0xd710, lsl #16
+    2140:	f2dafae2 	movk	x2, #0xd7d7, lsl #32
+    2144:	f2fae202 	movk	x2, #0xd710, lsl #48
+    2148:	f8008422 	str	x2, [x1], #8
+    214c:	eb01007f 	cmp	x3, x1
+    2150:	54ffff41 	b.ne	2138 <__stubGETFIELD2+0xc4>  // b.any
+    2154:	fd4000c0 	ldr	d0, [x6]
+    2158:	f100075f 	cmp	x26, #0x1
+    215c:	fd000480 	str	d0, [x4, #8]
+    2160:	54ff50e0 	b.eq	b7c <__stubPUSH+0xc>  // b.none
+    2164:	cb000324 	sub	x4, x25, x0
+    2168:	91002000 	add	x0, x0, #0x8
+    216c:	d1002084 	sub	x4, x4, #0x8
+    2170:	d2800021 	mov	x1, #0x1                   	// #1
+    2174:	f8606882 	ldr	x2, [x4, x0]
+    2178:	aa0103e6 	mov	x6, x1
+    217c:	91000421 	add	x1, x1, #0x1
+    2180:	eb01035f 	cmp	x26, x1
+    2184:	fd400040 	ldr	d0, [x2]
+    2188:	fc008400 	str	d0, [x0], #8
+    218c:	54ffff41 	b.ne	2174 <__stubGETFIELD2+0x100>  // b.any
+    2190:	8b060f39 	add	x25, x25, x6, lsl #3
+    2194:	f90043f6 	str	x22, [sp, #128]
+    2198:	17fff98e 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+000000000000219c <__stubGETFIELD0>:
+    219c:	aa0203f3 	mov	x19, x2
+    21a0:	f90043f6 	str	x22, [sp, #128]
+    21a4:	f94002b5 	ldr	x21, [x21]
+    21a8:	17fff98a 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    21ac:	90000000 	adrp	x0, 0 <Caml_state>
+    21b0:	f9400000 	ldr	x0, [x0]
+    21b4:	d53bd041 	mrs	x1, tpidr_el0
+    21b8:	b9400662 	ldr	w2, [x19, #4]
+    21bc:	91002273 	add	x19, x19, #0x8
+    21c0:	f860683a 	ldr	x26, [x1, x0]
+    21c4:	fc62daa8 	ldr	d8, [x21, w2, sxtw #3]
+    21c8:	f9400740 	ldr	x0, [x26, #8]
+    21cc:	d1004000 	sub	x0, x0, #0x10
+    21d0:	f9000740 	str	x0, [x26, #8]
+    21d4:	94000000 	bl	0 <caml_alloc_point_here>
+    21d8:	f9400740 	ldr	x0, [x26, #8]
+    21dc:	f9400341 	ldr	x1, [x26]
+    21e0:	eb01001f 	cmp	x0, x1
+    21e4:	540067e3 	b.cc	2ee0 <__stubRAISE+0x6bc>  // b.lo, b.ul, b.last
+    21e8:	d2809fa1 	mov	x1, #0x4fd                 	// #1277
+    21ec:	f9000001 	str	x1, [x0]
+    21f0:	f90043f6 	str	x22, [sp, #128]
+    21f4:	f9400740 	ldr	x0, [x26, #8]
+    21f8:	91002015 	add	x21, x0, #0x8
+    21fc:	fd000408 	str	d8, [x0, #8]
+    2200:	17fff974 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002204 <__stubSETFIELD0>:
+    2204:	f8408721 	ldr	x1, [x25], #8
+    2208:	aa1503e0 	mov	x0, x21
+    220c:	aa0203f3 	mov	x19, x2
+    2210:	d2800035 	mov	x21, #0x1                   	// #1
+    2214:	94000000 	bl	0 <caml_modify>
+    2218:	f90043f6 	str	x22, [sp, #128]
+    221c:	17fff96d 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002220 <__stubSETFIELD1>:
+    2220:	f8408721 	ldr	x1, [x25], #8
+    2224:	910022a0 	add	x0, x21, #0x8
+    2228:	aa0203f3 	mov	x19, x2
+    222c:	d2800035 	mov	x21, #0x1                   	// #1
+    2230:	94000000 	bl	0 <caml_modify>
+    2234:	f90043f6 	str	x22, [sp, #128]
+    2238:	17fff966 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+000000000000223c <__stubSETFIELD2>:
+    223c:	f8408721 	ldr	x1, [x25], #8
+    2240:	910042a0 	add	x0, x21, #0x10
+    2244:	aa0203f3 	mov	x19, x2
+    2248:	d2800035 	mov	x21, #0x1                   	// #1
+    224c:	94000000 	bl	0 <caml_modify>
+    2250:	f90043f6 	str	x22, [sp, #128]
+    2254:	17fff95f 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002258 <__stubGETFIELD3>:
+    2258:	aa0203f3 	mov	x19, x2
+    225c:	f90043f6 	str	x22, [sp, #128]
+    2260:	f9400eb5 	ldr	x21, [x21, #24]
+    2264:	17fff95b 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002268 <__stubGETFIELD>:
+    2268:	b9400660 	ldr	w0, [x19, #4]
+    226c:	91002273 	add	x19, x19, #0x8
+    2270:	f90043f6 	str	x22, [sp, #128]
+    2274:	f860dab5 	ldr	x21, [x21, w0, sxtw #3]
+    2278:	17fff956 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+000000000000227c <__stubPUSHACC2>:
+    227c:	aa0203f3 	mov	x19, x2
+    2280:	d1002339 	sub	x25, x25, #0x8
+    2284:	f9000335 	str	x21, [x25]
+    2288:	f90043f6 	str	x22, [sp, #128]
+    228c:	f9400b35 	ldr	x21, [x25, #16]
+    2290:	17fff950 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002294 <__stubPUSHACC3>:
+    2294:	aa0203f3 	mov	x19, x2
+    2298:	d1002339 	sub	x25, x25, #0x8
+    229c:	f9000335 	str	x21, [x25]
+    22a0:	f90043f6 	str	x22, [sp, #128]
+    22a4:	f9400f35 	ldr	x21, [x25, #24]
+    22a8:	17fff94a 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+00000000000022ac <__stubPUSHACC4>:
+    22ac:	aa0203f3 	mov	x19, x2
+    22b0:	d1002339 	sub	x25, x25, #0x8
+    22b4:	f9000335 	str	x21, [x25]
+    22b8:	f90043f6 	str	x22, [sp, #128]
+    22bc:	f9401335 	ldr	x21, [x25, #32]
+    22c0:	17fff944 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+00000000000022c4 <__stubPUSHACC5>:
+    22c4:	aa0203f3 	mov	x19, x2
+    22c8:	d1002339 	sub	x25, x25, #0x8
+    22cc:	f9000335 	str	x21, [x25]
+    22d0:	f90043f6 	str	x22, [sp, #128]
+    22d4:	f9401735 	ldr	x21, [x25, #40]
+    22d8:	17fff93e 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+00000000000022dc <__stubPUSHACC6>:
+    22dc:	aa0203f3 	mov	x19, x2
+    22e0:	d1002339 	sub	x25, x25, #0x8
+    22e4:	f9000335 	str	x21, [x25]
+    22e8:	f90043f6 	str	x22, [sp, #128]
+    22ec:	f9401b35 	ldr	x21, [x25, #48]
+    22f0:	17fff938 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+00000000000022f4 <__stubPUSHACC7>:
+    22f4:	aa0203f3 	mov	x19, x2
+    22f8:	d1002339 	sub	x25, x25, #0x8
+    22fc:	f9000335 	str	x21, [x25]
+    2300:	f90043f6 	str	x22, [sp, #128]
+    2304:	f9401f35 	ldr	x21, [x25, #56]
+    2308:	17fff932 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+000000000000230c <__stubPOP>:
+    230c:	b9800660 	ldrsw	x0, [x19, #4]
+    2310:	91002273 	add	x19, x19, #0x8
+    2314:	f90043f6 	str	x22, [sp, #128]
+    2318:	8b000f39 	add	x25, x25, x0, lsl #3
+    231c:	17fff92d 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002320 <__stubC_CALL4>:
+    2320:	91002262 	add	x2, x19, #0x8
+    2324:	a93f0b37 	stp	x23, x2, [x25, #-16]
+    2328:	90000001 	adrp	x1, 0 <caml_prim_table>
+    232c:	f9401363 	ldr	x3, [x27, #32]
+    2330:	d1004324 	sub	x4, x25, #0x10
+    2334:	f9400021 	ldr	x1, [x1]
+    2338:	aa1503e0 	mov	x0, x21
+    233c:	f9000064 	str	x4, [x3]
+    2340:	b9800663 	ldrsw	x3, [x19, #4]
+    2344:	aa0203f3 	mov	x19, x2
+    2348:	f9400422 	ldr	x2, [x1, #8]
+    234c:	f8637844 	ldr	x4, [x2, x3, lsl #3]
+    2350:	a9400b21 	ldp	x1, x2, [x25]
+    2354:	f9400b23 	ldr	x3, [x25, #16]
+    2358:	d63f0080 	blr	x4
+    235c:	aa0003f5 	mov	x21, x0
+    2360:	f9401361 	ldr	x1, [x27, #32]
+    2364:	f90043f6 	str	x22, [sp, #128]
+    2368:	f9400039 	ldr	x25, [x1]
+    236c:	f8428737 	ldr	x23, [x25], #40
+    2370:	17fff918 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002374 <__stubC_CALL5>:
+    2374:	91002262 	add	x2, x19, #0x8
+    2378:	a93f0b37 	stp	x23, x2, [x25, #-16]
+    237c:	90000001 	adrp	x1, 0 <caml_prim_table>
+    2380:	f9401363 	ldr	x3, [x27, #32]
+    2384:	d1004324 	sub	x4, x25, #0x10
+    2388:	f9400021 	ldr	x1, [x1]
+    238c:	aa1503e0 	mov	x0, x21
+    2390:	f9000064 	str	x4, [x3]
+    2394:	b9800663 	ldrsw	x3, [x19, #4]
+    2398:	aa0203f3 	mov	x19, x2
+    239c:	f9400422 	ldr	x2, [x1, #8]
+    23a0:	f8637847 	ldr	x7, [x2, x3, lsl #3]
+    23a4:	a9400b21 	ldp	x1, x2, [x25]
+    23a8:	a9411323 	ldp	x3, x4, [x25, #16]
+    23ac:	d63f00e0 	blr	x7
+    23b0:	aa0003f5 	mov	x21, x0
+    23b4:	f9401361 	ldr	x1, [x27, #32]
+    23b8:	f90043f6 	str	x22, [sp, #128]
+    23bc:	f9400039 	ldr	x25, [x1]
+    23c0:	f8430737 	ldr	x23, [x25], #48
+    23c4:	17fff903 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    23c8:	b940067a 	ldr	w26, [x19, #4]
+    23cc:	91003263 	add	x3, x19, #0xc
+    23d0:	a93e8f37 	stp	x23, x3, [x25, #-24]
+    23d4:	90000002 	adrp	x2, 0 <caml_prim_table>
+    23d8:	d1006327 	sub	x7, x25, #0x18
+    23dc:	f81f8335 	stur	x21, [x25, #-8]
+    23e0:	d1002320 	sub	x0, x25, #0x8
+    23e4:	f9400042 	ldr	x2, [x2]
+    23e8:	2a1a03e1 	mov	w1, w26
+    23ec:	f9401364 	ldr	x4, [x27, #32]
+    23f0:	f9000087 	str	x7, [x4]
+    23f4:	b9800a64 	ldrsw	x4, [x19, #8]
+    23f8:	aa0303f3 	mov	x19, x3
+    23fc:	f9400442 	ldr	x2, [x2, #8]
+    2400:	f8647842 	ldr	x2, [x2, x4, lsl #3]
+    2404:	d63f0040 	blr	x2
+    2408:	aa0003f5 	mov	x21, x0
+    240c:	f9401361 	ldr	x1, [x27, #32]
+    2410:	f90043f6 	str	x22, [sp, #128]
+    2414:	f9400020 	ldr	x0, [x1]
+    2418:	8b3acc19 	add	x25, x0, w26, sxtw #3
+    241c:	91004339 	add	x25, x25, #0x10
+    2420:	f9400017 	ldr	x23, [x0]
+    2424:	17fff8eb 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002428 <__stubCONST0>:
+    2428:	d2800035 	mov	x21, #0x1                   	// #1
+    242c:	aa0203f3 	mov	x19, x2
+    2430:	f90043f6 	str	x22, [sp, #128]
+    2434:	17fff8e7 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002438 <__stubC_CALL2>:
+    2438:	91002262 	add	x2, x19, #0x8
+    243c:	a93f0b37 	stp	x23, x2, [x25, #-16]
+    2440:	90000001 	adrp	x1, 0 <caml_prim_table>
+    2444:	f9401363 	ldr	x3, [x27, #32]
+    2448:	d1004324 	sub	x4, x25, #0x10
+    244c:	f9400021 	ldr	x1, [x1]
+    2450:	aa1503e0 	mov	x0, x21
+    2454:	f9000064 	str	x4, [x3]
+    2458:	b9800663 	ldrsw	x3, [x19, #4]
+    245c:	aa0203f3 	mov	x19, x2
+    2460:	f9400422 	ldr	x2, [x1, #8]
+    2464:	f9400321 	ldr	x1, [x25]
+    2468:	f8637842 	ldr	x2, [x2, x3, lsl #3]
+    246c:	d63f0040 	blr	x2
+    2470:	aa0003f5 	mov	x21, x0
+    2474:	f9401361 	ldr	x1, [x27, #32]
+    2478:	f90043f6 	str	x22, [sp, #128]
+    247c:	f9400039 	ldr	x25, [x1]
+    2480:	f8418737 	ldr	x23, [x25], #24
+    2484:	17fff8d3 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002488 <__stubC_CALL3>:
+    2488:	91002262 	add	x2, x19, #0x8
+    248c:	a93f0b37 	stp	x23, x2, [x25, #-16]
+    2490:	90000001 	adrp	x1, 0 <caml_prim_table>
+    2494:	f9401363 	ldr	x3, [x27, #32]
+    2498:	d1004324 	sub	x4, x25, #0x10
+    249c:	f9400021 	ldr	x1, [x1]
+    24a0:	aa1503e0 	mov	x0, x21
+    24a4:	f9000064 	str	x4, [x3]
+    24a8:	b9800663 	ldrsw	x3, [x19, #4]
+    24ac:	aa0203f3 	mov	x19, x2
+    24b0:	f9400422 	ldr	x2, [x1, #8]
+    24b4:	f8637843 	ldr	x3, [x2, x3, lsl #3]
+    24b8:	a9400b21 	ldp	x1, x2, [x25]
+    24bc:	d63f0060 	blr	x3
+    24c0:	aa0003f5 	mov	x21, x0
+    24c4:	f9401361 	ldr	x1, [x27, #32]
+    24c8:	f90043f6 	str	x22, [sp, #128]
+    24cc:	f9400039 	ldr	x25, [x1]
+    24d0:	f8420737 	ldr	x23, [x25], #32
+    24d4:	17fff8bf 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+00000000000024d8 <__stubC_CALL1>:
+    24d8:	91002262 	add	x2, x19, #0x8
+    24dc:	a93f0b37 	stp	x23, x2, [x25, #-16]
+    24e0:	90000001 	adrp	x1, 0 <caml_prim_table>
+    24e4:	f9401363 	ldr	x3, [x27, #32]
+    24e8:	d1004339 	sub	x25, x25, #0x10
+    24ec:	f9400021 	ldr	x1, [x1]
+    24f0:	aa1503e0 	mov	x0, x21
+    24f4:	f9000079 	str	x25, [x3]
+    24f8:	b9800663 	ldrsw	x3, [x19, #4]
+    24fc:	aa0203f3 	mov	x19, x2
+    2500:	f9400421 	ldr	x1, [x1, #8]
+    2504:	f8637821 	ldr	x1, [x1, x3, lsl #3]
+    2508:	d63f0020 	blr	x1
+    250c:	aa0003f5 	mov	x21, x0
+    2510:	f9401361 	ldr	x1, [x27, #32]
+    2514:	f90043f6 	str	x22, [sp, #128]
+    2518:	f9400039 	ldr	x25, [x1]
+    251c:	f8410737 	ldr	x23, [x25], #16
+    2520:	17fff8ac 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002524 <__stubACC0>:
+    2524:	aa0203f3 	mov	x19, x2
+    2528:	f90043f6 	str	x22, [sp, #128]
+    252c:	f9400335 	ldr	x21, [x25]
+    2530:	17fff8a8 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002534 <__stubACC1>:
+    2534:	aa0203f3 	mov	x19, x2
+    2538:	f90043f6 	str	x22, [sp, #128]
+    253c:	f9400735 	ldr	x21, [x25, #8]
+    2540:	17fff8a4 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002544 <__stubACC2>:
+    2544:	aa0203f3 	mov	x19, x2
+    2548:	f90043f6 	str	x22, [sp, #128]
+    254c:	f9400b35 	ldr	x21, [x25, #16]
+    2550:	17fff8a0 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002554 <__stubACC3>:
+    2554:	aa0203f3 	mov	x19, x2
+    2558:	f90043f6 	str	x22, [sp, #128]
+    255c:	f9400f35 	ldr	x21, [x25, #24]
+    2560:	17fff89c 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2564:	a9400f20 	ldp	x0, x3, [x25]
+    2568:	aa1303f8 	mov	x24, x19
+    256c:	aa0703fc 	mov	x28, x7
+    2570:	36005fc3 	tbz	w3, #0, 3168 <__stubRAISE+0x944>
+    2574:	f9403be2 	ldr	x2, [sp, #112]
+    2578:	928001e7 	mov	x7, #0xfffffffffffffff0    	// #-16
+    257c:	b9400664 	ldr	w4, [x19, #4]
+    2580:	d1000463 	sub	x3, x3, #0x1
+    2584:	f9401041 	ldr	x1, [x2, #32]
+    2588:	8b24cce4 	add	x4, x7, w4, sxtw #3
+    258c:	f940ec42 	ldr	x2, [x2, #472]
+    2590:	8b040336 	add	x22, x25, x4
+    2594:	f9400826 	ldr	x6, [x1, #16]
+    2598:	d37ff842 	lsl	x2, x2, #1
+    259c:	91000442 	add	x2, x2, #0x1
+    25a0:	f9400cc6 	ldr	x6, [x6, #24]
+    25a4:	f8246b22 	str	x2, [x25, x4]
+    25a8:	f90006dc 	str	x28, [x22, #8]
+    25ac:	b4004ee6 	cbz	x6, 2f88 <__stubRAISE+0x764>
+    25b0:	f9403be2 	ldr	x2, [sp, #112]
+    25b4:	f9000036 	str	x22, [x1]
+    25b8:	f9001046 	str	x6, [x2, #32]
+    25bc:	f9400864 	ldr	x4, [x3, #16]
+    25c0:	f94000c2 	ldr	x2, [x6]
+    25c4:	f9400c84 	ldr	x4, [x4, #24]
+    25c8:	b5006c24 	cbnz	x4, 334c <__stubRAISE+0xb28>
+    25cc:	f9400824 	ldr	x4, [x1, #16]
+    25d0:	d1002053 	sub	x19, x2, #0x8
+    25d4:	f9000c9f 	str	xzr, [x4, #24]
+    25d8:	f9403be4 	ldr	x4, [sp, #112]
+    25dc:	f9400863 	ldr	x3, [x3, #16]
+    25e0:	f9000c61 	str	x1, [x3, #24]
+    25e4:	f9400043 	ldr	x3, [x2]
+    25e8:	9341fc63 	asr	x3, x3, #1
+    25ec:	f900ec83 	str	x3, [x4, #472]
+    25f0:	a93f8055 	stp	x21, x0, [x2, #-8]
+    25f4:	f9400443 	ldr	x3, [x2, #8]
+    25f8:	9341fc63 	asr	x3, x3, #1
+    25fc:	37007301 	tbnz	w1, #0, 345c <__stubRAISE+0xc38>
+    2600:	91000420 	add	x0, x1, #0x1
+    2604:	f9000440 	str	x0, [x2, #8]
+    2608:	91000874 	add	x20, x3, #0x2
+    260c:	f9400820 	ldr	x0, [x1, #16]
+    2610:	f9400815 	ldr	x21, [x0, #16]
+    2614:	f94002b8 	ldr	x24, [x21]
+    2618:	17fff84e 	b	750 <caml_interprete+0x130>
+
+000000000000261c <__stubACC4>:
+    261c:	aa0203f3 	mov	x19, x2
+    2620:	f90043f6 	str	x22, [sp, #128]
+    2624:	f9401335 	ldr	x21, [x25, #32]
+    2628:	17fff86a 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+000000000000262c <__stubACC5>:
+    262c:	aa0203f3 	mov	x19, x2
+    2630:	f90043f6 	str	x22, [sp, #128]
+    2634:	f9401735 	ldr	x21, [x25, #40]
+    2638:	17fff866 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+000000000000263c <__stubACC6>:
+    263c:	aa0203f3 	mov	x19, x2
+    2640:	f90043f6 	str	x22, [sp, #128]
+    2644:	f9401b35 	ldr	x21, [x25, #48]
+    2648:	17fff862 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+000000000000264c <__stubACC7>:
+    264c:	aa0203f3 	mov	x19, x2
+    2650:	f90043f6 	str	x22, [sp, #128]
+    2654:	f9401f35 	ldr	x21, [x25, #56]
+    2658:	17fff85e 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+000000000000265c <__stubPUSHACC1>:
+    265c:	aa0203f3 	mov	x19, x2
+    2660:	d1002339 	sub	x25, x25, #0x8
+    2664:	f9000335 	str	x21, [x25]
+    2668:	f90043f6 	str	x22, [sp, #128]
+    266c:	f9400735 	ldr	x21, [x25, #8]
+    2670:	17fff858 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002674 <__stubPUSHCONST0>:
+    2674:	aa0203f3 	mov	x19, x2
+    2678:	d1002339 	sub	x25, x25, #0x8
+    267c:	f9000335 	str	x21, [x25]
+    2680:	d2800035 	mov	x21, #0x1                   	// #1
+    2684:	f90043f6 	str	x22, [sp, #128]
+    2688:	17fff852 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+000000000000268c <__stubPUSHCONST1>:
+    268c:	aa0203f3 	mov	x19, x2
+    2690:	d1002339 	sub	x25, x25, #0x8
+    2694:	f9000335 	str	x21, [x25]
+    2698:	d2800075 	mov	x21, #0x3                   	// #3
+    269c:	f90043f6 	str	x22, [sp, #128]
+    26a0:	17fff84c 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+00000000000026a4 <__stubPUSHCONST2>:
+    26a4:	aa0203f3 	mov	x19, x2
+    26a8:	d1002339 	sub	x25, x25, #0x8
+    26ac:	f9000335 	str	x21, [x25]
+    26b0:	d28000b5 	mov	x21, #0x5                   	// #5
+    26b4:	f90043f6 	str	x22, [sp, #128]
+    26b8:	17fff846 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+00000000000026bc <__stubPUSHCONST3>:
+    26bc:	aa0203f3 	mov	x19, x2
+    26c0:	d1002339 	sub	x25, x25, #0x8
+    26c4:	f9000335 	str	x21, [x25]
+    26c8:	d28000f5 	mov	x21, #0x7                   	// #7
+    26cc:	f90043f6 	str	x22, [sp, #128]
+    26d0:	17fff840 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+00000000000026d4 <__stubCONST1>:
+    26d4:	d2800075 	mov	x21, #0x3                   	// #3
+    26d8:	aa0203f3 	mov	x19, x2
+    26dc:	f90043f6 	str	x22, [sp, #128]
+    26e0:	17fff83c 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+00000000000026e4 <__stubSETFIELD3>:
+    26e4:	f8408721 	ldr	x1, [x25], #8
+    26e8:	910062a0 	add	x0, x21, #0x18
+    26ec:	aa0203f3 	mov	x19, x2
+    26f0:	d2800035 	mov	x21, #0x1                   	// #1
+    26f4:	94000000 	bl	0 <caml_modify>
+    26f8:	f90043f6 	str	x22, [sp, #128]
+    26fc:	17fff835 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002700 <__stubSETFIELD>:
+    2700:	f8408721 	ldr	x1, [x25], #8
+    2704:	91002273 	add	x19, x19, #0x8
+    2708:	b85fc260 	ldur	w0, [x19, #-4]
+    270c:	8b20cea0 	add	x0, x21, w0, sxtw #3
+    2710:	d2800035 	mov	x21, #0x1                   	// #1
+    2714:	94000000 	bl	0 <caml_modify>
+    2718:	f90043f6 	str	x22, [sp, #128]
+    271c:	17fff82d 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002720 <__stubSETFLOATFIELD>:
+    2720:	f8408721 	ldr	x1, [x25], #8
+    2724:	91002273 	add	x19, x19, #0x8
+    2728:	b85fc260 	ldur	w0, [x19, #-4]
+    272c:	f90043f6 	str	x22, [sp, #128]
+    2730:	fd400020 	ldr	d0, [x1]
+    2734:	fc20daa0 	str	d0, [x21, w0, sxtw #3]
+    2738:	d2800035 	mov	x21, #0x1                   	// #1
+    273c:	17fff825 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2740:	f85f82b5 	ldur	x21, [x21, #-8]
+    2744:	aa0203f3 	mov	x19, x2
+    2748:	f90043f6 	str	x22, [sp, #128]
+    274c:	d34afeb5 	lsr	x21, x21, #10
+    2750:	d37ffab5 	lsl	x21, x21, #1
+    2754:	910006b5 	add	x21, x21, #0x1
+    2758:	17fff81e 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+000000000000275c <__stubGETVECTITEM>:
+    275c:	f8408720 	ldr	x0, [x25], #8
+    2760:	aa0203f3 	mov	x19, x2
+    2764:	f90043f6 	str	x22, [sp, #128]
+    2768:	9341fc00 	asr	x0, x0, #1
+    276c:	f8607ab5 	ldr	x21, [x21, x0, lsl #3]
+    2770:	17fff818 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002774 <__stubSETVECTITEM>:
+    2774:	f9400721 	ldr	x1, [x25, #8]
+    2778:	aa0203f3 	mov	x19, x2
+    277c:	f8410720 	ldr	x0, [x25], #16
+    2780:	9341fc00 	asr	x0, x0, #1
+    2784:	8b000ea0 	add	x0, x21, x0, lsl #3
+    2788:	d2800035 	mov	x21, #0x1                   	// #1
+    278c:	94000000 	bl	0 <caml_modify>
+    2790:	f90043f6 	str	x22, [sp, #128]
+    2794:	17fff80f 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+0000000000002798 <__stubSETBYTESCHAR>:
+    2798:	a9400720 	ldp	x0, x1, [x25]
+    279c:	aa0203f3 	mov	x19, x2
+    27a0:	91004339 	add	x25, x25, #0x10
+    27a4:	f90043f6 	str	x22, [sp, #128]
+    27a8:	9341fc00 	asr	x0, x0, #1
+    27ac:	9341fc21 	asr	x1, x1, #1
+    27b0:	38356801 	strb	w1, [x0, x21]
+    27b4:	d2800035 	mov	x21, #0x1                   	// #1
+    27b8:	17fff806 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+
+00000000000027bc <__stubCONST3>:
+    27bc:	d28000f5 	mov	x21, #0x7                   	// #7
+    27c0:	aa0203f3 	mov	x19, x2
+    27c4:	f90043f6 	str	x22, [sp, #128]
+    27c8:	17fff802 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    27cc:	f9010be7 	str	x7, [sp, #528]
+    27d0:	f9010fe2 	str	x2, [sp, #536]
+
+00000000000027d4 <__stubPOPTRAP>:
+    27d4:	94000000 	bl	0 <caml_alloc_point_here>
+    27d8:	f9400761 	ldr	x1, [x27, #8]
+    27dc:	f9400360 	ldr	x0, [x27]
+    27e0:	eb00003f 	cmp	x1, x0
+    27e4:	f9410be7 	ldr	x7, [sp, #528]
+    27e8:	54003c63 	b.cc	2f74 <__stubRAISE+0x750>  // b.lo, b.ul, b.last
+    27ec:	f90107e7 	str	x7, [sp, #520]
+    27f0:	94000000 	bl	0 <caml_check_for_pending_signals>
+    27f4:	f94107e7 	ldr	x7, [sp, #520]
+    27f8:	35003be0 	cbnz	w0, 2f74 <__stubRAISE+0x750>
+    27fc:	f9400720 	ldr	x0, [x25, #8]
+    2800:	91008339 	add	x25, x25, #0x20
+    2804:	f9410fe2 	ldr	x2, [sp, #536]
+    2808:	f90043f6 	str	x22, [sp, #128]
+    280c:	9341fc00 	asr	x0, x0, #1
+    2810:	f900ef60 	str	x0, [x27, #472]
+    2814:	aa0203f3 	mov	x19, x2
+    2818:	17fff7ee 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    281c:	aa1303f8 	mov	x24, x19
+    2820:	aa1903f3 	mov	x19, x25
+
+0000000000002824 <__stubRAISE>:
+    2824:	f90043f6 	str	x22, [sp, #128]
+    2828:	aa1503f6 	mov	x22, x21
+    282c:	f9403be0 	ldr	x0, [sp, #112]
+    2830:	a95d8001 	ldp	x1, x0, [x0, #472]
+    2834:	eb00003f 	cmp	x1, x0
+    2838:	5400130a 	b.ge	2a98 <__stubRAISE+0x274>  // b.tcont
+    283c:	f9403be0 	ldr	x0, [sp, #112]
+    2840:	f9406000 	ldr	x0, [x0, #192]
+    2844:	b4fef580 	cbz	x0, 6f4 <caml_interprete+0xd4>
+    2848:	f81f8278 	stur	x24, [x19, #-8]
+    284c:	d1002273 	sub	x19, x19, #0x8
+    2850:	aa1603e0 	mov	x0, x22
+    2854:	aa1303e1 	mov	x1, x19
+    2858:	52800002 	mov	w2, #0x0                   	// #0
+    285c:	94000000 	bl	0 <caml_stash_backtrace>
+    2860:	17fff7a5 	b	6f4 <caml_interprete+0xd4>
+    2864:	a95857f3 	ldp	x19, x21, [sp, #384]
+    2868:	90000001 	adrp	x1, 0 <func_stack_push>
+    286c:	f94043e0 	ldr	x0, [sp, #128]
+    2870:	91000021 	add	x1, x1, #0x0
+    2874:	52800014 	mov	w20, #0x0                   	// #0
+    2878:	b9401002 	ldr	w2, [x0, #16]
+    287c:	52800020 	mov	w0, #0x1                   	// #1
+    2880:	94000000 	bl	0 <__printf_chk>
+    2884:	f9400722 	ldr	x2, [x25, #8]
+    2888:	90000001 	adrp	x1, 0 <func_stack_push>
+    288c:	52800020 	mov	w0, #0x1                   	// #1
+    2890:	91000021 	add	x1, x1, #0x0
+    2894:	94000000 	bl	0 <__printf_chk>
+    2898:	f9400f22 	ldr	x2, [x25, #24]
+    289c:	90000001 	adrp	x1, 0 <func_stack_push>
+    28a0:	52800020 	mov	w0, #0x1                   	// #1
+    28a4:	91000021 	add	x1, x1, #0x0
+    28a8:	94000000 	bl	0 <__printf_chk>
+    28ac:	f9400b22 	ldr	x2, [x25, #16]
+    28b0:	90000001 	adrp	x1, 0 <func_stack_push>
+    28b4:	52800020 	mov	w0, #0x1                   	// #1
+    28b8:	91000021 	add	x1, x1, #0x0
+    28bc:	94000000 	bl	0 <__printf_chk>
+    28c0:	f9401322 	ldr	x2, [x25, #32]
+    28c4:	90000001 	adrp	x1, 0 <func_stack_push>
+    28c8:	52800020 	mov	w0, #0x1                   	// #1
+    28cc:	91000021 	add	x1, x1, #0x0
+    28d0:	94000000 	bl	0 <__printf_chk>
+    28d4:	f9400720 	ldr	x0, [x25, #8]
+    28d8:	d2800001 	mov	x1, #0x0                   	// #0
+    28dc:	b4000340 	cbz	x0, 2944 <__stubRAISE+0x120>
+    28e0:	90000017 	adrp	x23, 0 <func_stack_push>
+    28e4:	90000018 	adrp	x24, 0 <func_stack_push>
+    28e8:	910002f7 	add	x23, x23, #0x0
+    28ec:	91000318 	add	x24, x24, #0x0
+    28f0:	5280003a 	mov	w26, #0x1                   	// #1
+    28f4:	14000009 	b	2918 <__stubRAISE+0xf4>
+    28f8:	aa1703e1 	mov	x1, x23
+    28fc:	2a1a03e0 	mov	w0, w26
+    2900:	94000000 	bl	0 <__printf_chk>
+    2904:	f9400720 	ldr	x0, [x25, #8]
+    2908:	11000694 	add	w20, w20, #0x1
+    290c:	93407e81 	sxtw	x1, w20
+    2910:	eb34c01f 	cmp	x0, w20, sxtw
+    2914:	54000189 	b.ls	2944 <__stubRAISE+0x120>  // b.plast
+    2918:	f9400322 	ldr	x2, [x25]
+    291c:	f9401320 	ldr	x0, [x25, #32]
+    2920:	f8617843 	ldr	x3, [x2, x1, lsl #3]
+    2924:	d1000400 	sub	x0, x0, #0x1
+    2928:	2a1403e2 	mov	w2, w20
+    292c:	eb00003f 	cmp	x1, x0
+    2930:	54fffe41 	b.ne	28f8 <__stubRAISE+0xd4>  // b.any
+    2934:	aa1803e1 	mov	x1, x24
+    2938:	2a1a03e0 	mov	w0, w26
+    293c:	94000000 	bl	0 <__printf_chk>
+    2940:	17fffff1 	b	2904 <__stubRAISE+0xe0>
+    2944:	f94053e0 	ldr	x0, [sp, #160]
+    2948:	f9400000 	ldr	x0, [x0]
+    294c:	94000000 	bl	0 <free>
+    2950:	aa1903e0 	mov	x0, x25
+    2954:	94000000 	bl	0 <free>
+    2958:	aa1603e0 	mov	x0, x22
+    295c:	94000000 	bl	1f0 <ht_destroy>
+    2960:	f9403be1 	ldr	x1, [sp, #112]
+    2964:	f9405be2 	ldr	x2, [sp, #176]
+    2968:	f9401020 	ldr	x0, [x1, #32]
+    296c:	f900ec22 	str	x2, [x1, #472]
+    2970:	f94057e2 	ldr	x2, [sp, #168]
+    2974:	f900f422 	str	x2, [x1, #488]
+    2978:	f9000013 	str	x19, [x0]
+    297c:	17fff8f2 	b	d44 <__stubGETBYTESCHAR+0x7c>
+    2980:	51000803 	sub	w3, w0, #0x2
+    2984:	17fffb43 	b	1690 <__stubRERAISE+0x14c>
+    2988:	90000000 	adrp	x0, 0 <caml_global_data>
+    298c:	aa1603f3 	mov	x19, x22
+    2990:	f9400000 	ldr	x0, [x0]
+    2994:	f9400000 	ldr	x0, [x0]
+    2998:	f9403416 	ldr	x22, [x0, #104]
+    299c:	17ffffa4 	b	282c <__stubRAISE+0x8>
+    29a0:	7100001f 	cmp	w0, #0x0
+    29a4:	5400544d 	b.le	342c <__stubRAISE+0xc08>
+    29a8:	90000001 	adrp	x1, 0 <Caml_state>
+    29ac:	f9400021 	ldr	x1, [x1]
+    29b0:	d53bd042 	mrs	x2, tpidr_el0
+    29b4:	11000f44 	add	w4, w26, #0x3
+    29b8:	f900e7f3 	str	x19, [sp, #456]
+    29bc:	937d7c84 	sbfiz	x4, x4, #3, #32
+    29c0:	f8616841 	ldr	x1, [x2, x1]
+    29c4:	cb0403e2 	neg	x2, x4
+    29c8:	f90093e2 	str	x2, [sp, #288]
+    29cc:	aa0103f3 	mov	x19, x1
+    29d0:	f9400422 	ldr	x2, [x1, #8]
+    29d4:	cb040042 	sub	x2, x2, x4
+    29d8:	f9000422 	str	x2, [x1, #8]
+    29dc:	aa1703e1 	mov	x1, x23
+    29e0:	aa1603f7 	mov	x23, x22
+    29e4:	aa1403f6 	mov	x22, x20
+    29e8:	aa0403f4 	mov	x20, x4
+    29ec:	aa1503e4 	mov	x4, x21
+    29f0:	aa1b03f5 	mov	x21, x27
+    29f4:	2a0003fb 	mov	w27, w0
+    29f8:	a91d93e1 	stp	x1, x4, [sp, #472]
+    29fc:	94000000 	bl	0 <caml_alloc_point_here>
+    2a00:	f9400662 	ldr	x2, [x19, #8]
+    2a04:	f9400260 	ldr	x0, [x19]
+    2a08:	eb00005f 	cmp	x2, x0
+    2a0c:	a95d93e1 	ldp	x1, x4, [sp, #472]
+    2a10:	54004e83 	b.cc	33e0 <__stubRAISE+0xbbc>  // b.lo, b.ul, b.last
+    2a14:	93407f67 	sxtw	x7, w27
+    2a18:	aa1603f4 	mov	x20, x22
+    2a1c:	aa1703f6 	mov	x22, x23
+    2a20:	aa0103f7 	mov	x23, x1
+    2a24:	93767ce4 	sbfiz	x4, x7, #10, #32
+    2a28:	aa1303e1 	mov	x1, x19
+    2a2c:	9103dc84 	add	x4, x4, #0xf7
+    2a30:	f9000044 	str	x4, [x2]
+    2a34:	aa1503fb 	mov	x27, x21
+    2a38:	d2800000 	mov	x0, #0x0                   	// #0
+    2a3c:	f9400421 	ldr	x1, [x1, #8]
+    2a40:	f940e7f3 	ldr	x19, [sp, #456]
+    2a44:	91002035 	add	x21, x1, #0x8
+    2a48:	aa1503e2 	mov	x2, x21
+    2a4c:	f90087f5 	str	x21, [sp, #264]
+    2a50:	d29adae3 	mov	x3, #0xd6d7                	// #54999
+    2a54:	f2bae203 	movk	x3, #0xd710, lsl #16
+    2a58:	f2dafae3 	movk	x3, #0xd7d7, lsl #32
+    2a5c:	f2fae203 	movk	x3, #0xd710, lsl #48
+    2a60:	f8207843 	str	x3, [x2, x0, lsl #3]
+    2a64:	91000400 	add	x0, x0, #0x1
+    2a68:	eb0000ff 	cmp	x7, x0
+    2a6c:	54ffff21 	b.ne	2a50 <__stubRAISE+0x22c>  // b.any
+    2a70:	7100035f 	cmp	w26, #0x0
+    2a74:	54ff87ad 	b.le	1b68 <__stubRETURN+0x10c>
+    2a78:	91006021 	add	x1, x1, #0x18
+    2a7c:	d2800000 	mov	x0, #0x0                   	// #0
+    2a80:	f8607b23 	ldr	x3, [x25, x0, lsl #3]
+    2a84:	f8207823 	str	x3, [x1, x0, lsl #3]
+    2a88:	91000400 	add	x0, x0, #0x1
+    2a8c:	6b00035f 	cmp	w26, w0
+    2a90:	54ffff8c 	b.gt	2a80 <__stubRAISE+0x25c>
+    2a94:	17fffc35 	b	1b68 <__stubRETURN+0x10c>
+    2a98:	d2800021 	mov	x1, #0x1                   	// #1
+    2a9c:	52800080 	mov	w0, #0x4                   	// #4
+    2aa0:	94000000 	bl	0 <caml_debugger>
+    2aa4:	17ffff66 	b	283c <__stubRAISE+0x18>
+    2aa8:	f9403be0 	ldr	x0, [sp, #112]
+    2aac:	aa1503f6 	mov	x22, x21
+    2ab0:	f940ec02 	ldr	x2, [x0, #472]
+    2ab4:	17fff712 	b	6fc <caml_interprete+0xdc>
+    2ab8:	91003273 	add	x19, x19, #0xc
+    2abc:	f90043f6 	str	x22, [sp, #128]
+    2ac0:	17fff744 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2ac4:	aa1803e0 	mov	x0, x24
+    2ac8:	97fff56e 	bl	80 <func_stack_pop>
+    2acc:	f9401360 	ldr	x0, [x27, #32]
+    2ad0:	f940033a 	ldr	x26, [x25]
+    2ad4:	f9400801 	ldr	x1, [x0, #16]
+    2ad8:	eb19003f 	cmp	x1, x25
+    2adc:	54003260 	b.eq	3128 <__stubRAISE+0x904>  // b.none
+    2ae0:	a940d337 	ldp	x23, x20, [x25, #8]
+    2ae4:	aa1a03f3 	mov	x19, x26
+    2ae8:	91006339 	add	x25, x25, #0x18
+    2aec:	f90043f6 	str	x22, [sp, #128]
+    2af0:	9341fe94 	asr	x20, x20, #1
+    2af4:	17fff737 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2af8:	d2800075 	mov	x21, #0x3                   	// #3
+    2afc:	f90043f6 	str	x22, [sp, #128]
+    2b00:	17fff734 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2b04:	d2800075 	mov	x21, #0x3                   	// #3
+    2b08:	f90043f6 	str	x22, [sp, #128]
+    2b0c:	17fff731 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2b10:	d2800075 	mov	x21, #0x3                   	// #3
+    2b14:	f90043f6 	str	x22, [sp, #128]
+    2b18:	17fff72e 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2b1c:	d2800075 	mov	x21, #0x3                   	// #3
+    2b20:	f90043f6 	str	x22, [sp, #128]
+    2b24:	17fff72b 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2b28:	91003273 	add	x19, x19, #0xc
+    2b2c:	f90043f6 	str	x22, [sp, #128]
+    2b30:	17fff728 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2b34:	91003273 	add	x19, x19, #0xc
+    2b38:	f90043f6 	str	x22, [sp, #128]
+    2b3c:	17fff725 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2b40:	d2800075 	mov	x21, #0x3                   	// #3
+    2b44:	f90043f6 	str	x22, [sp, #128]
+    2b48:	17fff722 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2b4c:	d2800075 	mov	x21, #0x3                   	// #3
+    2b50:	f90043f6 	str	x22, [sp, #128]
+    2b54:	17fff71f 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2b58:	91003273 	add	x19, x19, #0xc
+    2b5c:	f90043f6 	str	x22, [sp, #128]
+    2b60:	17fff71c 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2b64:	91003273 	add	x19, x19, #0xc
+    2b68:	f90043f6 	str	x22, [sp, #128]
+    2b6c:	17fff719 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2b70:	92403c00 	and	x0, x0, #0xffff
+    2b74:	9341fea2 	asr	x2, x21, #1
+    2b78:	eb95041f 	cmp	x0, x21, asr #1
+    2b7c:	54004ba9 	b.ls	34f0 <__stubRAISE+0xccc>  // b.plast
+    2b80:	b8a2783a 	ldrsw	x26, [x1, x2, lsl #2]
+    2b84:	f90043f6 	str	x22, [sp, #128]
+    2b88:	8b1a0833 	add	x19, x1, x26, lsl #2
+    2b8c:	17fff711 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2b90:	b94000e2 	ldr	w2, [x7]
+    2b94:	52800061 	mov	w1, #0x3                   	// #3
+    2b98:	14000008 	b	2bb8 <__stubRAISE+0x394>
+    2b9c:	0b010040 	add	w0, w2, w1
+    2ba0:	13017c00 	asr	w0, w0, #1
+    2ba4:	32000000 	orr	w0, w0, #0x1
+    2ba8:	f860d8e4 	ldr	x4, [x7, w0, sxtw #3]
+    2bac:	eb03009f 	cmp	x4, x3
+    2bb0:	5400068c 	b.gt	2c80 <__stubRAISE+0x45c>
+    2bb4:	2a0003e1 	mov	w1, w0
+    2bb8:	6b01005f 	cmp	w2, w1
+    2bbc:	54ffff0c 	b.gt	2b9c <__stubRAISE+0x378>
+    2bc0:	51000c20 	sub	w0, w1, #0x3
+    2bc4:	51000421 	sub	w1, w1, #0x1
+    2bc8:	91003273 	add	x19, x19, #0xc
+    2bcc:	531d7000 	lsl	w0, w0, #3
+    2bd0:	b81fc260 	stur	w0, [x19, #-4]
+    2bd4:	f861d8f5 	ldr	x21, [x7, w1, sxtw #3]
+    2bd8:	17fffaa0 	b	1658 <__stubRERAISE+0x114>
+    2bdc:	91003273 	add	x19, x19, #0xc
+    2be0:	f90043f6 	str	x22, [sp, #128]
+    2be4:	17fff6fb 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2be8:	b9400a7a 	ldr	w26, [x19, #8]
+    2bec:	f90043f6 	str	x22, [sp, #128]
+    2bf0:	8b3aca7a 	add	x26, x19, w26, sxtw #2
+    2bf4:	91002353 	add	x19, x26, #0x8
+    2bf8:	17fff6f6 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2bfc:	aa1a03e0 	mov	x0, x26
+    2c00:	52801fc1 	mov	w1, #0xfe                  	// #254
+    2c04:	94000000 	bl	0 <caml_alloc_shr>
+    2c08:	fd4002a0 	ldr	d0, [x21]
+    2c0c:	aa0003f5 	mov	x21, x0
+    2c10:	fd000000 	str	d0, [x0]
+    2c14:	17fffd54 	b	2164 <__stubGETFIELD2+0xf0>
+    2c18:	91002273 	add	x19, x19, #0x8
+    2c1c:	f90043f6 	str	x22, [sp, #128]
+    2c20:	17fff6ec 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2c24:	b980067a 	ldrsw	x26, [x19, #4]
+    2c28:	f90043f6 	str	x22, [sp, #128]
+    2c2c:	8b1a0853 	add	x19, x2, x26, lsl #2
+    2c30:	17fff6e8 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2c34:	2a1303e1 	mov	w1, w19
+    2c38:	aa1a03e0 	mov	x0, x26
+    2c3c:	94000000 	bl	0 <caml_alloc_shr>
+    2c40:	f900afe0 	str	x0, [sp, #344]
+    2c44:	aa1503e1 	mov	x1, x21
+    2c48:	f900bfe0 	str	x0, [sp, #376]
+    2c4c:	94000000 	bl	0 <caml_initialize>
+    2c50:	d2800033 	mov	x19, #0x1                   	// #1
+    2c54:	f940bff5 	ldr	x21, [sp, #376]
+    2c58:	8b130ea0 	add	x0, x21, x19, lsl #3
+    2c5c:	f8408721 	ldr	x1, [x25], #8
+    2c60:	91000673 	add	x19, x19, #0x1
+    2c64:	94000000 	bl	0 <caml_initialize>
+    2c68:	eb13035f 	cmp	x26, x19
+    2c6c:	54ffff61 	b.ne	2c58 <__stubRAISE+0x434>  // b.any
+    2c70:	f90043f6 	str	x22, [sp, #128]
+    2c74:	f9406bf3 	ldr	x19, [sp, #208]
+    2c78:	f940aff5 	ldr	x21, [sp, #344]
+    2c7c:	17fff6d5 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2c80:	51000802 	sub	w2, w0, #0x2
+    2c84:	17ffffcd 	b	2bb8 <__stubRAISE+0x394>
+    2c88:	91003273 	add	x19, x19, #0xc
+    2c8c:	f90043f6 	str	x22, [sp, #128]
+    2c90:	17fff6d0 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2c94:	d2800021 	mov	x1, #0x1                   	// #1
+    2c98:	52800080 	mov	w0, #0x4                   	// #4
+    2c9c:	94000000 	bl	0 <caml_debugger>
+    2ca0:	17fffa2d 	b	1554 <__stubRERAISE+0x10>
+    2ca4:	52801ee1 	mov	w1, #0xf7                  	// #247
+    2ca8:	94000000 	bl	0 <caml_alloc_shr>
+    2cac:	aa0003f5 	mov	x21, x0
+    2cb0:	b940dfe0 	ldr	w0, [sp, #220]
+    2cb4:	7100001f 	cmp	w0, #0x0
+    2cb8:	b940ffe0 	ldr	w0, [sp, #252]
+    2cbc:	8b20ceba 	add	x26, x21, w0, sxtw #3
+    2cc0:	5400032d 	b.le	2d24 <__stubRAISE+0x500>
+    2cc4:	b940dfe0 	ldr	w0, [sp, #220]
+    2cc8:	cb1a0321 	sub	x1, x25, x26
+    2ccc:	51000400 	sub	w0, w0, #0x1
+    2cd0:	91000400 	add	x0, x0, #0x1
+    2cd4:	8b000f40 	add	x0, x26, x0, lsl #3
+    2cd8:	a90e87e0 	stp	x0, x1, [sp, #232]
+    2cdc:	aa1503e0 	mov	x0, x21
+    2ce0:	aa1403f5 	mov	x21, x20
+    2ce4:	aa1303f4 	mov	x20, x19
+    2ce8:	aa1903f3 	mov	x19, x25
+    2cec:	aa1a03f9 	mov	x25, x26
+    2cf0:	aa0003fa 	mov	x26, x0
+    2cf4:	f9407be0 	ldr	x0, [sp, #240]
+    2cf8:	f8606b21 	ldr	x1, [x25, x0]
+    2cfc:	aa1903e0 	mov	x0, x25
+    2d00:	91002339 	add	x25, x25, #0x8
+    2d04:	94000000 	bl	0 <caml_initialize>
+    2d08:	f94077e0 	ldr	x0, [sp, #232]
+    2d0c:	eb00033f 	cmp	x25, x0
+    2d10:	54ffff21 	b.ne	2cf4 <__stubRAISE+0x4d0>  // b.any
+    2d14:	aa1303f9 	mov	x25, x19
+    2d18:	aa1403f3 	mov	x19, x20
+    2d1c:	aa1503f4 	mov	x20, x21
+    2d20:	aa1a03f5 	mov	x21, x26
+    2d24:	aa1503e0 	mov	x0, x21
+    2d28:	17fff914 	b	1178 <__stubENVACC4+0x148>
+    2d2c:	d2800075 	mov	x21, #0x3                   	// #3
+    2d30:	f90043f6 	str	x22, [sp, #128]
+    2d34:	17fff6a7 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2d38:	d2800035 	mov	x21, #0x1                   	// #1
+    2d3c:	f90043f6 	str	x22, [sp, #128]
+    2d40:	17fff6a4 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    2d44:	91000680 	add	x0, x20, #0x1
+    2d48:	f900bbe0 	str	x0, [sp, #368]
+    2d4c:	b100129f 	cmn	x20, #0x4
+    2d50:	540039e0 	b.eq	348c <__stubRAISE+0xc68>  // b.none
+    2d54:	9100113a 	add	x26, x9, #0x4
+    2d58:	f104035f 	cmp	x26, #0x100
+    2d5c:	540038c8 	b.hi	3474 <__stubRAISE+0xc50>  // b.pmore
+    2d60:	90000000 	adrp	x0, 0 <Caml_state>
+    2d64:	f9400000 	ldr	x0, [x0]
+    2d68:	d53bd041 	mrs	x1, tpidr_el0
+    2d6c:	d37df342 	lsl	x2, x26, #3
+    2d70:	928000f4 	mov	x20, #0xfffffffffffffff8    	// #-8
+    2d74:	cb020283 	sub	x3, x20, x2
+    2d78:	91002044 	add	x4, x2, #0x8
+    2d7c:	a91113e3 	stp	x3, x4, [sp, #272]
+    2d80:	f8606834 	ldr	x20, [x1, x0]
+    2d84:	aa1503e0 	mov	x0, x21
+    2d88:	aa1303f5 	mov	x21, x19
+    2d8c:	aa0203f3 	mov	x19, x2
+    2d90:	aa0003e2 	mov	x2, x0
+    2d94:	f9400681 	ldr	x1, [x20, #8]
+    2d98:	8b030021 	add	x1, x1, x3
+    2d9c:	f9000681 	str	x1, [x20, #8]
+    2da0:	f900ebe2 	str	x2, [sp, #464]
+    2da4:	94000000 	bl	0 <caml_alloc_point_here>
+    2da8:	f9400681 	ldr	x1, [x20, #8]
+    2dac:	f9400280 	ldr	x0, [x20]
+    2db0:	eb00003f 	cmp	x1, x0
+    2db4:	f940ebe2 	ldr	x2, [sp, #464]
+    2db8:	54002243 	b.cc	3200 <__stubRAISE+0x9dc>  // b.lo, b.ul, b.last
+    2dbc:	d376d743 	lsl	x3, x26, #10
+    2dc0:	aa1303e2 	mov	x2, x19
+    2dc4:	9103dc63 	add	x3, x3, #0xf7
+    2dc8:	f9000023 	str	x3, [x1]
+    2dcc:	aa1503f3 	mov	x19, x21
+    2dd0:	f9400683 	ldr	x3, [x20, #8]
+    2dd4:	91002075 	add	x21, x3, #0x8
+    2dd8:	b400211a 	cbz	x26, 31f8 <__stubRAISE+0x9d4>
+    2ddc:	8b020061 	add	x1, x3, x2
+    2de0:	aa1503e0 	mov	x0, x21
+    2de4:	91002021 	add	x1, x1, #0x8
+    2de8:	aa1503e4 	mov	x4, x21
+    2dec:	d29adae5 	mov	x5, #0xd6d7                	// #54999
+    2df0:	f2bae205 	movk	x5, #0xd710, lsl #16
+    2df4:	f2dafae5 	movk	x5, #0xd7d7, lsl #32
+    2df8:	f2fae205 	movk	x5, #0xd710, lsl #48
+    2dfc:	f8008485 	str	x5, [x4], #8
+    2e00:	eb04003f 	cmp	x1, x4
+    2e04:	54ffff41 	b.ne	2dec <__stubRAISE+0x5c8>  // b.any
+    2e08:	f940bbe5 	ldr	x5, [sp, #368]
+    2e0c:	f9000817 	str	x23, [x0, #16]
+    2e10:	cb000324 	sub	x4, x25, x0
+    2e14:	91006001 	add	x1, x0, #0x18
+    2e18:	d1006084 	sub	x4, x4, #0x18
+    2e1c:	8b000047 	add	x7, x2, x0
+    2e20:	b40000a5 	cbz	x5, 2e34 <__stubRAISE+0x610>
+    2e24:	f8616885 	ldr	x5, [x4, x1]
+    2e28:	f8008425 	str	x5, [x1], #8
+    2e2c:	eb0100ff 	cmp	x7, x1
+    2e30:	54ffffa1 	b.ne	2e24 <__stubRAISE+0x600>  // b.any
+    2e34:	d100127a 	sub	x26, x19, #0x4
+    2e38:	d1006042 	sub	x2, x2, #0x18
+    2e3c:	f900047a 	str	x26, [x3, #8]
+    2e40:	d28000a1 	mov	x1, #0x5                   	// #5
+    2e44:	8b020339 	add	x25, x25, x2
+    2e48:	f9000401 	str	x1, [x0, #8]
+    2e4c:	17ffff20 	b	2acc <__stubRAISE+0x2a8>
+    2e50:	90000003 	adrp	x3, 0 <func_stack_push>
+    2e54:	91000063 	add	x3, x3, #0x0
+    2e58:	91024063 	add	x3, x3, #0x90
+    2e5c:	90000001 	adrp	x1, 0 <func_stack_push>
+    2e60:	d2800002 	mov	x2, #0x0                   	// #0
+    2e64:	91000021 	add	x1, x1, #0x0
+    2e68:	52800020 	mov	w0, #0x1                   	// #1
+    2e6c:	94000000 	bl	0 <__printf_chk>
+    2e70:	17fffaf2 	b	1a38 <__stubAPPLY1+0x18>
+    2e74:	90000003 	adrp	x3, 0 <func_stack_push>
+    2e78:	91000063 	add	x3, x3, #0x0
+    2e7c:	91024063 	add	x3, x3, #0x90
+    2e80:	90000001 	adrp	x1, 0 <func_stack_push>
+    2e84:	d2800002 	mov	x2, #0x0                   	// #0
+    2e88:	91000021 	add	x1, x1, #0x0
+    2e8c:	52800020 	mov	w0, #0x1                   	// #1
+    2e90:	94000000 	bl	0 <__printf_chk>
+    2e94:	17fffada 	b	19fc <__stubAPPLY+0x14>
+    2e98:	90000003 	adrp	x3, 0 <func_stack_push>
+    2e9c:	91000063 	add	x3, x3, #0x0
+    2ea0:	91024063 	add	x3, x3, #0x90
+    2ea4:	90000001 	adrp	x1, 0 <func_stack_push>
+    2ea8:	d2800002 	mov	x2, #0x0                   	// #0
+    2eac:	91000021 	add	x1, x1, #0x0
+    2eb0:	52800020 	mov	w0, #0x1                   	// #1
+    2eb4:	94000000 	bl	0 <__printf_chk>
+    2eb8:	17fffb54 	b	1c08 <__stubRETURN+0x1ac>
+    2ebc:	90000003 	adrp	x3, 0 <func_stack_push>
+    2ec0:	91000063 	add	x3, x3, #0x0
+    2ec4:	91024063 	add	x3, x3, #0x90
+    2ec8:	90000001 	adrp	x1, 0 <func_stack_push>
+    2ecc:	d2800002 	mov	x2, #0x0                   	// #0
+    2ed0:	91000021 	add	x1, x1, #0x0
+    2ed4:	52800020 	mov	w0, #0x1                   	// #1
+    2ed8:	94000000 	bl	0 <__printf_chk>
+    2edc:	17fffb60 	b	1c5c <__stubRETURN+0x200>
+    2ee0:	91004000 	add	x0, x0, #0x10
+    2ee4:	f9000740 	str	x0, [x26, #8]
+    2ee8:	a93edf35 	stp	x21, x23, [x25, #-24]
+    2eec:	d1006321 	sub	x1, x25, #0x18
+    2ef0:	f81f8333 	stur	x19, [x25, #-8]
+    2ef4:	f9401360 	ldr	x0, [x27, #32]
+    2ef8:	f9000001 	str	x1, [x0]
+    2efc:	94000000 	bl	0 <caml_process_pending_actions>
+    2f00:	f9401361 	ldr	x1, [x27, #32]
+    2f04:	f9400740 	ldr	x0, [x26, #8]
+    2f08:	f9400021 	ldr	x1, [x1]
+    2f0c:	d1004000 	sub	x0, x0, #0x10
+    2f10:	91006039 	add	x25, x1, #0x18
+    2f14:	a9405c35 	ldp	x21, x23, [x1]
+    2f18:	f9000740 	str	x0, [x26, #8]
+    2f1c:	17fffcae 	b	21d4 <__stubGETFIELD0+0x38>
+    2f20:	91004000 	add	x0, x0, #0x10
+    2f24:	f9000680 	str	x0, [x20, #8]
+    2f28:	a93ede75 	stp	x21, x23, [x19, #-24]
+    2f2c:	d1006261 	sub	x1, x19, #0x18
+    2f30:	f81f827a 	stur	x26, [x19, #-8]
+    2f34:	f9401300 	ldr	x0, [x24, #32]
+    2f38:	f9000001 	str	x1, [x0]
+    2f3c:	94000000 	bl	0 <caml_process_pending_actions>
+    2f40:	f9401301 	ldr	x1, [x24, #32]
+    2f44:	f9400680 	ldr	x0, [x20, #8]
+    2f48:	f9400021 	ldr	x1, [x1]
+    2f4c:	d1004000 	sub	x0, x0, #0x10
+    2f50:	91006033 	add	x19, x1, #0x18
+    2f54:	a9405c35 	ldp	x21, x23, [x1]
+    2f58:	f9000680 	str	x0, [x20, #8]
+    2f5c:	17fffa32 	b	1824 <__stubSTOP+0x118>
+    2f60:	90000000 	adrp	x0, 0 <caml_global_data>
+    2f64:	f9400000 	ldr	x0, [x0]
+    2f68:	f9400000 	ldr	x0, [x0]
+    2f6c:	f9403016 	ldr	x22, [x0, #96]
+    2f70:	17fffe2f 	b	282c <__stubRAISE+0x8>
+    2f74:	aa1303f8 	mov	x24, x19
+    2f78:	aa0703fc 	mov	x28, x7
+    2f7c:	aa1903f3 	mov	x19, x25
+    2f80:	f90043f6 	str	x22, [sp, #128]
+    2f84:	17fff6e8 	b	b24 <__stubCHECK_SIGNALS+0x3bc>
+    2f88:	94000000 	bl	0 <caml_continuation_use>
+    2f8c:	aa0003f5 	mov	x21, x0
+    2f90:	90000001 	adrp	x1, 0 <caml_global_data>
+    2f94:	90000002 	adrp	x2, 0 <func_stack_push>
+    2f98:	f9400021 	ldr	x1, [x1]
+    2f9c:	f9400042 	ldr	x2, [x2]
+    2fa0:	f9400020 	ldr	x0, [x1]
+    2fa4:	f9403003 	ldr	x3, [x0, #96]
+    2fa8:	17fffa58 	b	1908 <__stubSTOP+0x1fc>
+    2fac:	91008021 	add	x1, x1, #0x20
+    2fb0:	f90006a1 	str	x1, [x21, #8]
+    2fb4:	a93eef37 	stp	x23, x27, [x25, #-24]
+    2fb8:	d1006321 	sub	x1, x25, #0x18
+    2fbc:	f81f8333 	stur	x19, [x25, #-8]
+    2fc0:	f9401280 	ldr	x0, [x20, #32]
+    2fc4:	f9000001 	str	x1, [x0]
+    2fc8:	94000000 	bl	0 <caml_process_pending_actions>
+    2fcc:	f9401281 	ldr	x1, [x20, #32]
+    2fd0:	f94006a0 	ldr	x0, [x21, #8]
+    2fd4:	f9400021 	ldr	x1, [x1]
+    2fd8:	d1008000 	sub	x0, x0, #0x20
+    2fdc:	91006039 	add	x25, x1, #0x18
+    2fe0:	a9406c37 	ldp	x23, x27, [x1]
+    2fe4:	f90006a0 	str	x0, [x21, #8]
+    2fe8:	17fffc03 	b	1ff4 <__stubMAKEBLOCK+0x274>
+    2fec:	91006021 	add	x1, x1, #0x18
+    2ff0:	f90006a1 	str	x1, [x21, #8]
+    2ff4:	a93eef37 	stp	x23, x27, [x25, #-24]
+    2ff8:	d1006321 	sub	x1, x25, #0x18
+    2ffc:	f81f8333 	stur	x19, [x25, #-8]
+    3000:	f9401280 	ldr	x0, [x20, #32]
+    3004:	f9000001 	str	x1, [x0]
+    3008:	94000000 	bl	0 <caml_process_pending_actions>
+    300c:	f9401281 	ldr	x1, [x20, #32]
+    3010:	f94006a0 	ldr	x0, [x21, #8]
+    3014:	f9400021 	ldr	x1, [x1]
+    3018:	d1006000 	sub	x0, x0, #0x18
+    301c:	91006039 	add	x25, x1, #0x18
+    3020:	a9406c37 	ldp	x23, x27, [x1]
+    3024:	f90006a0 	str	x0, [x21, #8]
+    3028:	17fffbcb 	b	1f54 <__stubMAKEBLOCK+0x1d4>
+    302c:	91004021 	add	x1, x1, #0x10
+    3030:	f90006a1 	str	x1, [x21, #8]
+    3034:	a93eef37 	stp	x23, x27, [x25, #-24]
+    3038:	d1006321 	sub	x1, x25, #0x18
+    303c:	f81f8333 	stur	x19, [x25, #-8]
+    3040:	f9401280 	ldr	x0, [x20, #32]
+    3044:	f9000001 	str	x1, [x0]
+    3048:	94000000 	bl	0 <caml_process_pending_actions>
+    304c:	f9401281 	ldr	x1, [x20, #32]
+    3050:	f94006a0 	ldr	x0, [x21, #8]
+    3054:	f9400021 	ldr	x1, [x1]
+    3058:	d1004000 	sub	x0, x0, #0x10
+    305c:	91006039 	add	x25, x1, #0x18
+    3060:	a9406c37 	ldp	x23, x27, [x1]
+    3064:	f90006a0 	str	x0, [x21, #8]
+    3068:	17fffb9a 	b	1ed0 <__stubMAKEBLOCK+0x150>
+    306c:	90000001 	adrp	x1, 0 <func_stack_push>
+    3070:	90000000 	adrp	x0, 0 <func_stack_push>
+    3074:	91000021 	add	x1, x1, #0x0
+    3078:	91000000 	add	x0, x0, #0x0
+    307c:	5280b242 	mov	w2, #0x592                 	// #1426
+    3080:	94000000 	bl	0 <caml_failed_assert>
+    3084:	90000001 	adrp	x1, 0 <func_stack_push>
+    3088:	90000000 	adrp	x0, 0 <func_stack_push>
+    308c:	91000021 	add	x1, x1, #0x0
+    3090:	91000000 	add	x0, x0, #0x0
+    3094:	5280b122 	mov	w2, #0x589                 	// #1417
+    3098:	94000000 	bl	0 <caml_failed_assert>
+    309c:	f90043f6 	str	x22, [sp, #128]
+    30a0:	f9406bf3 	ldr	x19, [sp, #208]
+    30a4:	17fff5cb 	b	7d0 <__stubCHECK_SIGNALS+0x68>
+    30a8:	f940a3e2 	ldr	x2, [sp, #320]
+    30ac:	d1006323 	sub	x3, x25, #0x18
+    30b0:	8b020000 	add	x0, x0, x2
+    30b4:	f90006a0 	str	x0, [x21, #8]
+    30b8:	f9406be0 	ldr	x0, [sp, #208]
+    30bc:	a93e873b 	stp	x27, x1, [x25, #-24]
+    30c0:	f81f8320 	stur	x0, [x25, #-8]
+    30c4:	f9401260 	ldr	x0, [x19, #32]
+    30c8:	f9000003 	str	x3, [x0]
+    30cc:	94000000 	bl	0 <caml_process_pending_actions>
+    30d0:	f9401261 	ldr	x1, [x19, #32]
+    30d4:	f94006a0 	ldr	x0, [x21, #8]
+    30d8:	f9400021 	ldr	x1, [x1]
+    30dc:	f9409fe2 	ldr	x2, [sp, #312]
+    30e0:	91006039 	add	x25, x1, #0x18
+    30e4:	f940003b 	ldr	x27, [x1]
+    30e8:	8b020000 	add	x0, x0, x2
+    30ec:	f9400421 	ldr	x1, [x1, #8]
+    30f0:	f90006a0 	str	x0, [x21, #8]
+    30f4:	17fffb3e 	b	1dec <__stubMAKEBLOCK+0x6c>
+    30f8:	90000001 	adrp	x1, 0 <func_stack_push>
+    30fc:	90000000 	adrp	x0, 0 <func_stack_push>
+    3100:	91000021 	add	x1, x1, #0x0
+    3104:	91000000 	add	x0, x0, #0x0
+    3108:	5280af42 	mov	w2, #0x57a                 	// #1402
+    310c:	94000000 	bl	0 <caml_failed_assert>
+    3110:	90000001 	adrp	x1, 0 <func_stack_push>
+    3114:	90000000 	adrp	x0, 0 <func_stack_push>
+    3118:	91000021 	add	x1, x1, #0x0
+    311c:	91000000 	add	x0, x0, #0x0
+    3120:	5280af42 	mov	w2, #0x57a                 	// #1402
+    3124:	94000000 	bl	0 <caml_failed_assert>
+    3128:	f9400f21 	ldr	x1, [x25, #24]
+    312c:	b40002a1 	cbz	x1, 3180 <__stubRAISE+0x95c>
+    3130:	f9403bf4 	ldr	x20, [sp, #112]
+    3134:	f9001281 	str	x1, [x20, #32]
+    3138:	f9400036 	ldr	x22, [x1]
+    313c:	94000000 	bl	0 <caml_free_stack>
+    3140:	aa1603f3 	mov	x19, x22
+    3144:	f94002c0 	ldr	x0, [x22]
+    3148:	9341fc00 	asr	x0, x0, #1
+    314c:	f900ee80 	str	x0, [x20, #472]
+    3150:	f8408e74 	ldr	x20, [x19, #8]!
+    3154:	f90006d5 	str	x21, [x22, #8]
+    3158:	aa1a03f5 	mov	x21, x26
+    315c:	f9400358 	ldr	x24, [x26]
+    3160:	9341fe94 	asr	x20, x20, #1
+    3164:	17fff57b 	b	750 <caml_interprete+0x130>
+    3168:	90000001 	adrp	x1, 0 <func_stack_push>
+    316c:	90000000 	adrp	x0, 0 <func_stack_push>
+    3170:	91000021 	add	x1, x1, #0x0
+    3174:	91000000 	add	x0, x0, #0x0
+    3178:	528020a2 	mov	w2, #0x105                 	// #261
+    317c:	94000000 	bl	0 <caml_failed_assert>
+    3180:	90000001 	adrp	x1, 0 <func_stack_push>
+    3184:	90000000 	adrp	x0, 0 <func_stack_push>
+    3188:	91000021 	add	x1, x1, #0x0
+    318c:	91000000 	add	x0, x0, #0x0
+    3190:	52809562 	mov	w2, #0x4ab                 	// #1195
+    3194:	94000000 	bl	0 <caml_failed_assert>
+    3198:	90000001 	adrp	x1, 0 <func_stack_push>
+    319c:	90000000 	adrp	x0, 0 <func_stack_push>
+    31a0:	91000021 	add	x1, x1, #0x0
+    31a4:	91000000 	add	x0, x0, #0x0
+    31a8:	5280fc22 	mov	w2, #0x7e1                 	// #2017
+    31ac:	94000000 	bl	0 <caml_failed_assert>
+    31b0:	90000001 	adrp	x1, 0 <func_stack_push>
+    31b4:	90000000 	adrp	x0, 0 <func_stack_push>
+    31b8:	91000021 	add	x1, x1, #0x0
+    31bc:	91000000 	add	x0, x0, #0x0
+    31c0:	5280fc22 	mov	w2, #0x7e1                 	// #2017
+    31c4:	94000000 	bl	0 <caml_failed_assert>
+    31c8:	90000001 	adrp	x1, 0 <func_stack_push>
+    31cc:	90000000 	adrp	x0, 0 <func_stack_push>
+    31d0:	91000021 	add	x1, x1, #0x0
+    31d4:	91000000 	add	x0, x0, #0x0
+    31d8:	5280a082 	mov	w2, #0x504                 	// #1284
+    31dc:	94000000 	bl	0 <caml_failed_assert>
+    31e0:	90000001 	adrp	x1, 0 <func_stack_push>
+    31e4:	90000000 	adrp	x0, 0 <func_stack_push>
+    31e8:	91000021 	add	x1, x1, #0x0
+    31ec:	91000000 	add	x0, x0, #0x0
+    31f0:	5280fc22 	mov	w2, #0x7e1                 	// #2017
+    31f4:	94000000 	bl	0 <caml_failed_assert>
+    31f8:	aa1503e0 	mov	x0, x21
+    31fc:	17ffff03 	b	2e08 <__stubRAISE+0x5e4>
+    3200:	f9408fe0 	ldr	x0, [sp, #280]
+    3204:	8b000021 	add	x1, x1, x0
+    3208:	f9000681 	str	x1, [x20, #8]
+    320c:	f940b7e0 	ldr	x0, [sp, #360]
+    3210:	a93edf22 	stp	x2, x23, [x25, #-24]
+    3214:	d1006321 	sub	x1, x25, #0x18
+    3218:	f81f8320 	stur	x0, [x25, #-8]
+    321c:	f9401360 	ldr	x0, [x27, #32]
+    3220:	f9000001 	str	x1, [x0]
+    3224:	94000000 	bl	0 <caml_process_pending_actions>
+    3228:	f9401361 	ldr	x1, [x27, #32]
+    322c:	f9400680 	ldr	x0, [x20, #8]
+    3230:	f9400021 	ldr	x1, [x1]
+    3234:	f9408be2 	ldr	x2, [sp, #272]
+    3238:	91006039 	add	x25, x1, #0x18
+    323c:	f9400437 	ldr	x23, [x1, #8]
+    3240:	8b020000 	add	x0, x0, x2
+    3244:	f9400022 	ldr	x2, [x1]
+    3248:	f9000680 	str	x0, [x20, #8]
+    324c:	17fffed5 	b	2da0 <__stubRAISE+0x57c>
+    3250:	f9403be0 	ldr	x0, [sp, #112]
+    3254:	9100131a 	add	x26, x24, #0x4
+    3258:	a93f6a75 	stp	x21, x26, [x19, #-16]
+    325c:	d1004273 	sub	x19, x19, #0x10
+    3260:	f9401000 	ldr	x0, [x0, #32]
+    3264:	f9000013 	str	x19, [x0]
+    3268:	94000000 	bl	0 <caml_raise_stack_overflow>
+    326c:	90000003 	adrp	x3, 0 <stderr>
+    3270:	90000000 	adrp	x0, 0 <func_stack_push>
+    3274:	aa1503e1 	mov	x1, x21
+    3278:	91000000 	add	x0, x0, #0x0
+    327c:	f9400063 	ldr	x3, [x3]
+    3280:	d2800522 	mov	x2, #0x29                  	// #41
+    3284:	f9400063 	ldr	x3, [x3]
+    3288:	94000000 	bl	0 <fwrite>
+    328c:	52800020 	mov	w0, #0x1                   	// #1
+    3290:	94000000 	bl	0 <exit>
+    3294:	90000001 	adrp	x1, 0 <func_stack_push>
+    3298:	90000000 	adrp	x0, 0 <func_stack_push>
+    329c:	91000021 	add	x1, x1, #0x0
+    32a0:	91000000 	add	x0, x0, #0x0
+    32a4:	52806ec2 	mov	w2, #0x376                 	// #886
+    32a8:	94000000 	bl	0 <caml_failed_assert>
+    32ac:	90000001 	adrp	x1, 0 <func_stack_push>
+    32b0:	90000000 	adrp	x0, 0 <func_stack_push>
+    32b4:	91000021 	add	x1, x1, #0x0
+    32b8:	91000000 	add	x0, x0, #0x0
+    32bc:	52806ea2 	mov	w2, #0x375                 	// #885
+    32c0:	94000000 	bl	0 <caml_failed_assert>
+    32c4:	90000003 	adrp	x3, 0 <func_stack_push>
+    32c8:	91000063 	add	x3, x3, #0x0
+    32cc:	90000001 	adrp	x1, 0 <func_stack_push>
+    32d0:	90000000 	adrp	x0, 0 <func_stack_push>
+    32d4:	9101e063 	add	x3, x3, #0x78
+    32d8:	91000021 	add	x1, x1, #0x0
+    32dc:	91000000 	add	x0, x0, #0x0
+    32e0:	52804c82 	mov	w2, #0x264                 	// #612
+    32e4:	94000000 	bl	0 <__assert_fail>
+    32e8:	90000003 	adrp	x3, 0 <stderr>
+    32ec:	aa1503e1 	mov	x1, x21
+    32f0:	90000000 	adrp	x0, 0 <func_stack_push>
+    32f4:	d2800442 	mov	x2, #0x22                  	// #34
+    32f8:	f9400063 	ldr	x3, [x3]
+    32fc:	91000000 	add	x0, x0, #0x0
+    3300:	f9400063 	ldr	x3, [x3]
+    3304:	94000000 	bl	0 <fwrite>
+    3308:	17ffffe1 	b	328c <__stubRAISE+0xa68>
+    330c:	90000013 	adrp	x19, 0 <stderr>
+    3310:	aa1503e1 	mov	x1, x21
+    3314:	d2800502 	mov	x2, #0x28                  	// #40
+    3318:	90000000 	adrp	x0, 0 <func_stack_push>
+    331c:	f9400273 	ldr	x19, [x19]
+    3320:	91000000 	add	x0, x0, #0x0
+    3324:	f9400263 	ldr	x3, [x19]
+    3328:	94000000 	bl	0 <fwrite>
+    332c:	f9400263 	ldr	x3, [x19]
+    3330:	aa1503e1 	mov	x1, x21
+    3334:	90000000 	adrp	x0, 0 <func_stack_push>
+    3338:	d2800482 	mov	x2, #0x24                  	// #36
+    333c:	91000000 	add	x0, x0, #0x0
+    3340:	94000000 	bl	0 <fwrite>
+    3344:	17ffffd2 	b	328c <__stubRAISE+0xa68>
+    3348:	94000000 	bl	0 <__stack_chk_fail>
+    334c:	90000001 	adrp	x1, 0 <func_stack_push>
+    3350:	90000000 	adrp	x0, 0 <func_stack_push>
+    3354:	91000021 	add	x1, x1, #0x0
+    3358:	91000000 	add	x0, x0, #0x0
+    335c:	52810982 	mov	w2, #0x84c                 	// #2124
+    3360:	94000000 	bl	0 <caml_failed_assert>
+    3364:	90000001 	adrp	x1, 0 <func_stack_push>
+    3368:	90000000 	adrp	x0, 0 <func_stack_push>
+    336c:	91000021 	add	x1, x1, #0x0
+    3370:	91000000 	add	x0, x0, #0x0
+    3374:	5280b3a2 	mov	w2, #0x59d                 	// #1437
+    3378:	94000000 	bl	0 <caml_failed_assert>
+    337c:	f9409be0 	ldr	x0, [sp, #304]
+    3380:	d1006321 	sub	x1, x25, #0x18
+    3384:	8b000063 	add	x3, x3, x0
+    3388:	f9000743 	str	x3, [x26, #8]
+    338c:	f94073e0 	ldr	x0, [sp, #224]
+    3390:	a93eef24 	stp	x4, x27, [x25, #-24]
+    3394:	f81f8320 	stur	x0, [x25, #-8]
+    3398:	f9401260 	ldr	x0, [x19, #32]
+    339c:	f9000001 	str	x1, [x0]
+    33a0:	94000000 	bl	0 <caml_process_pending_actions>
+    33a4:	f9401261 	ldr	x1, [x19, #32]
+    33a8:	f9400740 	ldr	x0, [x26, #8]
+    33ac:	f9400021 	ldr	x1, [x1]
+    33b0:	f94097e2 	ldr	x2, [sp, #296]
+    33b4:	91006039 	add	x25, x1, #0x18
+    33b8:	a9406c24 	ldp	x4, x27, [x1]
+    33bc:	8b020000 	add	x0, x0, x2
+    33c0:	f9000740 	str	x0, [x26, #8]
+    33c4:	17fff745 	b	10d8 <__stubENVACC4+0xa8>
+    33c8:	90000001 	adrp	x1, 0 <func_stack_push>
+    33cc:	90000000 	adrp	x0, 0 <func_stack_push>
+    33d0:	91000021 	add	x1, x1, #0x0
+    33d4:	91000000 	add	x0, x0, #0x0
+    33d8:	5280b562 	mov	w2, #0x5ab                 	// #1451
+    33dc:	94000000 	bl	0 <caml_failed_assert>
+    33e0:	8b140042 	add	x2, x2, x20
+    33e4:	f9000662 	str	x2, [x19, #8]
+    33e8:	f94083e0 	ldr	x0, [sp, #256]
+    33ec:	a93e8724 	stp	x4, x1, [x25, #-24]
+    33f0:	d1006322 	sub	x2, x25, #0x18
+    33f4:	f81f8320 	stur	x0, [x25, #-8]
+    33f8:	f94012a0 	ldr	x0, [x21, #32]
+    33fc:	f9000002 	str	x2, [x0]
+    3400:	94000000 	bl	0 <caml_process_pending_actions>
+    3404:	f94012a1 	ldr	x1, [x21, #32]
+    3408:	f9400660 	ldr	x0, [x19, #8]
+    340c:	f9400021 	ldr	x1, [x1]
+    3410:	f94093e2 	ldr	x2, [sp, #288]
+    3414:	91006039 	add	x25, x1, #0x18
+    3418:	f9400024 	ldr	x4, [x1]
+    341c:	8b020000 	add	x0, x0, x2
+    3420:	f9400421 	ldr	x1, [x1, #8]
+    3424:	f9000660 	str	x0, [x19, #8]
+    3428:	17fffd74 	b	29f8 <__stubRAISE+0x1d4>
+    342c:	90000001 	adrp	x1, 0 <func_stack_push>
+    3430:	90000000 	adrp	x0, 0 <func_stack_push>
+    3434:	91000021 	add	x1, x1, #0x0
+    3438:	91000000 	add	x0, x0, #0x0
+    343c:	52809d02 	mov	w2, #0x4e8                 	// #1256
+    3440:	94000000 	bl	0 <caml_failed_assert>
+    3444:	90000001 	adrp	x1, 0 <func_stack_push>
+    3448:	90000000 	adrp	x0, 0 <func_stack_push>
+    344c:	91000021 	add	x1, x1, #0x0
+    3450:	91000000 	add	x0, x0, #0x0
+    3454:	5280c542 	mov	w2, #0x62a                 	// #1578
+    3458:	94000000 	bl	0 <caml_failed_assert>
+    345c:	90000001 	adrp	x1, 0 <func_stack_push>
+    3460:	90000000 	adrp	x0, 0 <func_stack_push>
+    3464:	91000021 	add	x1, x1, #0x0
+    3468:	91000000 	add	x0, x0, #0x0
+    346c:	52802002 	mov	w2, #0x100                 	// #256
+    3470:	94000000 	bl	0 <caml_failed_assert>
+    3474:	90000001 	adrp	x1, 0 <func_stack_push>
+    3478:	90000000 	adrp	x0, 0 <func_stack_push>
+    347c:	91000021 	add	x1, x1, #0x0
+    3480:	91000000 	add	x0, x0, #0x0
+    3484:	52809ae2 	mov	w2, #0x4d7                 	// #1239
+    3488:	94000000 	bl	0 <caml_failed_assert>
+    348c:	90000001 	adrp	x1, 0 <func_stack_push>
+    3490:	90000000 	adrp	x0, 0 <func_stack_push>
+    3494:	91000021 	add	x1, x1, #0x0
+    3498:	91000000 	add	x0, x0, #0x0
+    349c:	52809ae2 	mov	w2, #0x4d7                 	// #1239
+    34a0:	94000000 	bl	0 <caml_failed_assert>
+    34a4:	f940abe2 	ldr	x2, [sp, #336]
+    34a8:	d1006323 	sub	x3, x25, #0x18
+    34ac:	8b020000 	add	x0, x0, x2
+    34b0:	f90006a0 	str	x0, [x21, #8]
+    34b4:	a93e873b 	stp	x27, x1, [x25, #-24]
+    34b8:	f81f8333 	stur	x19, [x25, #-8]
+    34bc:	f9401280 	ldr	x0, [x20, #32]
+    34c0:	f9000003 	str	x3, [x0]
+    34c4:	94000000 	bl	0 <caml_process_pending_actions>
+    34c8:	f9401281 	ldr	x1, [x20, #32]
+    34cc:	f94006a0 	ldr	x0, [x21, #8]
+    34d0:	f9400021 	ldr	x1, [x1]
+    34d4:	f940a7e2 	ldr	x2, [sp, #328]
+    34d8:	91006039 	add	x25, x1, #0x18
+    34dc:	f940003b 	ldr	x27, [x1]
+    34e0:	8b020000 	add	x0, x0, x2
+    34e4:	f9400421 	ldr	x1, [x1, #8]
+    34e8:	f90006a0 	str	x0, [x21, #8]
+    34ec:	17fffafe 	b	20e4 <__stubGETFIELD2+0x70>
+    34f0:	90000001 	adrp	x1, 0 <func_stack_push>
+    34f4:	90000000 	adrp	x0, 0 <func_stack_push>
+    34f8:	91000021 	add	x1, x1, #0x0
+    34fc:	91000000 	add	x0, x0, #0x0
+    3500:	5280c5c2 	mov	w2, #0x62e                 	// #1582
+    3504:	94000000 	bl	0 <caml_failed_assert>
+    3508:	90000001 	adrp	x1, 0 <func_stack_push>
+    350c:	90000000 	adrp	x0, 0 <func_stack_push>
+    3510:	91000021 	add	x1, x1, #0x0
+    3514:	91000000 	add	x0, x0, #0x0
+    3518:	5280fb42 	mov	w2, #0x7da                 	// #2010
+    351c:	94000000 	bl	0 <caml_failed_assert>
+    3520:	90000001 	adrp	x1, 0 <func_stack_push>
+    3524:	90000000 	adrp	x0, 0 <func_stack_push>
+    3528:	91000021 	add	x1, x1, #0x0
+    352c:	91000000 	add	x0, x0, #0x0
+    3530:	5280fb42 	mov	w2, #0x7da                 	// #2010
+    3534:	94000000 	bl	0 <caml_failed_assert>
+    3538:	90000001 	adrp	x1, 0 <func_stack_push>
+    353c:	90000000 	adrp	x0, 0 <func_stack_push>
+    3540:	91000021 	add	x1, x1, #0x0
+    3544:	91000000 	add	x0, x0, #0x0
+    3548:	5280fb42 	mov	w2, #0x7da                 	// #2010
+    354c:	94000000 	bl	0 <caml_failed_assert>
+    3550:	aa1903e0 	mov	x0, x25
+    3554:	f81f8337 	stur	x23, [x25, #-8]
+    3558:	f9403be1 	ldr	x1, [sp, #112]
+    355c:	9100227a 	add	x26, x19, #0x8
+    3560:	f81f841a 	str	x26, [x0], #-8
+    3564:	f9401021 	ldr	x1, [x1, #32]
+    3568:	f9000020 	str	x0, [x1]
+    356c:	94000000 	bl	0 <caml_raise_zero_divide>
